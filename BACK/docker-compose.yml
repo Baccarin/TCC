@@ -1,0 +1,31 @@
+version: '3.7'
+services:
+    postgresTCC:
+     image: postgres
+     container_name: postgresTcc
+     deploy:
+       resources:
+         limits:
+           memory: 1024M
+         reservations:
+           memory: 128M
+     environment:
+       - POSTGRES_PASSWORD=123456
+       - POSTGRESQL_USERNAME=postgres
+       - POSTGRES_DB=tcc
+     ports:
+       - "5440:5432"
+     networks:
+      tcc:
+        ipv4_address: 10.1.0.2
+     volumes:
+       - ~/.volumedocker/tcc/postgresql/data:/var/lib/postgresql/data:rw
+       
+       
+networks:
+  tcc:
+    driver: bridge
+    ipam:
+     config:
+       - subnet: 10.1.0.0/16
+         gateway: 10.1.0.1
