@@ -1,0 +1,47 @@
+.rounded-circle {
+  width: 70px;
+  height: 70px;
+  border-radius: 50%;
+  margin-right: 10px;
+  color: #000;
+  font-size: 12px;
+}
+.obs {
+
+    color: #000;
+    font-size: 12px;
+  }
+h2{
+    font-size: 22px;
+    font-weight: bold;
+    margin: 3% auto 3% auto !important;
+
+}
+// p{
+//     font-size: 14px;
+    
+
+// }
+.d{
+    margin-top: -30px;
+}
+.e{
+    margin: 1% auto 1% auto !important;
+}
+.f{
+    margin: 4% auto 4% auto !important;
+}
+
+h3{
+    font-size: 16px;
+    font-weight: bold;
+    margin: 3% auto 3% auto !important;
+
+}
+
+@media (max-width: 480px) {
+    .m{
+        margin: 3% auto 3% auto !important;
+}
+}
+

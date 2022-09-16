@@ -1,0 +1,96 @@
+<loader></loader>
+<app-header></app-header>
+<app-nav></app-nav>
+<main id="main" class="main">
+
+  <div class="pagetitle">
+    <h1>Create your register</h1>
+  </div>
+
+  <section class="section">
+    <div class="row">
+      <div class="col-lg-12">
+
+        <div class="card">
+          <div class="card-body">
+            <h5 class="card-title">Register</h5>
+
+            <form (ngSubmit)="onSubmit(data)">
+              <div class="row gy-4">
+
+        
+
+                <div class="form-group col-md-6">
+                  <label for="exampleInputEmail1">Email address</label>
+                  <input type="email" name="email" autocomplete="off" [(ngModel)]="data.email" class="form-control" 
+                    aria-describedby="emailHelp" required minlength="4" #email="ngModel">
+                    <p class="cor" *ngIf="email.invalid && email.touched">Required</p>
+                </div>
+                
+
+                <div class="form-group col-md-6">
+                  <label for="exampleInputEmail1">Name</label>
+                  <input type="email" name="name" class="form-control" [(ngModel)]="data.name" id="exampleInputEmail1"
+                    aria-describedby="emailHelp">
+                </div>
+
+                <div class="form-group col-md-6">
+                  <label for="exampleInputEmail1">Curriculo<i class="bi bi-file-pdf"></i> &ensp;(only pdf)</label>
+                  <input type="file" name="file" class="form-control" [(ngModel)]="data.file"
+                   action="multipart/form-data"
+                    accept="application/pdf"
+                    (change)="onChange($event)"
+                    aria-describedby="emailHelp">
+                </div>
+
+                <div class="form-group col-md-6">
+                  <label for="exampleInputEmail1">Avatar</label>
+                  <input type="file" name="avatar" class="form-control" [(ngModel)]="data.avatar"
+                   action="multipart/form-data"
+                   
+                    (change)="onChangeAvatar($event)"
+                     aria-describedby="emailHelp">
+                </div>
+
+                <div class="form-group col-md-6">
+                  <label for="exampleInputEmail1">Phone</label>
+                  <input type="text" name="phone" class="form-control" [(ngModel)]="data.phone" 
+                    aria-describedby="emailHelp">
+                </div>
+
+                <div class="form-group col-md-6">
+                  <label for="exampleInputEmail1">Vacancy</label>
+                  <select class="form-select" aria-label="Default select example" name="vacancy" [(ngModel)]="data.vacancy">
+                    <option selected>Select</option>
+                    <option *ngFor="let vacancie of vacancies">{{vacancie.vacancy}}</option>
+                  </select>
+                </div>
+
+                <div class="form-group col-md-6">
+                  <label for="exampleInputEmail1">Linkedin</label>
+                  <input type="text" name="linkedin" class="form-control" [(ngModel)]="data.linkedin"
+                     aria-describedby="emailHelp">
+                </div>
+
+                <div class="form-group col-md-6">
+                  <label for="exampleInputPassword1">Password</label>
+                  <input type="password" name="password" autocomplete="off" class="form-control" [(ngModel)]="data.password"
+                    >
+                </div>
+
+              </div>
+              <br>
+              <button type="submit" class="btn btn-primary" [disabled]="!email.valid">Submit</button>
+            </form>
+           
+           
+          </div>
+        </div>
+
+      </div>
+
+
+    </div>
+  </section>
+
+</main>

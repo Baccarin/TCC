@@ -1,0 +1,44 @@
+.nav{
+    display: none;
+}
+
+.df{
+  display: none;
+}
+
+h2{
+    font-family: nyt !important;
+    color: #000;
+    
+}
+
+.dt{
+  margin-top:8px;
+}
+
+@font-face {
+  font-family:'nyt' ;
+  src: url('/assets/fonts/Chomsky-399c.woff') format('woff');
+  font-weight: 300;
+  font-style: normal;
+}
+@font-face {
+  font-family:'corleone' ;
+  src: url('/assets/fonts/Corleone.TTF') format('truetype');
+  font-weight: 300;
+  font-style: normal;
+}
+
+
+
+@media (max-width: 1200px) {
+    .nav{
+      display: block !important;
+    }
+    .df{
+      display: block !important;
+      background-color: #fff;
+    }
+   
+  }
+

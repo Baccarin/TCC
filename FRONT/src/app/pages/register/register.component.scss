@@ -1,0 +1,49 @@
+h1 {
+    font-family: NewYorkTimes;
+}
+.cor{
+    color:red;
+    font-size:12px;
+}
+.logo {
+    margin-right: 10px;
+    margin-bottom: -6px;
+}
+.avatar {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    //margin-right: 10px;
+}
+.fix {
+    bottom: 0 !important;
+    position: fixed !important;
+    margin-left: -90% !important;
+
+    //width: 90%;
+    //text-align: left;
+}
+.centraliza {
+    text-align: center;
+    margin-top: 10px;
+}
+.lef {
+    text-align: left;
+}
+.box {
+    // background-color: rgb(158, 147, 147);
+    margin: 0 auto 0 auto !important;
+    width: 40%;
+    height: 50%;
+}
+
+ /* Responsive Styles */
+ @media screen and (max-width: 767px) {
+    
+    .box {
+        margin: 0 auto 0 auto !important;
+      width: 80%;
+    }
+
+    
+  }

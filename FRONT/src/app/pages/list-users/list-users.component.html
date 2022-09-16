@@ -1,0 +1,80 @@
+<loader></loader>
+<app-header></app-header>
+
+<app-nav></app-nav>
+
+
+<main id="main" class="main">
+
+  <div class="pagetitle">
+    <h1>List users</h1>
+
+  </div>
+
+  <section class="section">
+    <div class="row">
+      <div class="col-lg-12">
+        <div class="card">
+          <div class="card-header">
+            <!-- <h4>News</h4> -->
+          </div>
+
+          <div class="container">
+                     
+            <div class="row align-items-start">
+      
+                       
+              <div class="card m" style="width: 18rem;" *ngFor="let user of users">
+   
+
+                <div class="card-body">
+                  <!-- <h5 class="card-title"><a href="{{user.id}}" target="_blank">Id: {{user.id}}</a> -->
+                  <h5 class="card-title">
+                    <div class="">
+                      <div class="card-body profile-card pt-4 d-flex flex-column align-items-center">
+
+                 
+                        <img class="rounded-circle" *ngIf="user.foto != null && user.foto !='null'"  src="data:image/png;base64,{{user.foto}}" alt="Avatar">
+                        <img class="rounded-circle" *ngIf="user.foto == null || user.foto == 'null'"  src="../../../assets/avatar.jpg" alt="Avatar">
+                 
+        
+                        <h2>{{user.nome}}</h2>
+                        <h3>{{user.vaga}}</h3>
+                        <div class="social-links mt-2">
+                          <a href="{{user.linkedin ||'https://www.linkedin.com/'}}" class="linkedin" target="_blank"><i
+                              class="bi bi-linkedin"></i></a>
+                        </div>
+             
+                      </div>
+                    </div>
+                  </h5>
+    
+                </div>
+                <div class="d"></div>
+                <p class="card-text">Email: {{user.email}}</p>
+                <p class="card-text">Phone: {{user.fone}}</p>
+                <button class="btn btn-outline-secondary" [disabled]="user.file=='null'"  (click)="onClickDownloadPdf(user.file)">
+                  Download Curriculo
+                </button>
+                <div class="e"></div>
+                <button class="btn btn-outline-dark" (click)="onClickEditRegister(user.id)">
+                  Edit Register
+                </button>
+                <div class="e"></div>
+                <button class="btn btn-outline-danger" (click)="deleteRegister(user.id)">
+                  Delete Register
+                </button>
+                <div class="f"></div>
+              </div>
+            </div>
+          </div>
+
+
+        </div>
+
+
+      </div>
+
+    </div>
+  </section>
+</main>

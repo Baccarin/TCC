@@ -14,7 +14,7 @@ import lombok.EqualsAndHashCode;
 @Data
 @EqualsAndHashCode
 @Entity
-@Table(uniqueConstraints = 
+@Table(name="empresa", schema = "engenhariasoftware" , uniqueConstraints = 
   {@UniqueConstraint(name = "empresa_nome_cnpj_unique", columnNames = { "nome", "cnpj" })})
 public class Empresa {
 

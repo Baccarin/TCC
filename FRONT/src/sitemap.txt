@@ -1,0 +1,14 @@
+
+https://marcoaf.website/respostas
+
+https://localhost:4200/metodologias/xp
+https://localhost:4200/metodologias/fdd
+https://localhost:4200/metodologias/kanban
+https://localhost:4200/metodologias/scrum
+
+
+https://marcoaf.website/location
+https://marcoaf.website/profile
+https://marcoaf.website/sendmessage
+https://marcoaf.website/payment
+
