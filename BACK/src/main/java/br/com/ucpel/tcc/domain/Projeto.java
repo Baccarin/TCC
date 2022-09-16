@@ -18,6 +18,7 @@ import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
 import br.com.ucpel.tcc.enums.EtapaProjeto;
+import br.com.ucpel.tcc.enums.MetodologiaAgil;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;

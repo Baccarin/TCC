@@ -2,7 +2,9 @@ package br.com.ucpel.tcc.resource;
 
 import java.util.Comparator;
 import java.util.List;
+import java.util.Objects;
 
+import javax.ws.rs.Consumes;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 
@@ -94,5 +96,18 @@ public class ProjetoResource {
 			return new ResponseEntity<List<Projeto>>(HttpStatus.NO_CONTENT);
 		}
 		return new ResponseEntity<List<Projeto>>(projetos, HttpStatus.OK);
+	}
+	
+	@PostMapping("salvar")
+	@CrossOrigin(origins = "*")
+	@ApiOperation(value = "Busca lista de projetos pelo time cadastrados.")
+	@Produces(MediaType.APPLICATION_JSON)
+	@Consumes(MediaType.APPLICATION_JSON)
+	public ResponseEntity<Projeto> salvarProjeto(@RequestBody ProjetoVO vo) {
+		Projeto projeto = service.inserirProjeto(vo);
+		if (Objects.isNull(projeto)) {
+			return new ResponseEntity<Projeto>(HttpStatus.NO_CONTENT);
+		}
+		return new ResponseEntity<Projeto>(projeto, HttpStatus.OK);
 	}
 }

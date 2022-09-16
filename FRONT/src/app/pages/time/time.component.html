@@ -1,10 +1,12 @@
-<loader></loader>
-<app-header></app-header>
 <app-nav></app-nav>
+<app-header></app-header>
+
 <main id="main" class="main">
 
   <div class="pagetitle">
-    <h1>Cadastro de projeto</h1>
+    <h1>Notes</h1>
+    <p>Add, delete, edit notes.</p>
+
   </div>
 
   <section class="section">
@@ -16,10 +18,32 @@
             <div class="espaco"></div>
             <div class="col">
                 <button type="button" class="btn btn-primary"
-                    (click)="openModal()">Adicionar time</button>
+                    (click)="openModal()">Add/Edit notes</button>
             </div>
 
             <div>
+             
+              <!-- <form (ngSubmit)="onSubmit(data)">
+                <div class="mb-3">
+                  <div class=" col-md-4">
+                    <label for="formGroupExampleInput" class="form-label">Title</label>
+                    <input type="text" class="form-control" id="formGroupExampleInput" [(ngModel)]="data.title"
+                      name="nome" placeholder="Note title..." required #title="ngModel">
+                  </div>
+                </div>
+
+                <div class="mb-3">
+                  <div class=" col-md-12">
+                    <label for="formGroupExampleInput" class="form-label">Description</label>
+           
+                    <textarea class="form-control" [(ngModel)]="data.description" name="enderecoBuscaTitular"
+                      placeholder="Note description..." id="exampleFormControlTextarea1" rows="3"></textarea>
+                  </div>
+                </div>
+
+
+                <button type="submit" class="btn btn-primary" [disabled]="!title.valid">Submit</button>
+              </form> -->
 
               <h5 class="card-title">List of registered notes</h5>
               <div class="col-md-4">
@@ -60,8 +84,9 @@
 
                   </tbody>
                 </table>
-                <pagination-controls (pageChange)="p = $event" previousLabel="Anterior" nextLabel="Próxima">
-                </pagination-controls>
+                <pagination-controls (pageChange)="p = $event" previousLabel="Anterior"
+                nextLabel="Próxima">
+            </pagination-controls>
               </div>
 
             </div>
@@ -70,8 +95,22 @@
       </div>
     </div>
   </section>
-  
-  <!-- Modal -->
+
+
+</main>
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- Modal -->
 <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog modal-dialog-centered">
     <div class="modal-content">
@@ -124,4 +163,4 @@
 </div>
 
 
-</main>
+

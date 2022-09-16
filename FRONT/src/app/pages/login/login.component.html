@@ -40,58 +40,39 @@
                 <div class="card-body">
 
                   <div class="pt-4 pb-2">
-                    <p class="obs">To access, request access credentials <a href="javascript:void(0)" routerLink="/sendmessage">here.</a></p>
                     <h5 class="card-title text-center pb-0 fs-4">Login</h5>
-                    <!-- <div class="d-flex justify-content-center">
-                      <a href="/index.html" class="logo d-flex align-items-center w-auto">
-                        <img src="assets/favoicon.png" alt="">
-                   
-                      </a>
-                    </div> -->
-                    
-                    <p class="text-center small">Auth</p>
                   </div>
 
                   <form class="row g-3 needs-validation" (ngSubmit)="onSubmit(data)">
 
                     <div class="col-12">
-                      <label for="yourUsername" class="form-label">User</label>
+                      <label for="yourUsername" class="form-label">Usuário</label>
                       <div class="input-group">
                         <input type="email" name="login" [(ngModel)]="data.login" class="form-control" 
                         aria-describedby="emailHelp"  required minlength="2" #email="ngModel">
                       </div>
 
                       <br>
-                      <label for="yourUsername" class="form-label">Password</label>
+                      <label for="yourUsername" class="form-label">Senha</label>
                       <div class="input-group">
                         <input type="password" name="senha" class="form-control" [(ngModel)]="data.senha" 
                           aria-describedby="emailHelp" required minlength="2" #password="ngModel">
                       </div>
 
-                     
-                      <!-- <p class="cor" *ngIf="erro==true">
-                        CPF não encontrado
-                      </p> -->
                     </div>
 
                     <div class="col-12">
-                      <!-- <label for="yourPassword" class="form-label">Password</label>
-                        <input type="password" name="passwword" class="form-control" id="yourPassword" required>
-                        <div class="invalid-feedback">Please enter your password!</div> -->
                     </div>
-                    <!-- <div class="e"></div> -->
                     <div class="d-flex justify-content-center" >
                       <re-captcha (resolved)="resolved($event)" siteKey="6LdQJCAcAAAAAGq5ymJKHifRPzK6UtIwGnpvgwKd" language="en"></re-captcha>
                     </div>
 
                     <div class="col-12">
 
-                      <button class="btn btn-primary w-100" type="submit" [disabled]="!password.valid || !email.valid" >Go</button>
-                      <!-- <button class="btn btn-primary w-100" type="submit" [disabled]="!cpf.valid">Login</button> -->
+                      <button class="btn btn-primary w-100" type="submit" [disabled]="!password.valid || !email.valid" >Acessar</button>
                     </div>
 
                     <div class="col-12">
-                      <!-- <p class="small mb-0">Don't have account? <a href="pages-register.html">Create an account</a></p> -->
                     </div>
 
                   </form>
@@ -104,7 +85,7 @@
  
               <div class="credits">
 
-                By <a href="https://marcoaf.website/profile">Guilherme Baccarin</a>
+                By <a href="index.html">Guilherme Baccarin</a>
 
               </div>
             </div>

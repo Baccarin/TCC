@@ -1,4 +1,4 @@
-package br.com.ucpel.tcc.domain;
+package br.com.ucpel.tcc.enums;
 
 public enum MetodologiaAgil {
 

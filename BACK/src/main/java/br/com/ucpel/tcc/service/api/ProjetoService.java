@@ -15,4 +15,5 @@ public interface ProjetoService {
 	Projeto atualizarProjeto(ProjetoVO vo);
 	
 	void avancarEtapaProjeto(ProjetoVO vo) throws RegistroNaoEncontradoException, ProximaEtapaProjetoInvalidaException ;
+
 }

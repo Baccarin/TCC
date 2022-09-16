@@ -6,6 +6,10 @@ describe('RegisterComponent', () => {
   let component: RegisterComponent;
   let fixture: ComponentFixture<RegisterComponent>;
 
+  let itemList = ['carrot', 'banana', 'apple', 
+      'potato', 'tomato', 'cabbage', 'turnip',
+      'okra', 'onion', 'cherries', 'plum', 'mango'];
+
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       declarations: [ RegisterComponent ]

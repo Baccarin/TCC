@@ -17,9 +17,7 @@ export class LoginComponent implements OnInit {
     senha:'',
   }
 
-  ret:any
-
-  constructor(public _loginservice: LoginService,private router: Router) {
+  constructor(public _loginservice: LoginService, private router: Router) {
     this.captcha = '';
    }
 
@@ -30,39 +28,22 @@ export class LoginComponent implements OnInit {
     this.captcha = captchaResponse;
   }
 
-
-    onSubmit(data:any){
-   // console.log(data)
-   if (this.captcha == '') {
-    Swal.fire({
-      title: 'Click on the captcha',
-      text: 'Please try again',
-      icon: 'error',
-      confirmButtonText: 'OK',
-      confirmButtonColor: 'red',
-    })
-  }
-  else {
-    this._loginservice.login(data).subscribe(
-      (resp)=>{
-        this.ret=resp
-        console.log(resp);
-        if(this.ret.token){
-          sessionStorage.setItem('token',this.ret.token)
-          this._loginservice.ip().subscribe(
-            (response)=>{
-              var data = response;
-              this._loginservice.sIp(data).subscribe(
-                (resp)=>{
-                });
-
-            });
-          this.router.navigate(['/'])
-        }
-
-      }
-    )
-  }
+  onSubmit(data:any){
+    if (this.captcha == '') {
+      Swal.fire({
+        title: 'Click on the captcha',
+        text: 'Please try again',
+        icon: 'error',
+        confirmButtonText: 'OK',
+        confirmButtonColor: 'red',
+      })
+    } else {
+      var token = this._loginservice.login(data).subscribe(
+        resp => {
+          console.log(resp);
+        });
+      
+    }
  
   }
 
