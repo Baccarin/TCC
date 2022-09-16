@@ -38,6 +38,21 @@
                 </div>
             
 
+                <div class="form-group col-md-3">
+                  <form [formGroup]="selectEtapa">
+                    <label>Selecione uma etapa:</label>
+                    <select
+                      class="form-control"
+                      formControlName="selectEtapa"
+                    >
+                      <option value="">Selecione</option>
+                      <option [ngValue]="etapa" *ngFor="let etapa of etapas">{{
+                        etapa
+                      }}</option>
+                    </select>
+                  </form>
+                </div>
+
               </div>
               <br>
               <button type="submit" class="btn btn-primary">Salvar</button>

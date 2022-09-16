@@ -54,4 +54,16 @@ export class RegisterService {
     }
     
   }
+
+  getEtapas(){
+    this.cabecalho.Authorization = sessionStorage.getItem('token')
+    return this.http.get(`${this.baseUrl}/etapa/buscaLista`,{headers: this.cabecalho})
+    .pipe(
+      map((response) => { 
+        console.log("teste")
+        console.log(response)
+        return response
+      }),catchError((error) => this.errorHandler(error))
+    )
+  }
 }
