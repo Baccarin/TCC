@@ -19,6 +19,11 @@ import { KanbanComponent } from './pages/tutorials/kanban/kanban.component';
 import { FDDComponent } from './pages/tutorials/fdd/fdd.component';
 import { CrystalComponent } from './pages/tutorials/crystal/crystal.component';
 
+//CADASTRO
+import { PessoaComponent } from './pages/cadastro/pessoa/pessoa.component';
+import { EmpresaComponent } from './pages/cadastro/empresa/empresa.component';
+
+
 
 
 const routes: Routes = [
@@ -29,6 +34,10 @@ const routes: Routes = [
   { path: 'metodologias/kanban', component: KanbanComponent },
   { path: 'metodologias/fdd', component: FDDComponent },
   { path: 'metodologias/crystal', component: CrystalComponent },
+
+  //CADASTRO
+  { path: 'cadastro/pessoa', component: PessoaComponent },
+  { path: 'cadastro/empresa', component: EmpresaComponent },
 
 
   { path: 'respostas', component: RespostasComponent },

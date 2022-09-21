@@ -33,7 +33,10 @@ import { FDDComponent } from './pages/tutorials/fdd/fdd.component';
 import { KanbanComponent } from './pages/tutorials/kanban/kanban.component';
 import { CrystalComponent } from './pages/tutorials/crystal/crystal.component';
 
-// ------
+// CADASTRO
+import { PessoaComponent } from './pages/cadastro/pessoa/pessoa.component';
+import { EmpresaComponent } from './pages/cadastro/empresa/empresa.component';
+
 
 
 import { RespostasComponent } from './pages/respostas/respostas.component';
@@ -61,6 +64,10 @@ import { NgxPaginationModule } from 'ngx-pagination';
     FDDComponent,
     CrystalComponent,
 
+    //CADASTROS
+    PessoaComponent,
+    EmpresaComponent,
+    
     RespostasComponent
   ],
   imports: [
