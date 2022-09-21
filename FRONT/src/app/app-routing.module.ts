@@ -17,6 +17,8 @@ import { XPComponent } from './pages/tutorials/xp/xp.component';
 import { ScrumComponent } from './pages/tutorials/scrum/scrum.component';
 import { KanbanComponent } from './pages/tutorials/kanban/kanban.component';
 import { FDDComponent } from './pages/tutorials/fdd/fdd.component';
+import { CrystalComponent } from './pages/tutorials/crystal/crystal.component';
+
 
 
 const routes: Routes = [
@@ -26,6 +28,8 @@ const routes: Routes = [
   { path: 'metodologias/scrum', component: ScrumComponent },
   { path: 'metodologias/kanban', component: KanbanComponent },
   { path: 'metodologias/fdd', component: FDDComponent },
+  { path: 'metodologias/crystal', component: CrystalComponent },
+
 
   { path: 'respostas', component: RespostasComponent },
   { path: 'location', component: LocationComponent },

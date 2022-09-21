@@ -31,6 +31,8 @@ import { XPComponent } from './pages/tutorials/xp/xp.component';
 import { ScrumComponent } from './pages/tutorials/scrum/scrum.component';
 import { FDDComponent } from './pages/tutorials/fdd/fdd.component';
 import { KanbanComponent } from './pages/tutorials/kanban/kanban.component';
+import { CrystalComponent } from './pages/tutorials/crystal/crystal.component';
+
 // ------
 
 
@@ -51,11 +53,13 @@ import { NgxPaginationModule } from 'ngx-pagination';
     EditUserComponent,
     ProfileComponent,
     NotesComponent,
+
     // TUTORIAIS
     XPComponent,
     ScrumComponent,
     KanbanComponent,
     FDDComponent,
+    CrystalComponent,
 
     RespostasComponent
   ],
