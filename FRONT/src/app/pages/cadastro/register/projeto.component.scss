@@ -91,24 +91,3 @@ list-item:hover {
 .error {
     border: 1px solid red;
 }
-
-.edit{
-    color: blue;
-    font-size: 22px;
-    cursor: pointer;
-}
-.del{
-    color: red;
-    font-size: 22px;
-    cursor: pointer;
-}
-.edit:hover{
-    color: #9ea2a8;
-}
-.del:hover{
-    color: #9ea2a8;
-}
-
-#container {
-    overflow: auto;
-}

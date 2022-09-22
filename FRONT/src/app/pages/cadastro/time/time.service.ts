@@ -2,15 +2,15 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { catchError, map, Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
-import Swal from 'sweetalert2'
+import Swal from 'sweetalert2';
 import { Router } from '@angular/router';
+
 
 
 @Injectable({
   providedIn: 'root'
 })
-
-export class EmpresaService {
+export class TimeService {
 
   baseUrl = environment.baseUrl
 
@@ -25,7 +25,7 @@ export class EmpresaService {
 
   register(data:any): Observable<any>{    
     this.cabecalho.Authorization = sessionStorage.getItem('token')
-    return this.http.post(`${this.baseUrl}/empresa/salvar`, data,{headers: this.cabecalho})
+    return this.http.post(`${this.baseUrl}/time/salvar`, data,{headers: this.cabecalho})
     .pipe(
       map((response) => { 
         return response
@@ -54,14 +54,5 @@ export class EmpresaService {
       })
     }
     
-  }
-
-  getAll(): Observable<any> {
-    this.cabecalho.Authorization = sessionStorage.getItem('token')
-    return this.http.get<any>(`${this.baseUrl}/empresa/buscaLista`, {headers: this.cabecalho})
-      .pipe(
-        map((response) => response),
-        catchError(async (error) => this.errorHandler(error))
-      );
   }
 }

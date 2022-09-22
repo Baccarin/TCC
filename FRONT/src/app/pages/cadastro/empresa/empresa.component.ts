@@ -17,18 +17,26 @@ export class EmpresaComponent implements OnInit {
     cnpj: ''
   }
 
+  empresas: any;
+  filter: any ;
+
 
   constructor(
-    private _registerservice: EmpresaService,
+    private empresaService: EmpresaService,
     private router: Router) { }
 
-  ngOnInit() {
+  init() {
+      this.empresaService.getAll().subscribe(resp => {
+        this.empresas = resp;
+      })
+  }
 
+  ngOnInit() {
+    this.init();
   }
 
   onSubmit(data: any) {
-
-    this._registerservice.register(data).subscribe(resp => {
+    this.empresaService.register(data).subscribe(resp => {
       Swal.fire({
         position: 'center',
         icon: 'success',
@@ -43,6 +51,26 @@ export class EmpresaComponent implements OnInit {
   }
   navigate(): void {
     this.router.navigate(['/register'])
+  }
+
+
+  edit(id: any) {
+
+  }
+
+  delete(id: any) {
+    Swal.fire({
+      title: "Warning!",
+      text: `Do you really want to delete ?`,
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      cancelButtonText: 'Cancelar',
+      confirmButtonText: 'Yes, is it!'
+    }).then((result) => {
+
+    })
   }
 
 

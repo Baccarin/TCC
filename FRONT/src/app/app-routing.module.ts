@@ -1,16 +1,12 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { AuthGuardService } from './components/auth-guard/auth-guard.service';
-import { EditUserComponent } from './pages/edit-user/edit-user.component';
 import { HomeComponent } from './pages/home/home.component';
-import { ListUsersComponent } from './pages/list-users/list-users.component';
-import { LocationComponent } from './pages/location/location.component';
+
 import { LoginComponent } from './pages/login/login.component';
-import { NotesComponent } from './pages/notes/notes.component';
 import { ProfileComponent } from './pages/profile/profile.component';
-import { RegisterComponent } from './pages/register/register.component';
-import { RespostasComponent } from './pages/respostas/respostas.component';
-import { SendmessageComponent } from './pages/sendmessage/sendmessage.component';
+
+
 
 // TUTORIAIS
 import { XPComponent } from './pages/tutorials/xp/xp.component';
@@ -22,12 +18,17 @@ import { CrystalComponent } from './pages/tutorials/crystal/crystal.component';
 //CADASTRO
 import { PessoaComponent } from './pages/cadastro/pessoa/pessoa.component';
 import { EmpresaComponent } from './pages/cadastro/empresa/empresa.component';
+import { TimeComponent } from './pages/cadastro/time/time.component';
+import { FuncionarioComponent } from './pages/cadastro/funcionario/funcionario.component';
+import { ProjetoComponent } from './pages/cadastro/register/projeto.component';
+
 
 
 
 
 const routes: Routes = [
   { path: '', component: HomeComponent },
+
   // TUTORIAIS
   { path: 'metodologias/xp', component: XPComponent },
   { path: 'metodologias/scrum', component: ScrumComponent },
@@ -36,19 +37,15 @@ const routes: Routes = [
   { path: 'metodologias/crystal', component: CrystalComponent },
 
   //CADASTRO
-  { path: 'cadastro/pessoa', component: PessoaComponent },
-  { path: 'cadastro/empresa', component: EmpresaComponent },
+  { path: 'cadastro/pessoa', component: PessoaComponent , canActivate: [AuthGuardService] },
+  { path: 'cadastro/empresa', component: EmpresaComponent , canActivate: [AuthGuardService] },
+  { path: 'cadastro/time', component: TimeComponent , canActivate: [AuthGuardService] },
+  { path: 'cadastro/funcionario', component: FuncionarioComponent , canActivate: [AuthGuardService] },
+  { path: 'cadastro/projeto', component: ProjetoComponent, canActivate: [AuthGuardService] },
 
-
-  { path: 'respostas', component: RespostasComponent },
-  { path: 'location', component: LocationComponent },
-  { path: 'profile', component: ProfileComponent },
-  { path: 'sendmessage', component: SendmessageComponent },
   { path: 'login', component: LoginComponent },
-  { path: 'notes', component: NotesComponent, canActivate: [AuthGuardService] },
-  { path: 'register', component: RegisterComponent, canActivate: [AuthGuardService] },
-  { path: 'list-users', component: ListUsersComponent, canActivate: [AuthGuardService] },
-  { path: 'edit-users', component: EditUserComponent, canActivate: [AuthGuardService] },
+
+  { path: 'profile', component: ProfileComponent },
 
 
 

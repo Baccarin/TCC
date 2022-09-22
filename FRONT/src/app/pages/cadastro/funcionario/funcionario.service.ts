@@ -10,7 +10,7 @@ import { Router } from '@angular/router';
   providedIn: 'root'
 })
 
-export class EmpresaService {
+export class FuncionarioService {
 
   baseUrl = environment.baseUrl
 
@@ -25,7 +25,7 @@ export class EmpresaService {
 
   register(data:any): Observable<any>{    
     this.cabecalho.Authorization = sessionStorage.getItem('token')
-    return this.http.post(`${this.baseUrl}/empresa/salvar`, data,{headers: this.cabecalho})
+    return this.http.post(`${this.baseUrl}/funcionario/salvar`, data,{headers: this.cabecalho})
     .pipe(
       map((response) => { 
         return response
@@ -56,12 +56,4 @@ export class EmpresaService {
     
   }
 
-  getAll(): Observable<any> {
-    this.cabecalho.Authorization = sessionStorage.getItem('token')
-    return this.http.get<any>(`${this.baseUrl}/empresa/buscaLista`, {headers: this.cabecalho})
-      .pipe(
-        map((response) => response),
-        catchError(async (error) => this.errorHandler(error))
-      );
-  }
 }

@@ -9,8 +9,7 @@ import { Router } from '@angular/router';
 @Injectable({
   providedIn: 'root'
 })
-
-export class EmpresaService {
+export class ProjetoService {
 
   baseUrl = environment.baseUrl
 
@@ -25,7 +24,7 @@ export class EmpresaService {
 
   register(data:any): Observable<any>{    
     this.cabecalho.Authorization = sessionStorage.getItem('token')
-    return this.http.post(`${this.baseUrl}/empresa/salvar`, data,{headers: this.cabecalho})
+    return this.http.post(`${this.baseUrl}/projeto/salvar`, data,{headers: this.cabecalho})
     .pipe(
       map((response) => { 
         return response
@@ -56,12 +55,15 @@ export class EmpresaService {
     
   }
 
-  getAll(): Observable<any> {
+  getEtapas(){
     this.cabecalho.Authorization = sessionStorage.getItem('token')
-    return this.http.get<any>(`${this.baseUrl}/empresa/buscaLista`, {headers: this.cabecalho})
-      .pipe(
-        map((response) => response),
-        catchError(async (error) => this.errorHandler(error))
-      );
+    return this.http.get(`${this.baseUrl}/etapa/buscaLista`,{headers: this.cabecalho})
+    .pipe(
+      map((response) => { 
+        console.log("teste")
+        console.log(response)
+        return response
+      }),catchError((error) => this.errorHandler(error))
+    )
   }
 }

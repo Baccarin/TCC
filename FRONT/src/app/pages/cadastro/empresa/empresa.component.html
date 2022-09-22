@@ -32,6 +32,42 @@
                 </div>            
 
               </div>
+
+              <br><br>
+
+              <div id="container">
+                <table class="table">
+                  <thead>
+                    <tr>
+                      <th scope="col">Nome</th>
+                      <th scope="col">CNPJ</th>
+                    </tr>
+                  </thead>
+
+                  <tbody>
+                    <tr *ngFor="let empresa of empresas | filter:filter; let i = index">
+
+                      <th scope="row">{{empresa.id}}</th>
+                      <td>{{empresa.nome}}</td>
+                      <td>{{empresa.cnpj}}</td>
+                      <td>
+
+
+                        <a class="edit" title="Edit" href="javascript:void(0)" (click)="edit(empresa.id)"><i
+                            class="bi bi-pencil-square"></i></a>
+                        &nbsp;&nbsp;
+                        <a class="del" title="Delete" href="javascript:void(0)" (click)="delete(empresa.id)"><i
+                            class="bi bi-x-circle"></i></a>
+
+
+
+                      </td>
+                    </tr>
+
+                  </tbody>
+                </table>
+              </div>
+
               <br>
               <button type="submit" class="btn btn-primary">Salvar</button>
             </form>

@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { HomeService } from './home.service';
-import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
-import Swal from 'sweetalert2';
+import { DomSanitizer} from '@angular/platform-browser';
 
 
 @Component({
@@ -15,8 +14,7 @@ export class HomeComponent implements OnInit {
 
   ngOnInit(): void {
  
-    
-  }//fim do ngOnInit
+  }
 
 
-}//fim do export class HomeComponent
+}

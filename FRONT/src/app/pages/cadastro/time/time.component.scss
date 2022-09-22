@@ -1,0 +1,28 @@
+.edit {
+    color: blue;
+    font-size: 22px;
+    cursor: pointer;
+}
+
+.del {
+    color: red;
+    font-size: 22px;
+    cursor: pointer;
+}
+
+.edit:hover {
+    color: #9ea2a8;
+}
+
+.del:hover {
+    color: #9ea2a8;
+}
+
+#container {
+    overflow: auto;
+}
+
+.espaco {
+    /* padding: 0px 0px 10px 0px !important; */
+    padding: 10px;
+}

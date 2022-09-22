@@ -101,15 +101,12 @@
                     class="bi bi-lock"></i><span>Restricted</span><i class="bi bi-chevron-down ms-auto"></i> </a>
             <ul id="icons-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
 
-            
-
                 <li class="nav-item">
-                    <a class="nav-link collapsed" routerLink="/notes">
+                    <a class="nav-link collapsed" routerLink="/login">
                         <i class="bi bi-circle-fill"></i>
                         <span>TESTE</span>
                     </a>
                 </li>
-        
         
                 <li class="nav-item">
                     <a class="nav-link collapsed" href="javascript:void(0)" (click)="logout()">
@@ -117,8 +114,49 @@
                         <span>Sair</span>
                     </a>
                 </li>
+            </ul>
+        </li>
 
 
+        <li class="nav-item">
+            <a class="nav-link collapsed" data-bs-target="#components-nav-cadastros" data-bs-toggle="collapse" href="#"> <i
+                    class="bi bi-book"></i><span>Cadastros</span><i class="bi bi-chevron-down ms-auto"></i> </a>
+            <ul id="components-nav-cadastros" class="nav-content collapse " data-bs-parent="#sidebar-nav">
+
+                <li class="nav-item">
+                    <a class="nav-link collapsed" routerLink="/cadastro/empresa">
+                        <i class="bi bi-circle-fill"></i>
+                        <span>Empresa</span>
+                    </a>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link collapsed" routerLink="/cadastro/funcionario">
+                        <i class="bi bi-circle-fill"></i>
+                        <span>Funcionário</span>
+                    </a>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link collapsed" routerLink="/cadastro/pessoa">
+                        <i class="bi bi-circle-fill"></i>
+                        <span>Pessoa</span>
+                    </a>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link collapsed" routerLink="/cadastro/time">
+                        <i class="bi bi-circle-fill"></i>
+                        <span>Time</span>
+                    </a>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link collapsed" routerLink="/cadastro/projeto">
+                        <i class="bi bi-circle-fill"></i>
+                        <span>Projeto</span>
+                    </a>
+                </li>
 
             </ul>
         </li>
