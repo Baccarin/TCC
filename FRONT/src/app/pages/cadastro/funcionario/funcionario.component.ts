@@ -16,8 +16,8 @@ export class FuncionarioComponent implements OnInit {
   tempoNotificacao = 2500;
 
   data = {
-    usuario: '',
-    empresa: ''
+    idUsuario: '',
+    idEmpresa: ''
   }
 
   funcionarios: any;
@@ -43,7 +43,7 @@ export class FuncionarioComponent implements OnInit {
       Swal.fire({
         position: 'center',
         icon: 'success',
-        title: 'Projeto salvo com sucesso',
+        title: 'Funcionário salvo com sucesso',
         showConfirmButton: false,
         timer: this.tempoNotificacao
       })
@@ -52,8 +52,8 @@ export class FuncionarioComponent implements OnInit {
   }
 
   limpaCampos(){
-    this.data.usuario = '';
-    this.data.empresa = '';
+    this.data.idUsuario = '';
+    this.data.idEmpresa = '';
   }
 
   navigate(): void {

@@ -12,10 +12,12 @@ import Swal from 'sweetalert2';
 })
 export class PessoaComponent implements OnInit {
 
+  tempoNotificacao = 2500;
+
   data = {
     nome: '',
     email: '',
-    sexo: 'Não informado',
+    sexo: 'OUTRO',
     dataNascimento: ''
   }
 
@@ -34,24 +36,42 @@ export class PessoaComponent implements OnInit {
     this.pessoaService.getAll().subscribe(response =>{
       this.pessoas = response;
     })
+   this.limpaCampos(); 
   }
+
+  limpaCampos(){
+    this.data.nome = '';
+    this.data.email = '';
+  }
+
 
   edit(id: any) {
 
   }
 
-  delete(id: any) {
+  delete(data: any) {
     Swal.fire({
-      title: "Warning!",
-      text: `Do you really want to delete ?`,
+      title: "Ateção!",
+      text: `Deseja confirmar a exclusão do registro?`,
       icon: 'warning',
       showCancelButton: true,
       confirmButtonColor: '#3085d6',
       cancelButtonColor: '#d33',
       cancelButtonText: 'Cancelar',
-      confirmButtonText: 'Yes, is it!'
+      confirmButtonText: 'Confirmar'
     }).then((result) => {
-
+        if (result.isConfirmed){
+        this.pessoaService.delete(data).subscribe(resp => {
+          Swal.fire({
+            position: 'top-end',
+            icon: 'success',
+            title: 'Exclusão confirmada',
+            showConfirmButton: false,
+            timer: this.tempoNotificacao
+          })
+          this.init();
+        })
+      }
     })
   }
 
@@ -61,11 +81,11 @@ export class PessoaComponent implements OnInit {
       Swal.fire({
         position: 'center',
         icon: 'success',
-        title: 'Projeto salvo com sucesso',
+        title: 'Registro salvo com sucesso',
         showConfirmButton: false,
         timer: 2500
       })
-      this.navigate()
+      this.init();
     })
 
 

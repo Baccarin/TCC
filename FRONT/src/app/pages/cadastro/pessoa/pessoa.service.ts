@@ -42,6 +42,21 @@ export class PessoaService {
       );
   }
 
+
+  delete(data: any): Observable<any> {
+
+    var postData = {
+      idPessoa: data
+    };
+
+    this.cabecalho.Authorization = sessionStorage.getItem('token')
+    return this.http.post(`${this.baseUrl}/pessoa/deletar`, postData, {headers: this.cabecalho}).pipe(
+      map((response) => response),
+      catchError(async (error) => this.errorHandler(error))
+    );
+  }
+
+
   errorHandler(error: any): any {
     if (error.status == 200){
       Swal.fire({
@@ -51,8 +66,6 @@ export class PessoaService {
         showConfirmButton: false,
         timer: 2000
       })
-      sessionStorage.setItem('token' , error.error.text);
-      this.router.navigate(['/'])
     } else {
       Swal.fire({
         title: 'Erro ao salvar cadastro',
@@ -61,6 +74,7 @@ export class PessoaService {
         confirmButtonText: 'OK',
         confirmButtonColor: 'red',
       })
+      sessionStorage.setItem('token' , error.error.text);
     }
     
   }
