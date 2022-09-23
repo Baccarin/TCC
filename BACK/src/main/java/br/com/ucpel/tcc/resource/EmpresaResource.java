@@ -50,19 +50,31 @@ public class EmpresaResource {
 	@CrossOrigin(origins = "*")
 	@ApiOperation(value = "Busca lista de empresas por nomes cadastradas.")
 	@Produces(MediaType.APPLICATION_JSON)
-	public ResponseEntity<List<Empresa>> buscaListaFuncionarioByNome(@RequestBody EmpresaVO vo) {
+	public ResponseEntity<List<Empresa>> buscaListaEmpresaByNome(@RequestBody EmpresaVO vo) {
 		List<Empresa> empresas = repository.findEmpresaByNome(vo.getNome());
 		if (empresas.isEmpty()) {
 			return new ResponseEntity<List<Empresa>>(HttpStatus.NO_CONTENT);
 		}
 		return new ResponseEntity<List<Empresa>>(empresas, HttpStatus.OK);
 	}
+	
+	@PostMapping("buscaLista/byId")
+	@CrossOrigin(origins = "*")
+	@ApiOperation(value = "Busca lista de empresas por id.")
+	@Produces(MediaType.APPLICATION_JSON)
+	public ResponseEntity<Empresa> buscaEmpresaById(@RequestBody EmpresaVO vo) {
+		Empresa empresa = repository.findById(vo.getId()).orElseGet(null);
+		if (Objects.isNull(empresa)) {
+			return new ResponseEntity<Empresa>(HttpStatus.NO_CONTENT);
+		}
+		return new ResponseEntity<Empresa>(empresa, HttpStatus.OK);
+	}
 
 	@PostMapping("buscaLista/byCNPJ")
 	@CrossOrigin(origins = "*")
 	@ApiOperation(value = "Busca lista de empresas por CNPJ cadastradas.")
 	@Produces(MediaType.APPLICATION_JSON)
-	public ResponseEntity<List<Empresa>> buscaListaFuncionarioByCNPJ(@RequestBody EmpresaVO vo) {
+	public ResponseEntity<List<Empresa>> buscaListaEmpresaByCNPJ(@RequestBody EmpresaVO vo) {
 		List<Empresa> empresas = repository.findEmpresaByCNPJ(vo.getCnpj());
 		if (empresas.isEmpty()) {
 			return new ResponseEntity<List<Empresa>>(HttpStatus.NO_CONTENT);
@@ -98,7 +110,7 @@ public class EmpresaResource {
 	@CrossOrigin(origins = "*")
 	@ApiOperation(value = "Deletar empresa.")
 	@Produces(MediaType.APPLICATION_JSON)
-	public ResponseEntity<String> deletarFuncionario(@RequestBody EmpresaVO vo)
+	public ResponseEntity<String> deletarEmpresa(@RequestBody EmpresaVO vo)
 			throws ExclusaoInvalidaRegistrosDependentesException {
 		try {
 			service.deletarEmpresa(vo);

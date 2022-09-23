@@ -19,8 +19,8 @@ public class EmpresaFunction  implements Converter<EmpresaVO, Empresa>{
 	
 	@Override
 	public Empresa convert(EmpresaVO vo) {
-		Empresa e = Objects.isNull(vo.getIdEmpresa()) || vo.getIdEmpresa() == 0 ? new Empresa() :
-			repository.findById(vo.getIdEmpresa()).get();
+		Empresa e = Objects.isNull(vo.getId()) || vo.getId() == 0 ? new Empresa() :
+			repository.findById(vo.getId()).get();
 		
 		if (Objects.nonNull(vo.getCnpj())) {
 			e.setCnpj(vo.getCnpj());

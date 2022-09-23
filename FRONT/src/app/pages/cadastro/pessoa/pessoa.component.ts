@@ -19,18 +19,45 @@ export class PessoaComponent implements OnInit {
     dataNascimento: ''
   }
 
+  pessoas: any;
+  filter: any;
 
   constructor(
-    private _registerservice: PessoaService,
+    private pessoaService: PessoaService,
     private router: Router) { }
 
   ngOnInit() {
+    this.init();
+  }
 
+  init(){
+    this.pessoaService.getAll().subscribe(response =>{
+      this.pessoas = response;
+    })
+  }
+
+  edit(id: any) {
+
+  }
+
+  delete(id: any) {
+    Swal.fire({
+      title: "Warning!",
+      text: `Do you really want to delete ?`,
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      cancelButtonText: 'Cancelar',
+      confirmButtonText: 'Yes, is it!'
+    }).then((result) => {
+
+    })
   }
 
   onSubmit(data: any) {
 
-    this._registerservice.register(data).subscribe(resp => {
+    this.pessoaService.register(data).subscribe(resp => {
       Swal.fire({
         position: 'center',
         icon: 'success',

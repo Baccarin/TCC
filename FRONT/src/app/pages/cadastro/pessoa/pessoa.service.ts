@@ -33,6 +33,15 @@ export class PessoaService {
     )
   }
 
+  getAll(): Observable<any> {
+    this.cabecalho.Authorization = sessionStorage.getItem('token')
+    return this.http.get<any>(`${this.baseUrl}/pessoa/buscaLista`, {headers: this.cabecalho})
+      .pipe(
+        map((response) => response),
+        catchError(async (error) => this.errorHandler(error))
+      );
+  }
+
   errorHandler(error: any): any {
     if (error.status == 200){
       Swal.fire({
@@ -56,15 +65,4 @@ export class PessoaService {
     
   }
 
-  getEtapas(){
-    this.cabecalho.Authorization = sessionStorage.getItem('token')
-    return this.http.get(`${this.baseUrl}/etapa/buscaLista`,{headers: this.cabecalho})
-    .pipe(
-      map((response) => { 
-        console.log("teste")
-        console.log(response)
-        return response
-      }),catchError((error) => this.errorHandler(error))
-    )
-  }
 }

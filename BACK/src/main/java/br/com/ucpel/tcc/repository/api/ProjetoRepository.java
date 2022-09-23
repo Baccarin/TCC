@@ -10,7 +10,7 @@ import br.com.ucpel.tcc.domain.Projeto;
 
 public interface ProjetoRepository extends JpaRepository<Projeto, Long> {
 
-	@Query("select p from Projeto p where :idTime in p.times and p.ativo is true")
+	@Query("select p from Projeto p where p.time =:idTime  and p.ativo is true")
 	List<Projeto> findProjetoByTimeId(@Param("idTime") Long idTime);
 	
 	@Query("select p from Projeto p where p.nome like :nome and p.ativo is true")

@@ -14,27 +14,32 @@ import { Router } from '@angular/router';
 
 export class TimeComponent implements OnInit {
 
-  data : {
+  data = {
     nome: '',
     lider: ''
   }
 
+  times: any;
+  filter: any;
+
   constructor(
-    private _registerservice: TimeService,
+    private timeService: TimeService,
     private router: Router) { }
 
   ngOnInit(): void {
-  
+    this.init();
   }
 
   init() {
-
+    this.timeService.getAll().subscribe(response =>{
+      this.times = response;
+    })
   }
 
 
   onSubmit(data: any) {
 
-    this._registerservice.register(data).subscribe(resp => {
+    this.timeService.register(data).subscribe(resp => {
       Swal.fire({
         position: 'center',
         icon: 'success',
@@ -51,6 +56,24 @@ export class TimeComponent implements OnInit {
     this.router.navigate(['/cadastro/time'])
   }
 
+  edit(id: any) {
+
+  }
+
+  delete(id: any) {
+    Swal.fire({
+      title: "Warning!",
+      text: `Do you really want to delete ?`,
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      cancelButtonText: 'Cancelar',
+      confirmButtonText: 'Yes, is it!'
+    }).then((result) => {
+
+    })
+  }
 
 
 }

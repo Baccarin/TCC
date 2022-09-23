@@ -17,5 +17,6 @@ public interface FuncionarioRepository extends JpaRepository<Funcionario, Long> 
 	
 	@Query("select f from Funcionario f where f.empresa.id = :empresa")
 	List<Funcionario> findFuncionarioByEmpresaId(@Param("empresa") Long empresa);
+	
 
 }

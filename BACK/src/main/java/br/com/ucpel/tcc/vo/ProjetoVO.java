@@ -1,7 +1,5 @@
 package br.com.ucpel.tcc.vo;
 
-import java.util.List;
-
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -13,7 +11,7 @@ public class ProjetoVO {
 
 	private Long idProjeto;
 	private String nome;
-	private List<Long> idsTimes;
+	private Long idTime;
 	private String dataInicio;
 	private String dataFim;
 	private String etapa;

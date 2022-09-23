@@ -22,25 +22,46 @@ export class ProjetoComponent implements OnInit {
     ativo: Boolean
   }
 
-  public selectEtapa: FormGroup;
-  public etapas: any
+  projetos:any;
+  filter: any;
 
   constructor(
-    private _registerservice: ProjetoService,
-    private router: Router,
-    private formBuilder: FormBuilder) { }
+    private projetoService: ProjetoService,
+    private router: Router) { }
 
   ngOnInit() {
-    this.selectEtapa = this.formBuilder.group({
-      selectEtapa : ['']
-    });
-
-    this._registerservice.getEtapas();
+    this.init();
   }
+
+  init(){
+    this.projetoService.getAll().subscribe(response =>{
+      this.projetos = response;
+    })
+  }
+
+  edit(id: any) {
+
+  }
+
+  delete(id: any) {
+    Swal.fire({
+      title: "Warning!",
+      text: `Do you really want to delete ?`,
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      cancelButtonText: 'Cancelar',
+      confirmButtonText: 'Yes, is it!'
+    }).then((result) => {
+
+    })
+  }
+
 
   onSubmit(data: any) {
 
-    this._registerservice.register(data).subscribe(resp => {
+    this.projetoService.register(data).subscribe(resp => {
       Swal.fire({
         position: 'center',
         icon: 'success',

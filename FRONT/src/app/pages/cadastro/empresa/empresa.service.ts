@@ -23,16 +23,6 @@ export class EmpresaService {
     'Content-Type': 'application/json'
   }
 
-  register(data:any): Observable<any>{    
-    this.cabecalho.Authorization = sessionStorage.getItem('token')
-    return this.http.post(`${this.baseUrl}/empresa/salvar`, data,{headers: this.cabecalho})
-    .pipe(
-      map((response) => { 
-        return response
-      }),catchError((error) => this.errorHandler(error))
-    )
-  }
-
   errorHandler(error: any): any {
     if (error.status == 200){
       Swal.fire({
@@ -63,5 +53,52 @@ export class EmpresaService {
         map((response) => response),
         catchError(async (error) => this.errorHandler(error))
       );
+  }
+
+  getEmpresa(data: any): Observable<any> {
+    var postData = {
+      id: data
+    };
+    
+    this.cabecalho.Authorization = sessionStorage.getItem('token')
+    return this.http.post(`${this.baseUrl}/empresa/buscaLista/byId`, postData,{headers: this.cabecalho})      .pipe(
+        map((response) => response),
+        catchError(async (error) => this.erroHandler(error))
+      );
+  }
+
+  register(data:any): Observable<any>{    
+    this.cabecalho.Authorization = sessionStorage.getItem('token')
+    return this.http.post(`${this.baseUrl}/empresa/salvar`, data,{headers: this.cabecalho})
+    .pipe(
+      map((response) => { 
+        return response
+      }),catchError((error) => this.errorHandler(error))
+    )
+  }
+
+  delete(data: any): Observable<any> {
+
+    var postData = {
+      id: data
+    };
+    console.log(postData);
+    this.cabecalho.Authorization = sessionStorage.getItem('token')
+    return this.http.post(`${this.baseUrl}/empresa/deletar`, postData, {headers: this.cabecalho}).pipe(
+      map((response) => response),
+      catchError(async (error) => this.erroHandler(error))
+    );
+  }
+
+  erroHandler(error: any): any {
+    Swal.fire({
+      title: 'Warning!',
+      text: "Error",
+      icon: 'error',
+      confirmButtonText: 'OK',
+      confirmButtonColor: 'red0'
+    })
+    return
+
   }
 }

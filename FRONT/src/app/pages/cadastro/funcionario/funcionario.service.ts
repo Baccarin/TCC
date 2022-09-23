@@ -33,6 +33,28 @@ export class FuncionarioService {
     )
   }
 
+  delete(data: any): Observable<any> {
+
+    var postData = {
+      id: data
+    };
+    
+    this.cabecalho.Authorization = sessionStorage.getItem('token')
+    return this.http.post(`${this.baseUrl}/funcionario/deletar`, postData, {headers: this.cabecalho}).pipe(
+      map((response) => response),
+      catchError(async (error) => this.errorHandler(error))
+    );
+  }
+
+  getAll(): Observable<any> {
+    this.cabecalho.Authorization = sessionStorage.getItem('token')
+    return this.http.get<any>(`${this.baseUrl}/funcionario/buscaLista`, {headers: this.cabecalho})
+      .pipe(
+        map((response) => response),
+        catchError(async (error) => this.errorHandler(error))
+      );
+  }
+
   errorHandler(error: any): any {
     if (error.status == 200){
       Swal.fire({

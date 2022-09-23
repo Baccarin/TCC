@@ -19,7 +19,7 @@
               <div class="row gy-4">
 
                 <div class="form-group col-md-6">
-                  <label for="name">Nome</label>
+                  <label for="nome">Nome</label>
                   <input type="nome" name="nome"  [(ngModel)]="data.nome" class="form-control" 
                     aria-describedby="nome" required minlength="4" #nome="ngModel">
 
@@ -37,12 +37,42 @@
               <button type="submit" class="btn btn-primary">Salvar</button>
             </form>
            
-           
+            <br>
+            <div id="container">
+              <table class="table">
+                <thead>
+                  <tr>
+                    <th scope="col">Nome</th>
+                    <th scope="col">Lider</th>
+                  </tr>
+                </thead>
+      
+                <tbody>
+                  <tr *ngFor="let time of times | filter:filter; let i = index">
+      
+                    <th scope="row">{{time.nome}}</th>
+                    <td>{{time.lider.usuario.pessoa.nome}}</td>
+                    <td>
+      
+                      <a class="edit" title="Edit" href="javascript:void(0)" (click)="edit(time.id)"><i
+                          class="bi bi-pencil-square"></i></a>
+                      &nbsp;&nbsp;
+                      
+                      <a class="del" title="Delete" href="javascript:void(0)" (click)="delete(time.id)"><i
+                          class="bi bi-x-circle"></i></a>
+      
+      
+      
+                    </td>
+                  </tr>
+      
+                </tbody>
+              </table>
+            </div>
           </div>
         </div>
 
       </div>
-
 
     </div>
   </section>

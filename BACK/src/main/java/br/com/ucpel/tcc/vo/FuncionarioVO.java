@@ -9,7 +9,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 public class FuncionarioVO {
 
-	private Long idFuncionario;
+	private Long id;
 	private Long idUsuario;
 	private Long idEmpresa;
 }

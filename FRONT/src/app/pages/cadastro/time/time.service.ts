@@ -33,6 +33,15 @@ export class TimeService {
     )
   }
 
+  getAll(): Observable<any> {
+    this.cabecalho.Authorization = sessionStorage.getItem('token')
+    return this.http.get<any>(`${this.baseUrl}/time/buscaLista`, {headers: this.cabecalho})
+      .pipe(
+        map((response) => response),
+        catchError(async (error) => this.errorHandler(error))
+      );
+  }
+
   errorHandler(error: any): any {
     if (error.status == 200){
       Swal.fire({

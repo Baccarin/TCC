@@ -25,10 +25,10 @@ public class EmpresaServiceImpl implements EmpresaService{
 	
 	@Override
 	public void deletarEmpresa(EmpresaVO vo) throws ExclusaoInvalidaRegistrosDependentesException {
-		Boolean funcionarios = funcionarioRepository.findFuncionarioByEmpresaId(vo.getIdEmpresa()).isEmpty();
+		Boolean funcionarios = funcionarioRepository.findFuncionarioByEmpresaId(vo.getId()).isEmpty();
 		if (!funcionarios) {
 			throw new ExclusaoInvalidaRegistrosDependentesException(Empresa.class, 
-					Funcionario.class, vo.getIdEmpresa());
+					Funcionario.class, vo.getId());
 		}
 		repository.delete(function.convert(vo));
 	}

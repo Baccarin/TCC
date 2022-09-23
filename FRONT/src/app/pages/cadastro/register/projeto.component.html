@@ -42,7 +42,46 @@
               <br>
               <button type="submit" class="btn btn-primary">Salvar</button>
             </form>
-           
+           <br>
+            <div id="container">
+              <table class="table">
+                <thead>
+                  <tr>
+                    <th scope="col">Nome</th>
+                    <th scope="col">Data início</th>
+                    <th scope="col">Etapa</th>
+                    <th scope="col">Metodologia aplicada</th>
+                    <th scope="col">Data fim</th>
+                    <th scope="col">Ativo</th>
+                  </tr>
+                </thead>
+  
+                <tbody>
+                  <tr *ngFor="let projeto of projetos | filter:filter; let i = index">
+  
+                    <th scope="row">{{projeto.nome}}</th>
+                    <td>{{projeto.dataInicio  | date: 'dd/MM/yyyy'}}</td>
+                    <td>{{projeto.etapa}}</td>
+                    <td>{{projeto.metodologiaAplicada}}</td>
+                    <td>{{projeto.dataFim  | date: 'dd/MM/yyyy'}}</td>
+                    <td>{{projeto.ativo ? 'Sim' : 'Não' }}</td>
+                    <td>
+  
+                      <a class="edit" title="Edit" href="javascript:void(0)" (click)="edit(projeto.id)"><i
+                          class="bi bi-pencil-square"></i></a>
+                      &nbsp;&nbsp;
+                      
+                      <a class="del" title="Delete" href="javascript:void(0)" (click)="delete(projeto.id)"><i
+                          class="bi bi-x-circle"></i></a>
+  
+  
+  
+                    </td>
+                  </tr>
+  
+                </tbody>
+              </table>
+            </div>
            
           </div>
         </div>

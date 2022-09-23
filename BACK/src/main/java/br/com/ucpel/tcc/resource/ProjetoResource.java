@@ -90,7 +90,7 @@ public class ProjetoResource {
 	@ApiOperation(value = "Busca lista de projetos pelo time cadastrados.")
 	@Produces(MediaType.APPLICATION_JSON)
 	public ResponseEntity<List<Projeto>> buscaListaProjetoByIdTime(@RequestBody ProjetoVO vo) {
-		List<Projeto> projetos = repository.findProjetoByTimeId(vo.getIdsTimes().get(0));
+		List<Projeto> projetos = repository.findProjetoByTimeId(vo.getIdTime());
 		projetos.sort(Comparator.comparing(Projeto::getDataInicio));
 		if (projetos.isEmpty()) {
 			return new ResponseEntity<List<Projeto>>(HttpStatus.NO_CONTENT);

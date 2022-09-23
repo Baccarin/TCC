@@ -49,13 +49,12 @@ public class ProjetoFunction implements Converter<ProjetoVO, Projeto> {
 		if (Objects.nonNull(vo.getMetodologia())) {
 			projeto.setMetodologiaAplicada(MetodologiaAgil.valueOf(vo.getMetodologia()));
 		}
-		if (Objects.nonNull(vo.getIdsTimes()) && !vo.getIdsTimes().isEmpty()) {
-			vo.getIdsTimes().stream().forEach(idTime -> {
-				Time time = timeRepository.findById(idTime).orElse(null);
-				if (Objects.nonNull(time)) {
-					projeto.getTimes().add(time);
-				}
-			});
+		if (Objects.nonNull(vo.getIdTime())) {
+			Time time = timeRepository.findById(vo.getIdTime()).orElse(null);
+			if (Objects.nonNull(time)) {
+				projeto.setTime(time);
+			}
+
 		}
 		if (Objects.nonNull(vo.getNome())) {
 			projeto.setNome(vo.getNome());

@@ -21,18 +21,20 @@ public class FuncionarioServiceImpl implements FuncionarioService {
 
 	private final FuncionarioRepository repository;
 	private final UsuarioRepository usuarioRepository;
+
 	private final FuncionarioFunction funcionarioFunction;
 
 
 	@Override
 	// Ao deletar funcionário, inativa seu respectivo usuário;
 	public void deletarFuncionario(FuncionarioVO vo) throws RegistroNaoEncontradoException {
-		Funcionario f = repository.findById(vo.getIdFuncionario())
-				.orElseThrow(() -> new RegistroNaoEncontradoException(Funcionario.class, vo.getIdFuncionario()));
+		Funcionario f = repository.findById(vo.getId())
+				.orElseThrow(() -> new RegistroNaoEncontradoException(Funcionario.class, vo.getId()));
 
 		Usuario u = usuarioRepository.findById(f.getUsuario().getId())
 				.orElseThrow(() -> new RegistroNaoEncontradoException(Usuario.class, vo.getIdUsuario()));
 		
+
 		u.setAtivo(false);
 		usuarioRepository.save(u);
 

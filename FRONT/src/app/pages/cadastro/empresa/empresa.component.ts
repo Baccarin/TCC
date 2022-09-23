@@ -12,6 +12,8 @@ import Swal from 'sweetalert2';
 })
 export class EmpresaComponent implements OnInit {
 
+  tempoNotificacao = 2500;
+
   data = {
     nome: '',
     cnpj: ''
@@ -24,6 +26,7 @@ export class EmpresaComponent implements OnInit {
   constructor(
     private empresaService: EmpresaService,
     private router: Router) { }
+
 
   init() {
       this.empresaService.getAll().subscribe(resp => {
@@ -42,34 +45,52 @@ export class EmpresaComponent implements OnInit {
         icon: 'success',
         title: 'Empresa salva com sucesso',
         showConfirmButton: false,
-        timer: 2500
+        timer: this.tempoNotificacao
       })
-      this.navigate()
+      this.init();
+      this.limpaCampos();
     })
-
-
   }
+
+  limpaCampos(){
+    this.data.nome = '';
+    this.data.cnpj = '';
+  }
+
   navigate(): void {
-    this.router.navigate(['/register'])
+    this.router.navigate(['/cadastro/empresa'])
   }
 
 
   edit(id: any) {
-
+    this.empresaService.getEmpresa(id).subscribe(resp => {
+      this.data = resp[0]
+    })
   }
 
-  delete(id: any) {
+  delete(data: any) {
     Swal.fire({
-      title: "Warning!",
-      text: `Do you really want to delete ?`,
+      title: "Ateção!",
+      text: `Deseja confirmar a exclusão do registro?`,
       icon: 'warning',
       showCancelButton: true,
       confirmButtonColor: '#3085d6',
       cancelButtonColor: '#d33',
       cancelButtonText: 'Cancelar',
-      confirmButtonText: 'Yes, is it!'
+      confirmButtonText: 'Confirmar'
     }).then((result) => {
-
+        if (result.isConfirmed){
+        this.empresaService.delete(data).subscribe(resp => {
+          Swal.fire({
+            position: 'top-end',
+            icon: 'success',
+            title: 'Exclusão confirmada',
+            showConfirmButton: false,
+            timer: this.tempoNotificacao
+          })
+          this.init();
+        })
+      }
     })
   }
 

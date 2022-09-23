@@ -30,8 +30,8 @@ public class FuncionarioFunction implements Converter<FuncionarioVO, Funcionario
 		Empresa e = Objects.isNull(vo.getIdEmpresa()) || vo.getIdEmpresa() == 0 ? null
 				: empresaRepository.findById(vo.getIdEmpresa()).get();
 		
-		Funcionario f = Objects.isNull(vo.getIdFuncionario()) || vo.getIdFuncionario() == 0 ? new Funcionario()
-				: repository.findById(vo.getIdFuncionario()).get();
+		Funcionario f = Objects.isNull(vo.getId()) || vo.getId() == 0 ? new Funcionario()
+				: repository.findById(vo.getId()).get();
 
 		
 		
