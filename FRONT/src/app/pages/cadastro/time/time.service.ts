@@ -42,6 +42,19 @@ export class TimeService {
       );
   }
 
+  delete(data: any): Observable<any> {
+
+    var postData = {
+      idTime: data
+    };
+
+    this.cabecalho.Authorization = sessionStorage.getItem('token')
+    return this.http.post(`${this.baseUrl}/time/deletar`, postData, {headers: this.cabecalho}).pipe(
+      map((response) => response),
+      catchError(async (error) => this.errorHandler(error))
+    );
+  }
+
   errorHandler(error: any): any {
     if (error.status == 200){
       Swal.fire({
@@ -51,8 +64,6 @@ export class TimeService {
         showConfirmButton: false,
         timer: 2000
       })
-      sessionStorage.setItem('token' , error.error.text);
-      this.router.navigate(['/'])
     } else {
       Swal.fire({
         title: 'Erro ao salvar cadastro',
@@ -61,6 +72,8 @@ export class TimeService {
         confirmButtonText: 'OK',
         confirmButtonColor: 'red',
       })
+      sessionStorage.setItem('token' , error.error.text);
+      this.router.navigate(['/'])
     }
     
   }

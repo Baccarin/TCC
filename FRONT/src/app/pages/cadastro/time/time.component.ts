@@ -14,6 +14,8 @@ import { Router } from '@angular/router';
 
 export class TimeComponent implements OnInit {
 
+  tempoNotificacao = 2500;
+
   data = {
     nome: '',
     lider: ''
@@ -34,8 +36,14 @@ export class TimeComponent implements OnInit {
     this.timeService.getAll().subscribe(response =>{
       this.times = response;
     })
+    this.limpaCampos();
   }
 
+  
+  limpaCampos(){
+    this.data.nome = '';
+    this.data.lider = '';
+  }
 
   onSubmit(data: any) {
 
@@ -43,11 +51,11 @@ export class TimeComponent implements OnInit {
       Swal.fire({
         position: 'center',
         icon: 'success',
-        title: 'Projeto salvo com sucesso',
+        title: 'Registro salvo com sucesso',
         showConfirmButton: false,
-        timer: 2500
+        timer: this.tempoNotificacao
       })
-      this.navigate()
+      this.init();
     })
 
 
@@ -60,18 +68,29 @@ export class TimeComponent implements OnInit {
 
   }
 
-  delete(id: any) {
+  delete(data: any) {
     Swal.fire({
-      title: "Warning!",
-      text: `Do you really want to delete ?`,
+      title: "Ateção!",
+      text: `Deseja confirmar a exclusão do registro?`,
       icon: 'warning',
       showCancelButton: true,
       confirmButtonColor: '#3085d6',
       cancelButtonColor: '#d33',
       cancelButtonText: 'Cancelar',
-      confirmButtonText: 'Yes, is it!'
+      confirmButtonText: 'Confirmar'
     }).then((result) => {
-
+        if (result.isConfirmed){
+        this.timeService.delete(data).subscribe(resp => {
+          Swal.fire({
+            position: 'top-end',
+            icon: 'success',
+            title: 'Exclusão confirmada',
+            showConfirmButton: false,
+            timer: this.tempoNotificacao
+          })
+          this.init();
+        })
+      }
     })
   }
 
