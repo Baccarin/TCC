@@ -50,7 +50,7 @@
                   <tr *ngFor="let time of times | filter:filter; let i = index">
       
                     <th scope="row">{{time.nome}}</th>
-                    <td>{{time.lider.usuario.pessoa.nome}}</td>
+                    <td>{{time.lider == null ? "Sem líder" : time.lider.usuario.pessoa.nome}}</td>
                     <td>
       
                       <a class="edit" title="Edit" href="javascript:void(0)" (click)="edit(time.id)"><i

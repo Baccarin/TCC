@@ -63,4 +63,17 @@ export class ProjetoService {
         catchError(async (error) => this.errorHandler(error))
       );
   }
+
+  delete(data: any): Observable<any> {
+
+    var postData = {
+      idProjeto: data
+    };
+
+    this.cabecalho.Authorization = sessionStorage.getItem('token')
+    return this.http.post(`${this.baseUrl}/projeto/deletar`, postData, {headers: this.cabecalho}).pipe(
+      map((response) => response),
+      catchError(async (error) => this.errorHandler(error))
+    );
+  }
 }

@@ -32,13 +32,14 @@ public class ProjetoServiceImpl implements ProjetoService{
 		Projeto projeto = repository.findById(vo.getIdProjeto()).orElseThrow( () ->
 		new RegistroNaoEncontradoException(Projeto.class, vo.getIdProjeto()));
 		if (projeto.getAtivo()) {
-			if (projeto.getEtapa() != EtapaProjeto.INICIO ||
+			if (projeto.getEtapa() != EtapaProjeto.INICIO &&
 					projeto.getEtapa() != EtapaProjeto.REQUISITOS) {
 				repository.delete(projeto);			
 			}else {
 				projeto.setAtivo(false);
 				repository.save(projeto);
-			}			
+			}
+			return;
 		}
 	
 		throw new RegistroInativoException(Projeto.class, vo.getIdProjeto());

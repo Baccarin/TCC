@@ -83,7 +83,7 @@ export class PessoaComponent implements OnInit {
         icon: 'success',
         title: 'Registro salvo com sucesso',
         showConfirmButton: false,
-        timer: 2500
+        timer: this.tempoNotificacao
       })
       this.init();
     })

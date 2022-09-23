@@ -16,5 +16,6 @@ public class ProjetoVO {
 	private String dataFim;
 	private String etapa;
 	private String metodologia;
+	private boolean ativo;
 	
 }

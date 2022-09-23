@@ -31,6 +31,7 @@ public class ProjetoFunction implements Converter<ProjetoVO, Projeto> {
 		Projeto projeto = Objects.isNull(vo.getIdProjeto()) || vo.getIdProjeto() == 0 ? new Projeto()
 				: repository.findById(vo.getIdProjeto()).get();
 
+		
 		try {
 			if (Objects.nonNull(vo.getDataInicio())) {
 				projeto.setDataInicio(sdf.parse(vo.getDataInicio()));
@@ -58,6 +59,12 @@ public class ProjetoFunction implements Converter<ProjetoVO, Projeto> {
 		}
 		if (Objects.nonNull(vo.getNome())) {
 			projeto.setNome(vo.getNome());
+		}
+		
+		if (Objects.nonNull(vo.isAtivo())) {
+			projeto.setAtivo(vo.isAtivo());
+		}else {
+			projeto.setAtivo(true);
 		}
 
 		return projeto;

@@ -13,13 +13,15 @@ import { FormBuilder, FormGroup } from '@angular/forms';
 })
 export class ProjetoComponent implements OnInit {
 
+  tempoNotificacao = 2500;
+
   data = {
     nome: '',
     dataInicio: '',
     dataFim: '',
     etapa: 'INICIO',
     metodologia: 'XP',
-    ativo: Boolean
+    ativo: true
   }
 
   projetos:any;
@@ -39,22 +41,39 @@ export class ProjetoComponent implements OnInit {
     })
   }
 
+  limpaCampos(){
+    this.data.nome = '';
+    this.data.dataInicio = '';
+    this.data.dataFim = '';
+  }
+
   edit(id: any) {
 
   }
 
-  delete(id: any) {
+  delete(data: any) {
     Swal.fire({
-      title: "Warning!",
-      text: `Do you really want to delete ?`,
+      title: "Ateção!",
+      text: `Deseja confirmar a exclusão do registro?`,
       icon: 'warning',
       showCancelButton: true,
       confirmButtonColor: '#3085d6',
       cancelButtonColor: '#d33',
       cancelButtonText: 'Cancelar',
-      confirmButtonText: 'Yes, is it!'
+      confirmButtonText: 'Confirmar'
     }).then((result) => {
-
+        if (result.isConfirmed){
+        this.projetoService.delete(data).subscribe(resp => {
+          Swal.fire({
+            position: 'top-end',
+            icon: 'success',
+            title: 'Exclusão confirmada',
+            showConfirmButton: false,
+            timer: this.tempoNotificacao
+          })
+          this.init();
+        })
+      }
     })
   }
 
@@ -67,9 +86,9 @@ export class ProjetoComponent implements OnInit {
         icon: 'success',
         title: 'Projeto salvo com sucesso',
         showConfirmButton: false,
-        timer: 2500
+        timer: this.tempoNotificacao
       })
-      this.navigate()
+      this.init();
     })
 
 

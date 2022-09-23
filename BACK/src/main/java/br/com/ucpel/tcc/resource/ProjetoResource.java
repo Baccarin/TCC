@@ -17,9 +17,13 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import br.com.ucpel.tcc.domain.Pessoa;
 import br.com.ucpel.tcc.domain.Projeto;
+import br.com.ucpel.tcc.exception.RegistroInativoException;
+import br.com.ucpel.tcc.exception.RegistroNaoEncontradoException;
 import br.com.ucpel.tcc.repository.api.ProjetoRepository;
 import br.com.ucpel.tcc.service.api.ProjetoService;
+import br.com.ucpel.tcc.vo.PessoaVO;
 import br.com.ucpel.tcc.vo.ProjetoVO;
 import io.swagger.annotations.ApiOperation;
 import lombok.RequiredArgsConstructor;
@@ -100,11 +104,36 @@ public class ProjetoResource {
 	
 	@PostMapping("salvar")
 	@CrossOrigin(origins = "*")
-	@ApiOperation(value = "Busca lista de projetos pelo time cadastrados.")
+	@ApiOperation(value = "Salvar novo projeto.")
 	@Produces(MediaType.APPLICATION_JSON)
 	@Consumes(MediaType.APPLICATION_JSON)
 	public ResponseEntity<Projeto> salvarProjeto(@RequestBody ProjetoVO vo) {
 		Projeto projeto = service.inserirProjeto(vo);
+		if (Objects.isNull(projeto)) {
+			return new ResponseEntity<Projeto>(HttpStatus.NO_CONTENT);
+		}
+		return new ResponseEntity<Projeto>(projeto, HttpStatus.OK);
+	}
+	
+	@PostMapping("deletar")
+	@CrossOrigin(origins = "*")
+	@ApiOperation(value = "Deletar projeto.")
+	@Produces(MediaType.APPLICATION_JSON)
+	public ResponseEntity<String> deletarProjeto(@RequestBody ProjetoVO vo) throws RegistroInativoException {
+		try {
+			service.deletarProjeto(vo);
+			return new ResponseEntity<String>("Registro excluido com sucesso", HttpStatus.OK);
+		} catch (RegistroNaoEncontradoException e) {
+			return new ResponseEntity<String>(e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
+		}
+	}
+	
+	@PostMapping("atualizar")
+	@CrossOrigin(origins = "*")
+	@ApiOperation(value = "Atualizar projeto.")
+	@Produces(MediaType.APPLICATION_JSON)
+	public ResponseEntity<Projeto> atualizarProjeto(@RequestBody ProjetoVO vo) {
+		Projeto projeto = service.atualizarProjeto(vo);
 		if (Objects.isNull(projeto)) {
 			return new ResponseEntity<Projeto>(HttpStatus.NO_CONTENT);
 		}
