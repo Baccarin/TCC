@@ -55,6 +55,24 @@ export class FuncionarioService {
       );
   }
 
+  getAllEmpresas(){
+    this.cabecalho.Authorization = sessionStorage.getItem('token')
+    return this.http.get<any>(`${this.baseUrl}/empresa/buscaLista`, {headers: this.cabecalho})
+      .pipe(
+        map((response) => response),
+        catchError(async (error) => this.errorHandler(error))
+      );
+  }
+
+  getAllUsuarios(){
+    this.cabecalho.Authorization = sessionStorage.getItem('token')
+    return this.http.get<any>(`${this.baseUrl}/usuario/buscaLista`, {headers: this.cabecalho})
+      .pipe(
+        map((response) => response),
+        catchError(async (error) => this.errorHandler(error))
+      );
+  }
+
   errorHandler(error: any): any {
     if (error.status == 200){
       Swal.fire({
@@ -78,4 +96,15 @@ export class FuncionarioService {
     
   }
 
+  getFuncionarioFilter(pesquisa:any){
+    var postData = {
+      texto: pesquisa
+    };
+    
+    this.cabecalho.Authorization = sessionStorage.getItem('token')
+    return this.http.post(`${this.baseUrl}/funcionario/buscaLista/byTextoGenerico`, postData,{headers: this.cabecalho}).pipe(
+        map((response) => response),
+        catchError(async (error) => this.errorHandler(error))
+      );
+  }
 }

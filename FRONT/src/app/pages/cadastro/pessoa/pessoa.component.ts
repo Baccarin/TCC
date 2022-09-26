@@ -24,6 +24,8 @@ export class PessoaComponent implements OnInit {
   pessoas: any;
   filter: any;
 
+  pesquisa: any;
+
   constructor(
     private pessoaService: PessoaService,
     private router: Router) { }
@@ -94,5 +96,22 @@ export class PessoaComponent implements OnInit {
     this.router.navigate(['/register'])
   }
 
+  pesquisar(pesquisa:any){
+    this.pesquisa = pesquisa;
+    if(this.pesquisa == undefined || this.pesquisa == ""){
+      Swal.fire({
+        position: 'center',
+        icon: 'error',
+        title: 'Atenção!',
+        text: 'Para pesquisar, preencha o campo de pesquisa',
+        showConfirmButton: true,
+        confirmButtonColor:'red'
+      });
+      return
+    }
+    this.pessoaService.getPessoasFilter(this.pesquisa).subscribe(resp => {
+      this.pessoas = resp
+    })
+  }
 
 }

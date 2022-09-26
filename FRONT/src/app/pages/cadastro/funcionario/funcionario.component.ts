@@ -21,7 +21,12 @@ export class FuncionarioComponent implements OnInit {
   }
 
   funcionarios: any;
+  empresas:any;
   filter: any;
+
+  usuarios: any;
+
+  pesquisa: any;
 
   constructor(
     private funcionarioService: FuncionarioService,
@@ -32,11 +37,16 @@ export class FuncionarioComponent implements OnInit {
     this.funcionarioService.getAll().subscribe(response =>{
       this.funcionarios = response;
     })
+
+    this.getAllEmpresas();
+    this.getAllUsuarios();
+
   }
 
   ngOnInit() {
     this.init();
   }
+
 
   onSubmit(data: any) {
     this.funcionarioService.register(data).subscribe(resp => {
@@ -87,6 +97,64 @@ export class FuncionarioComponent implements OnInit {
           this.init();
         })
       }
+    })
+  }
+
+
+  teste(){
+    this.funcionarioService.register(this.data).subscribe(resp => {
+      Swal.fire({
+        position: 'center',
+        icon: 'success',
+        title: 'Funcionário salvo com sucesso',
+        showConfirmButton: false,
+        timer: this.tempoNotificacao
+      })
+      this.navigate()
+    })
+  }
+
+  
+  observaEmpresa(event: any){
+    this.data.idEmpresa = event.target.value;
+    console.log(this.data.idEmpresa);
+  }
+  
+  observaUsuario(event:any){
+    this.data.idUsuario = event.target.value;
+    console.log(this.data.idUsuario);
+
+  }
+
+  getAllEmpresas(){
+    this.funcionarioService.getAllEmpresas().subscribe(resp => {
+      this.data.idEmpresa = resp[0].id;
+      this.empresas = resp;
+    })
+  }
+
+  getAllUsuarios(){
+    this.funcionarioService.getAllUsuarios().subscribe(resp => {
+      this.data.idUsuario = resp[0].id
+      this.usuarios = resp;
+    })
+  }
+
+  pesquisar(pesquisa:any){
+    this.pesquisa = pesquisa;
+    if(this.pesquisa == undefined || this.pesquisa == ""){
+      Swal.fire({
+        position: 'center',
+        icon: 'error',
+        title: 'Atenção!',
+        text: 'Para pesquisar, preencha o campo de pesquisa',
+        showConfirmButton: true,
+        confirmButtonColor:'red'
+      });
+      return
+    }
+    this.funcionarioService.getFuncionarioFilter(this.pesquisa).subscribe(resp => {
+      this.funcionarios = resp
     })
   }
 

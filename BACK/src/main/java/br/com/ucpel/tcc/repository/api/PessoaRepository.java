@@ -27,5 +27,8 @@ public interface PessoaRepository extends JpaRepository<Pessoa, Long> {
 
 	@Query("select p from Pessoa p where p.dataNascimento > :dataNascimento")
 	List<Pessoa> findPessoaByDataNascimentoMaior(@Param("dataNascimento") Calendar dataNascimento);
+	
+	@Query("select p from Pessoa p where UPPER(p.sexo) like UPPER(:texto) or UPPER(p.email) like UPPER(:texto) or UPPER(p.nome) like UPPER(:texto)")
+	List<Pessoa> findPessoaByTextoGenerico(@Param("texto") String texto);
 
 }

@@ -9,7 +9,7 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class PessoaVO {
+public class PessoaVO extends BuscaGenericaVO{
 
 	private Long idPessoa;
 	private String nome;

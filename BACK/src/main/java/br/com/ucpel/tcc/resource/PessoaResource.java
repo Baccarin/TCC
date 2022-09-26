@@ -15,11 +15,13 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import br.com.ucpel.tcc.domain.Empresa;
 import br.com.ucpel.tcc.domain.Pessoa;
 import br.com.ucpel.tcc.exception.RegistroNaoEncontradoException;
 import br.com.ucpel.tcc.function.PessoaFunction;
 import br.com.ucpel.tcc.repository.api.PessoaRepository;
 import br.com.ucpel.tcc.service.api.PessoaService;
+import br.com.ucpel.tcc.vo.EmpresaVO;
 import br.com.ucpel.tcc.vo.PessoaVO;
 import io.swagger.annotations.ApiOperation;
 import lombok.RequiredArgsConstructor;
@@ -93,6 +95,19 @@ public class PessoaResource {
 		return new ResponseEntity<List<Pessoa>>(pessoas, HttpStatus.OK);
 	}
 
+	@PostMapping("buscaLista/byTextoGenerico")
+	@CrossOrigin(origins = "*")
+	@ApiOperation(value = "Busca lista de empresas por texto genérico.")
+	@Produces(MediaType.APPLICATION_JSON)
+	public ResponseEntity<List<Pessoa>> buscaListaPessoaByTextoGenerico(@RequestBody PessoaVO vo) {
+		List<Pessoa> pessoas = repository.findPessoaByTextoGenerico(vo.getTexto());
+		if (pessoas.isEmpty()) {
+			return new ResponseEntity<List<Pessoa>>(HttpStatus.NO_CONTENT);
+		}
+		return new ResponseEntity<List<Pessoa>>(pessoas, HttpStatus.OK);
+	}
+
+	
 	@PostMapping("salvar")
 	@CrossOrigin(origins = "*")
 	@ApiOperation(value = "Inserir nova pessoa.")

@@ -19,6 +19,7 @@ import br.com.ucpel.tcc.domain.Funcionario;
 import br.com.ucpel.tcc.exception.RegistroNaoEncontradoException;
 import br.com.ucpel.tcc.repository.api.FuncionarioRepository;
 import br.com.ucpel.tcc.service.api.FuncionarioService;
+import br.com.ucpel.tcc.vo.EmpresaVO;
 import br.com.ucpel.tcc.vo.FuncionarioVO;
 import io.swagger.annotations.ApiOperation;
 import lombok.RequiredArgsConstructor;
@@ -55,6 +56,19 @@ public class FuncionarioResource {
 		}
 		return new ResponseEntity<List<Funcionario>>(funcionarios, HttpStatus.OK);
 	}
+	
+	@PostMapping("buscaLista/byTextoGenerico")
+	@CrossOrigin(origins = "*")
+	@ApiOperation(value = "Busca lista de funcionarios por texto genérico.")
+	@Produces(MediaType.APPLICATION_JSON)
+	public ResponseEntity<List<Funcionario>> buscaListaFuncionarioByTextoGenerico(@RequestBody EmpresaVO vo) {
+		List<Funcionario> funcionarios = repository.findFuncionarioTextoGenerico(vo.getTexto());
+		if (funcionarios.isEmpty()) {
+			return new ResponseEntity<List<Funcionario>>(HttpStatus.NO_CONTENT);
+		}
+		return new ResponseEntity<List<Funcionario>>(funcionarios, HttpStatus.OK);
+	}
+
 
 	@PostMapping("salvar")
 	@CrossOrigin(origins = "*")
