@@ -15,10 +15,12 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import br.com.ucpel.tcc.domain.Pessoa;
 import br.com.ucpel.tcc.domain.Time;
 import br.com.ucpel.tcc.exception.ExclusaoInvalidaRegistrosDependentesException;
 import br.com.ucpel.tcc.repository.api.TimeRepository;
 import br.com.ucpel.tcc.service.api.TimeService;
+import br.com.ucpel.tcc.vo.PessoaVO;
 import br.com.ucpel.tcc.vo.TimeVO;
 import io.swagger.annotations.ApiOperation;
 import lombok.RequiredArgsConstructor;
@@ -62,6 +64,18 @@ public class TimeResource {
 	@Produces(MediaType.APPLICATION_JSON)
 	public ResponseEntity<List<Time>> buscaListaTimesByNome(@RequestBody TimeVO vo) {
 		List<Time> times = repository.findTimeByNome(vo.getNome());
+		if (times.isEmpty()) {
+			return new ResponseEntity<List<Time>>(HttpStatus.NO_CONTENT);
+		}
+		return new ResponseEntity<List<Time>>(times, HttpStatus.OK);
+	}
+	
+	@PostMapping("buscaLista/byTextoGenerico")
+	@CrossOrigin(origins = "*")
+	@ApiOperation(value = "Busca lista de times por texto genérico.")
+	@Produces(MediaType.APPLICATION_JSON)
+	public ResponseEntity<List<Time>> buscaListaTimesByTextoGenerico(@RequestBody TimeVO vo) {
+		List<Time> times = repository.findTimeByTextoGenerico(vo.getTexto());
 		if (times.isEmpty()) {
 			return new ResponseEntity<List<Time>>(HttpStatus.NO_CONTENT);
 		}

@@ -7,6 +7,7 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
 import br.com.ucpel.tcc.domain.Projeto;
+import br.com.ucpel.tcc.domain.Time;
 
 public interface ProjetoRepository extends JpaRepository<Projeto, Long> {
 
@@ -21,5 +22,8 @@ public interface ProjetoRepository extends JpaRepository<Projeto, Long> {
  	
 	@Query("select p from Projeto p where p.metodologiaAplicada like :metodologia and p.ativo is true")
  	List<Projeto> findProjetoByMetodologia(@Param("metodologia") String metodologia);
+	
+	@Query("select p from Projeto p where UPPER(p.nome) like UPPER(:texto) or UPPER(p.etapa) like UPPER(:texto) or UPPER(p.metodologiaAplicada) like UPPER(:texto) and p.ativo is true")
+	List<Projeto> findProjetoByTextoGenerico(@Param("texto") String texto);
 	
 }

@@ -19,12 +19,14 @@ import org.springframework.web.bind.annotation.RestController;
 
 import br.com.ucpel.tcc.domain.Pessoa;
 import br.com.ucpel.tcc.domain.Projeto;
+import br.com.ucpel.tcc.domain.Time;
 import br.com.ucpel.tcc.exception.RegistroInativoException;
 import br.com.ucpel.tcc.exception.RegistroNaoEncontradoException;
 import br.com.ucpel.tcc.repository.api.ProjetoRepository;
 import br.com.ucpel.tcc.service.api.ProjetoService;
 import br.com.ucpel.tcc.vo.PessoaVO;
 import br.com.ucpel.tcc.vo.ProjetoVO;
+import br.com.ucpel.tcc.vo.TimeVO;
 import io.swagger.annotations.ApiOperation;
 import lombok.RequiredArgsConstructor;
 
@@ -96,6 +98,18 @@ public class ProjetoResource {
 	public ResponseEntity<List<Projeto>> buscaListaProjetoByIdTime(@RequestBody ProjetoVO vo) {
 		List<Projeto> projetos = repository.findProjetoByTimeId(vo.getIdTime());
 		projetos.sort(Comparator.comparing(Projeto::getDataInicio));
+		if (projetos.isEmpty()) {
+			return new ResponseEntity<List<Projeto>>(HttpStatus.NO_CONTENT);
+		}
+		return new ResponseEntity<List<Projeto>>(projetos, HttpStatus.OK);
+	}
+	
+	@PostMapping("buscaLista/byTextoGenerico")
+	@CrossOrigin(origins = "*")
+	@ApiOperation(value = "Busca lista de projetos por texto genérico.")
+	@Produces(MediaType.APPLICATION_JSON)
+	public ResponseEntity<List<Projeto>> buscaListaProjetosByTextoGenerico(@RequestBody TimeVO vo) {
+		List<Projeto> projetos = repository.findProjetoByTextoGenerico(vo.getTexto());
 		if (projetos.isEmpty()) {
 			return new ResponseEntity<List<Projeto>>(HttpStatus.NO_CONTENT);
 		}

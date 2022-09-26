@@ -18,4 +18,7 @@ public interface TimeRepository extends JpaRepository<Time, Long>{
 	@Query("select t from Time t where t.lider.id = :idLider")
 	List<Time> findTimeByIdLider(@Param("idLider") Long idLider);
 	
+	@Query("select t from Time t where UPPER(t.lider.usuario.pessoa.nome) like UPPER(:texto) or UPPER(t.nome) like UPPER(:texto)")
+	List<Time> findTimeByTextoGenerico(@Param("texto") String texto);
+	
 }

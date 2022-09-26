@@ -7,7 +7,7 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class ProjetoVO {
+public class ProjetoVO extends BuscaGenericaVO{
 
 	private Long idProjeto;
 	private String nome;

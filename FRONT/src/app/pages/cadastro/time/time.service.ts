@@ -77,4 +77,17 @@ export class TimeService {
     }
     
   }
+
+
+  getTimesFilter(pesquisa: any){
+    var postData = {
+      texto: pesquisa
+    };
+    
+    this.cabecalho.Authorization = sessionStorage.getItem('token')
+    return this.http.post(`${this.baseUrl}/time/buscaLista/byTextoGenerico`, postData,{headers: this.cabecalho}).pipe(
+        map((response) => response),
+        catchError(async (error) => this.errorHandler(error))
+      );
+  }
 }

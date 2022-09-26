@@ -27,6 +27,8 @@ export class ProjetoComponent implements OnInit {
   projetos:any;
   filter: any;
 
+  pesquisa: any;
+
   constructor(
     private projetoService: ProjetoService,
     private router: Router) { }
@@ -97,5 +99,23 @@ export class ProjetoComponent implements OnInit {
     this.router.navigate(['/register'])
   }
 
+
+  pesquisar(pesquisa:any){
+    this.pesquisa = pesquisa;
+    if(this.pesquisa == undefined || this.pesquisa == ""){
+      Swal.fire({
+        position: 'center',
+        icon: 'error',
+        title: 'Atenção!',
+        text: 'Para pesquisar, preencha o campo de pesquisa',
+        showConfirmButton: true,
+        confirmButtonColor:'red'
+      });
+      return
+    }
+    this.projetoService.getProjetoFilter(this.pesquisa).subscribe(resp => {
+      this.projetos = resp
+    })
+  }
 
 }

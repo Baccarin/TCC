@@ -24,6 +24,8 @@ export class TimeComponent implements OnInit {
   times: any;
   filter: any;
 
+  pesquisa: any;
+
   constructor(
     private timeService: TimeService,
     private router: Router) { }
@@ -94,5 +96,22 @@ export class TimeComponent implements OnInit {
     })
   }
 
+  pesquisar(pesquisa:any){
+    this.pesquisa = pesquisa;
+    if(this.pesquisa == undefined || this.pesquisa == ""){
+      Swal.fire({
+        position: 'center',
+        icon: 'error',
+        title: 'Atenção!',
+        text: 'Para pesquisar, preencha o campo de pesquisa',
+        showConfirmButton: true,
+        confirmButtonColor:'red'
+      });
+      return
+    }
+    this.timeService.getTimesFilter(this.pesquisa).subscribe(resp => {
+      this.times = resp
+    })
+  }
 
 }

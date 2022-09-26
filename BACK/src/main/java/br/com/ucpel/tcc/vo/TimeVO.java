@@ -9,7 +9,7 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class TimeVO {
+public class TimeVO extends BuscaGenericaVO {
 
 	private Long idTime;
 	private String nome;
