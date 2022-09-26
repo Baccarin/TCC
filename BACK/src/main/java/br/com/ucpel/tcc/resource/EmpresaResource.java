@@ -81,6 +81,18 @@ public class EmpresaResource {
 		}
 		return new ResponseEntity<List<Empresa>>(empresas, HttpStatus.OK);
 	}
+	
+	@PostMapping("buscaLista/byTextoGenerico")
+	@CrossOrigin(origins = "*")
+	@ApiOperation(value = "Busca lista de empresas por texto genérico.")
+	@Produces(MediaType.APPLICATION_JSON)
+	public ResponseEntity<List<Empresa>> buscaListaEmpresaByTextoGenerico(@RequestBody EmpresaVO vo) {
+		List<Empresa> empresas = repository.findEmpresaTextoGenerico(vo.getTexto());
+		if (empresas.isEmpty()) {
+			return new ResponseEntity<List<Empresa>>(HttpStatus.NO_CONTENT);
+		}
+		return new ResponseEntity<List<Empresa>>(empresas, HttpStatus.OK);
+	}
 
 	@PostMapping("salvar")
 	@CrossOrigin(origins = "*")

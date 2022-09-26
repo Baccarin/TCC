@@ -19,4 +19,7 @@ public interface EmpresaRepository extends JpaRepository<Empresa, Long>{
 	@Query("select e from Empresa e where e.cnpj like :cnpj")
 	List<Empresa> findEmpresaByCNPJ(@Param("cnpj") String cnpj);
 
+	@Query("select e from Empresa e where e.cnpj like :texto or UPPER(e.nome) like UPPER(:texto) ")
+	List<Empresa> findEmpresaTextoGenerico(@Param("texto") String texto);
+	
 }

@@ -21,6 +21,7 @@ export class EmpresaComponent implements OnInit {
 
   empresas: any;
   filter: any ;
+  pesquisa: any;
 
 
   constructor(
@@ -66,6 +67,25 @@ export class EmpresaComponent implements OnInit {
     this.empresaService.getEmpresa(id).subscribe(resp => {
       this.data = resp[0]
     })
+  }
+
+  pesquisar(pesquisa:any){
+    this.pesquisa = pesquisa;
+    if(this.pesquisa == undefined || this.pesquisa == ""){
+      Swal.fire({
+        position: 'center',
+        icon: 'error',
+        title: 'Atenção!',
+        text: 'Para pesquisar, preencha o campo de pesquisa',
+        showConfirmButton: true,
+        confirmButtonColor:'red'
+      });
+      return
+    }
+    this.empresaService.getEmpresaFilter(this.pesquisa).subscribe(resp => {
+      this.empresas = resp
+    }
+    )
   }
 
   delete(data: any) {

@@ -55,6 +55,18 @@ export class EmpresaService {
       );
   }
 
+  getEmpresaFilter(texto:any){
+    var postData = {
+      texto: texto
+    };
+    
+    this.cabecalho.Authorization = sessionStorage.getItem('token')
+    return this.http.post(`${this.baseUrl}/empresa/buscaLista/byTextoGenerico`, postData,{headers: this.cabecalho}).pipe(
+        map((response) => response),
+        catchError(async (error) => this.erroHandler(error))
+      );
+  }
+
   getEmpresa(data: any): Observable<any> {
     var postData = {
       id: data
