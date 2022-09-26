@@ -18,22 +18,22 @@
             <form (ngSubmit)="onSubmit(data)">
               <div class="row gy-4">
 
-                <div class="form-group col-md-6">
+                <div class="form-group col-md-4">
                   <label for="name">Pessoa</label>
                   <select class="form-select"   >
                       <option *ngFor="let pessoa of pessoas" [value]="pessoa.id">{{pessoa.nome}}</option>
                   </select>
                 </div>
 
-                <div class="form-group col-md-6">
+                <div class="form-group col-md-4">
                   <label for="login">Login</label>
                   <input type="login" name="login"  [(ngModel)]="data.login" class="form-control" 
                     aria-describedby="login" required minlength="4" #nome="ngModel">
                 </div>
 
-                <div class="form-group col-md-6">
+                <div class="form-group col-md-4">
                   <label for="password">Senha</label>
-                  <input type="text" name="password"  [(ngModel)]="data.senha" class="form-control" 
+                  <input type="password" name="password"  [(ngModel)]="data.senha" class="form-control" 
                     aria-describedby="password" required minlength="4" #nome="ngModel">
                 </div>
 
