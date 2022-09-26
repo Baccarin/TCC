@@ -36,17 +36,15 @@ export class ProjetoService {
     if (error.status == 200){
       Swal.fire({
         position: 'center',
-        title: 'Cadastro salvo com sucesso',
+        title: 'Operação realizada com sucesso',
         icon: 'success',
         showConfirmButton: false,
         timer: 2000
       })
-      sessionStorage.setItem('token' , error.error.text);
-      this.router.navigate(['/'])
     } else {
       Swal.fire({
         title: 'Erro ao salvar cadastro',
-        text: 'Não foi possível salvar o registro.',
+        text: error.error.message,
         icon: 'error',
         confirmButtonText: 'OK',
         confirmButtonColor: 'red',
@@ -76,6 +74,19 @@ export class ProjetoService {
       catchError(async (error) => this.errorHandler(error))
     );
   }
+
+  avancaEtapa(data:any){
+    var postData = {
+      idProjeto: data
+    };
+
+    this.cabecalho.Authorization = sessionStorage.getItem('token')
+    return this.http.post(`${this.baseUrl}/projeto/avancaEtapa`, postData, {headers: this.cabecalho}).pipe(
+      map((response) => response),
+      catchError(async (error) => this.errorHandler(error))
+    );
+  }
+
 
   getProjetoFilter(pesquisa:any){
     var postData = {

@@ -20,6 +20,7 @@ import org.springframework.web.bind.annotation.RestController;
 import br.com.ucpel.tcc.domain.Pessoa;
 import br.com.ucpel.tcc.domain.Projeto;
 import br.com.ucpel.tcc.domain.Time;
+import br.com.ucpel.tcc.exception.ProximaEtapaProjetoInvalidaException;
 import br.com.ucpel.tcc.exception.RegistroInativoException;
 import br.com.ucpel.tcc.exception.RegistroNaoEncontradoException;
 import br.com.ucpel.tcc.repository.api.ProjetoRepository;
@@ -153,4 +154,17 @@ public class ProjetoResource {
 		}
 		return new ResponseEntity<Projeto>(projeto, HttpStatus.OK);
 	}
+
+	@PostMapping("avancaEtapa")
+	@CrossOrigin(origins = "*")
+	@ApiOperation(value = "Avança de etapa projeto.")
+	@Produces(MediaType.APPLICATION_JSON)
+	public ResponseEntity<Projeto> avançarEtapaProjeto(@RequestBody ProjetoVO vo) throws RegistroNaoEncontradoException, ProximaEtapaProjetoInvalidaException {
+		Projeto projeto = service.avancarEtapaProjeto(vo);
+		if (Objects.isNull(projeto)) {
+			return new ResponseEntity<Projeto>(HttpStatus.NO_CONTENT);
+		}
+		return new ResponseEntity<Projeto>(projeto, HttpStatus.OK);
+	}
+
 }

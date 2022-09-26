@@ -1,13 +1,15 @@
 package br.com.ucpel.tcc.enums;
 
+import java.util.Arrays;
+
 public enum EtapaProjeto {
 
-	INICIO("Estado inicial",1),
-	REQUISITOS("Em obtenção de requisitos", 2),
-	DESENVOLVIMENTO("Em desenvolvimento", 3), 
-	TESTE("Testes", 4),
-	HOMOLOGACAO("Homologação", 5),
-	FIM("Fim", 6);
+	INICIO("Estado inicial",0),
+	REQUISITOS("Em obtenção de requisitos", 1),
+	DESENVOLVIMENTO("Em desenvolvimento", 2), 
+	TESTE("Testes", 3),
+	HOMOLOGACAO("Homologação", 4),
+	FIM("Fim", 5);
 
 	private String descricao;
 	private int etapa;
@@ -23,5 +25,9 @@ public enum EtapaProjeto {
 
 	public int getEtapa() {
 		return etapa;
+	}
+	
+	public static EtapaProjeto getProximaEtapa(EtapaProjeto etapa) {
+		return Arrays.asList(EtapaProjeto.values()).get(etapa.getEtapa() + 1);			
 	}
 }

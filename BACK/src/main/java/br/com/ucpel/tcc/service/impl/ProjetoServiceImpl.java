@@ -1,7 +1,6 @@
 package br.com.ucpel.tcc.service.impl;
 
 import java.util.Arrays;
-import java.util.List;
 
 import javax.transaction.Transactional;
 
@@ -57,18 +56,19 @@ public class ProjetoServiceImpl implements ProjetoService{
 	}
 
 	@Override
-	public void avancarEtapaProjeto(ProjetoVO vo) throws RegistroNaoEncontradoException, ProximaEtapaProjetoInvalidaException {
+	public Projeto avancarEtapaProjeto(ProjetoVO vo) throws RegistroNaoEncontradoException, ProximaEtapaProjetoInvalidaException {
 
 		Projeto projeto = repository.findById(vo.getIdProjeto()).orElseThrow(
 				() -> new RegistroNaoEncontradoException(Projeto.class, vo.getIdProjeto()));
-		EtapaProjeto etapa = null;
-		try {
-			etapa = Arrays.asList(EtapaProjeto.values()).get(projeto.getEtapa().getEtapa() + 1);			
-			projeto.setEtapa(etapa);
+		try {	
+			projeto.setEtapa(EtapaProjeto.getProximaEtapa(projeto.getEtapa()));
+			return repository.save(projeto);
 		} catch(Exception e) {
 			throw new ProximaEtapaProjetoInvalidaException();
 		}
 		
 	}
+
+
 
 }

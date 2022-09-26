@@ -30,8 +30,7 @@ export class ProjetoComponent implements OnInit {
   pesquisa: any;
 
   constructor(
-    private projetoService: ProjetoService,
-    private router: Router) { }
+    private projetoService: ProjetoService) { }
 
   ngOnInit() {
     this.init();
@@ -79,6 +78,25 @@ export class ProjetoComponent implements OnInit {
     })
   }
 
+  avancaEtapa(data:any){
+    Swal.fire({
+      title: "Ateção!",
+      text: `Deseja confirmar o avanço de etapa do registro?`,
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      cancelButtonText: 'Cancelar',
+      confirmButtonText: 'Confirmar'
+    }).then((result) => {
+        if (result.isConfirmed){
+        this.projetoService.avancaEtapa(data).subscribe(resp => {
+          this.init();
+        })
+      }
+    })
+  }
+
 
   onSubmit(data: any) {
 
@@ -95,9 +113,7 @@ export class ProjetoComponent implements OnInit {
 
 
   }
-  navigate(): void {
-    this.router.navigate(['/register'])
-  }
+
 
 
   pesquisar(pesquisa:any){
