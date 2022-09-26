@@ -38,6 +38,7 @@ import { UsuarioComponent } from './pages/cadastro/usuario/usuario.component';
 
 
 import { NgxPaginationModule } from 'ngx-pagination';
+import { RestComponent } from './pages/api/rest/rest.component';
 
 @NgModule({
   declarations: [
@@ -54,6 +55,9 @@ import { NgxPaginationModule } from 'ngx-pagination';
     KanbanComponent,
     FDDComponent,
     CrystalComponent,
+
+    // API
+    RestComponent,
     
     //CADASTROS
     PessoaComponent,

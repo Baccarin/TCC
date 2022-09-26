@@ -15,6 +15,10 @@ import { KanbanComponent } from './pages/tutorials/kanban/kanban.component';
 import { FDDComponent } from './pages/tutorials/fdd/fdd.component';
 import { CrystalComponent } from './pages/tutorials/crystal/crystal.component';
 
+// API
+import { RestComponent } from './pages/api/rest/rest.component';
+
+
 //CADASTRO
 import { PessoaComponent } from './pages/cadastro/pessoa/pessoa.component';
 import { EmpresaComponent } from './pages/cadastro/empresa/empresa.component';
@@ -45,6 +49,8 @@ const routes: Routes = [
   { path: 'cadastro/projeto', component: ProjetoComponent, canActivate: [AuthGuardService] },
   { path: 'cadastro/usuario', component: UsuarioComponent, canActivate: [AuthGuardService] },
 
+  //API
+  { path: 'api/rest', component: RestComponent },
 
   { path: 'login', component: LoginComponent },
 
