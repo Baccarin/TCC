@@ -1,13 +1,13 @@
 import { TestBed } from '@angular/core/testing';
 
-import { RestService } from './rest.service';
+import { SoapService } from './soap.service';
 
-describe('RestService', () => {
-  let service: RestService;
+describe('SoapService', () => {
+  let service: SoapService;
 
   beforeEach(() => {
     TestBed.configureTestingModule({});
-    service = TestBed.inject(RestService);
+    service = TestBed.inject(SoapService);
   });
 
   it('should be created', () => {

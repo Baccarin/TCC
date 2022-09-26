@@ -17,6 +17,7 @@ import { CrystalComponent } from './pages/tutorials/crystal/crystal.component';
 
 // API
 import { RestComponent } from './pages/api/rest/rest.component';
+import { SoapComponent } from './pages/api/soap/soap.component';
 
 
 //CADASTRO
@@ -51,6 +52,8 @@ const routes: Routes = [
 
   //API
   { path: 'api/rest', component: RestComponent },
+  { path: 'api/soap', component: SoapComponent },
+
 
   { path: 'login', component: LoginComponent },
 
