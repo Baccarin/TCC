@@ -57,7 +57,7 @@ export class FuncionarioComponent implements OnInit {
         showConfirmButton: false,
         timer: this.tempoNotificacao
       })
-      this.navigate()
+      this.init()
     })
   }
 
@@ -66,9 +66,6 @@ export class FuncionarioComponent implements OnInit {
     this.data.idEmpresa = '';
   }
 
-  navigate(): void {
-    this.router.navigate(['/register'])
-  }
 
   edit(id: any) {
 
@@ -87,13 +84,13 @@ export class FuncionarioComponent implements OnInit {
     }).then((result) => {
         if (result.isConfirmed){
         this.funcionarioService.delete(data).subscribe(resp => {
-          Swal.fire({
-            position: 'top-end',
-            icon: 'success',
-            title: 'Exclusão confirmada',
-            showConfirmButton: false,
-            timer: this.tempoNotificacao
-          })
+          // Swal.fire({
+          //   position: 'center',
+          //   icon: 'success',
+          //   title: 'Exclusão confirmada',
+          //   showConfirmButton: false,
+          //   timer: this.tempoNotificacao
+          // })
           this.init();
         })
       }
@@ -110,8 +107,8 @@ export class FuncionarioComponent implements OnInit {
         showConfirmButton: false,
         timer: this.tempoNotificacao
       })
-      this.navigate()
-    })
+      this.init();
+   })
   }
 
   

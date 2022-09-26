@@ -21,6 +21,7 @@ import { EmpresaComponent } from './pages/cadastro/empresa/empresa.component';
 import { TimeComponent } from './pages/cadastro/time/time.component';
 import { FuncionarioComponent } from './pages/cadastro/funcionario/funcionario.component';
 import { ProjetoComponent } from './pages/cadastro/register/projeto.component';
+import { UsuarioComponent } from './pages/cadastro/usuario/usuario.component';
 
 
 
@@ -42,6 +43,8 @@ const routes: Routes = [
   { path: 'cadastro/time', component: TimeComponent , canActivate: [AuthGuardService] },
   { path: 'cadastro/funcionario', component: FuncionarioComponent , canActivate: [AuthGuardService] },
   { path: 'cadastro/projeto', component: ProjetoComponent, canActivate: [AuthGuardService] },
+  { path: 'cadastro/usuario', component: UsuarioComponent, canActivate: [AuthGuardService] },
+
 
   { path: 'login', component: LoginComponent },
 

@@ -2,33 +2,34 @@
 
 import { Component, OnInit } from '@angular/core';
 import Swal from 'sweetalert2';
-import { TimeService } from './time.service';
+import { UsuarioService } from './usuario.service';
 import { Router } from '@angular/router';
 
 
 @Component({
   selector: 'app-notes',
-  templateUrl: './time.component.html',
-  styleUrls: ['./time.component.scss']
+  templateUrl: './usuario.component.html',
+  styleUrls: ['./usuario.component.scss']
 })
 
-export class TimeComponent implements OnInit {
+export class UsuarioComponent implements OnInit {
 
   tempoNotificacao = 2500;
 
   data = {
-    nome: '',
-    idLider: ''
+    idPessoa: '',
+    login: '',
+    senha: ''
   }
 
-  times: any;
+  pessoas: any;
   filter: any;
-  liders: any;
+  usuarios: any;
 
   pesquisa: any;
 
   constructor(
-    private timeService: TimeService,
+    private usuarioService: UsuarioService,
     private router: Router) { }
 
   ngOnInit(): void {
@@ -36,22 +37,23 @@ export class TimeComponent implements OnInit {
   }
 
   init() {
-    this.timeService.getAll().subscribe(response =>{
-      this.times = response;
+    this.usuarioService.getAll().subscribe(response =>{
+      this.usuarios = response;
     })
 
-    this.getAllLiders();
+    this.getAllPessoas();
     this.limpaCampos();
   }
 
   
   limpaCampos(){
-    this.data.nome = '';
-    this.data.idLider = '';
+    this.data.idPessoa = '';
+    this.data.senha = '';
+    this.data.login = '';
   }
 
   onSubmit(data: any) {
-    this.timeService.register(data).subscribe(resp => {
+    this.usuarioService.register(data).subscribe(resp => {
       Swal.fire({
         position: 'center',
         icon: 'success',
@@ -63,9 +65,6 @@ export class TimeComponent implements OnInit {
     })
 
 
-  }
-  navigate(): void {
-    this.router.navigate(['/cadastro/time'])
   }
 
   edit(id: any) {
@@ -84,7 +83,7 @@ export class TimeComponent implements OnInit {
       confirmButtonText: 'Confirmar'
     }).then((result) => {
         if (result.isConfirmed){
-        this.timeService.delete(data).subscribe(resp => {
+        this.usuarioService.delete(data).subscribe(resp => {
           Swal.fire({
             position: 'top-end',
             icon: 'success',
@@ -111,15 +110,15 @@ export class TimeComponent implements OnInit {
       });
       return
     }
-    this.timeService.getTimesFilter(this.pesquisa).subscribe(resp => {
-      this.times = resp
+    this.usuarioService.getUsuariosFilter(this.pesquisa).subscribe(resp => {
+      this.usuarios = resp
     })
   }
 
-  getAllLiders(){
-    this.timeService.getAllLiders().subscribe(resp => {
-      this.data.idLider = resp[0].id;
-      this.liders = resp;
+  getAllPessoas(){
+    this.usuarioService.getAllPessoas().subscribe(resp => {
+      this.data.idPessoa = resp[0].id;
+      this.pessoas = resp;
     })
   }
 

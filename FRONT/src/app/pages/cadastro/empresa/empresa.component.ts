@@ -101,13 +101,6 @@ export class EmpresaComponent implements OnInit {
     }).then((result) => {
         if (result.isConfirmed){
         this.empresaService.delete(data).subscribe(resp => {
-          Swal.fire({
-            position: 'top-end',
-            icon: 'success',
-            title: 'Exclusão confirmada',
-            showConfirmButton: false,
-            timer: this.tempoNotificacao
-          })
           this.init();
         })
       }

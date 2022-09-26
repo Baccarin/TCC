@@ -94,7 +94,7 @@ export class EmpresaService {
     var postData = {
       id: data
     };
-    console.log(postData);
+
     this.cabecalho.Authorization = sessionStorage.getItem('token')
     return this.http.post(`${this.baseUrl}/empresa/deletar`, postData, {headers: this.cabecalho}).pipe(
       map((response) => response),
@@ -103,14 +103,24 @@ export class EmpresaService {
   }
 
   erroHandler(error: any): any {
-    Swal.fire({
-      title: 'Warning!',
-      text: "Error",
-      icon: 'error',
-      confirmButtonText: 'OK',
-      confirmButtonColor: 'red0'
-    })
-    return
+    if (error.status == 200){          
+      Swal.fire({
+          position: 'top-end',
+          icon: 'success',
+          title: 'Operação realizado com sucesso.',
+          showConfirmButton: false
+      })
+    } else {
+      Swal.fire({
+        title: 'Atenção!',
+        text: error.error,
+        icon: 'error',
+        confirmButtonText: 'OK',
+        confirmButtonColor: 'red0'
+      })
+      return
+    }
+
 
   }
 }

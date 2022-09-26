@@ -33,6 +33,7 @@ import { EmpresaComponent } from './pages/cadastro/empresa/empresa.component';
 import { FuncionarioComponent } from './pages/cadastro/funcionario/funcionario.component';
 import { TimeComponent } from './pages/cadastro/time/time.component';
 import { ProjetoComponent } from './pages/cadastro/register/projeto.component';
+import { UsuarioComponent } from './pages/cadastro/usuario/usuario.component';
 
 
 
@@ -60,6 +61,7 @@ import { NgxPaginationModule } from 'ngx-pagination';
     FuncionarioComponent,
     TimeComponent,
     ProjetoComponent,
+    UsuarioComponent
 
   ],
   imports: [

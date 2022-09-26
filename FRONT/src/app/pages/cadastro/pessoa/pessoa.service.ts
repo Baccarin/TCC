@@ -16,6 +16,7 @@ export class PessoaService {
 
   constructor(private http: HttpClient, private router : Router) { }
 
+  tempoNotificacao = 2500;
 
   cabecalho:any = {
     'Authorization' :'',
@@ -61,15 +62,15 @@ export class PessoaService {
     if (error.status == 200){
       Swal.fire({
         position: 'center',
-        title: 'Cadastro salvo com sucesso',
+        title: 'Operação realizada com sucesso',
         icon: 'success',
         showConfirmButton: false,
-        timer: 2000
+        timer: this.tempoNotificacao
       })
     } else {
       Swal.fire({
         title: 'Erro ao salvar cadastro',
-        text: 'Não foi possível salvar o registro.',
+        text: error.error,
         icon: 'error',
         confirmButtonText: 'OK',
         confirmButtonColor: 'red',

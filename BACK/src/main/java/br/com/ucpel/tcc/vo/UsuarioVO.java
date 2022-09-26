@@ -9,7 +9,7 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class UsuarioVO {
+public class UsuarioVO extends BuscaGenericaVO{
 
 	private Long idUsuario;
 	private Long idPessoa;

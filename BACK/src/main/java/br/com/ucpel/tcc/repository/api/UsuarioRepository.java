@@ -24,5 +24,7 @@ public interface UsuarioRepository extends JpaRepository<Usuario, Long> {
 
 	@Query("select u from Usuario u where u.dataCadastro > :dataCadastro")
 	List<Usuario> findUsuarioByDataCadastroMaior(@Param("dataCadastro") Calendar dataNascimento);
-	
+
+	@Query("select u from Usuario u where u.login like :texto or UPPER(u.pessoa.nome) like UPPER(:texto) ")
+	List<Usuario> findUsuarioTextoGenerico(@Param("texto") String texto);
 }

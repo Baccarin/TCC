@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import br.com.ucpel.tcc.domain.Funcionario;
+import br.com.ucpel.tcc.exception.ExclusaoInvalidaRegistrosDependentesException;
 import br.com.ucpel.tcc.exception.RegistroNaoEncontradoException;
 import br.com.ucpel.tcc.repository.api.FuncionarioRepository;
 import br.com.ucpel.tcc.service.api.FuncionarioService;
@@ -90,7 +91,7 @@ public class FuncionarioResource {
 		try {
 			service.deletarFuncionario(vo);
 			return new ResponseEntity<String>("Registro excluido com sucesso", HttpStatus.OK);
-		} catch (RegistroNaoEncontradoException e) {
+		} catch (RegistroNaoEncontradoException | ExclusaoInvalidaRegistrosDependentesException e) {
 			return new ResponseEntity<String>(e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
 		}
 	}

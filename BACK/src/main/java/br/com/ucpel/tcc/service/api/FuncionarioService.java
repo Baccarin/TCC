@@ -1,12 +1,13 @@
 package br.com.ucpel.tcc.service.api;
 
 import br.com.ucpel.tcc.domain.Funcionario;
+import br.com.ucpel.tcc.exception.ExclusaoInvalidaRegistrosDependentesException;
 import br.com.ucpel.tcc.exception.RegistroNaoEncontradoException;
 import br.com.ucpel.tcc.vo.FuncionarioVO;
 
 public interface FuncionarioService {
 	
-	void deletarFuncionario(FuncionarioVO vo) throws RegistroNaoEncontradoException;
+	void deletarFuncionario(FuncionarioVO vo) throws RegistroNaoEncontradoException, ExclusaoInvalidaRegistrosDependentesException;
 
 	Funcionario salvarFuncionario(FuncionarioVO vo);
 	

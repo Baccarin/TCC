@@ -15,12 +15,14 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import br.com.ucpel.tcc.domain.Funcionario;
 import br.com.ucpel.tcc.domain.Usuario;
 import br.com.ucpel.tcc.exception.RegistroNaoEncontradoException;
 import br.com.ucpel.tcc.function.UsuarioFunction;
 import br.com.ucpel.tcc.repository.api.PessoaRepository;
 import br.com.ucpel.tcc.repository.api.UsuarioRepository;
 import br.com.ucpel.tcc.service.api.UsuarioService;
+import br.com.ucpel.tcc.vo.EmpresaVO;
 import br.com.ucpel.tcc.vo.UsuarioVO;
 import io.swagger.annotations.ApiOperation;
 import lombok.RequiredArgsConstructor;
@@ -88,6 +90,18 @@ public class UsuarioResource {
 	@Produces(MediaType.APPLICATION_JSON)
 	public ResponseEntity<List<Usuario>> buscaListaUsuarioByDataNascimentoMenor(@RequestBody UsuarioVO vo) {
 		List<Usuario> usuarios = repository.findUsuarioByDataCadastroMenor(vo.getDataCadastro());
+		if (usuarios.isEmpty()) {
+			return new ResponseEntity<List<Usuario>>(HttpStatus.NO_CONTENT);
+		}
+		return new ResponseEntity<List<Usuario>>(usuarios, HttpStatus.OK);
+	}
+	
+	@PostMapping("buscaLista/byTextoGenerico")
+	@CrossOrigin(origins = "*")
+	@ApiOperation(value = "Busca lista de usuarios por texto genérico.")
+	@Produces(MediaType.APPLICATION_JSON)
+	public ResponseEntity<List<Usuario>> buscaListaUsuariosByTextoGenerico(@RequestBody UsuarioVO vo) {
+		List<Usuario> usuarios = repository.findUsuarioTextoGenerico(vo.getTexto());
 		if (usuarios.isEmpty()) {
 			return new ResponseEntity<List<Usuario>>(HttpStatus.NO_CONTENT);
 		}
