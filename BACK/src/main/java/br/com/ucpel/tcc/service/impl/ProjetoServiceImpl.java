@@ -1,6 +1,7 @@
 package br.com.ucpel.tcc.service.impl;
 
 import java.util.Arrays;
+import java.util.Calendar;
 
 import javax.transaction.Transactional;
 
@@ -62,6 +63,9 @@ public class ProjetoServiceImpl implements ProjetoService{
 				() -> new RegistroNaoEncontradoException(Projeto.class, vo.getIdProjeto()));
 		try {	
 			projeto.setEtapa(EtapaProjeto.getProximaEtapa(projeto.getEtapa()));
+			if (projeto.getEtapa() == EtapaProjeto.FIM) {
+				projeto.setDataFim(Calendar.getInstance().getTime());
+			}
 			return repository.save(projeto);
 		} catch(Exception e) {
 			throw new ProximaEtapaProjetoInvalidaException();

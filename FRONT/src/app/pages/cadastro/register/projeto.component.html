@@ -81,20 +81,26 @@
   
                     <th scope="row">{{projeto.nome}}</th>
                     <td>{{projeto.dataInicio  | date: 'dd/MM/yyyy'}}</td>
-                    <td>{{projeto.etapa}}</td>
-                    <td>{{projeto.metodologiaAplicada}}</td>
-                    <td>{{projeto.dataFim  | date: 'dd/MM/yyyy'}}</td>
-                    <td>{{projeto.ativo ? 'Sim' : 'Não' }}</td>
+                    <td *ngIf="projeto.etapa=='INICIO'" style="background-color: rgb(216, 34, 21); text-align: center">{{projeto.etapa}}</td>
+                    <td *ngIf="projeto.etapa=='REQUISITOS'" style="background-color: rgba(255, 72, 0, 0.856);">{{projeto.etapa}}</td>
+                    <td *ngIf="projeto.etapa=='DESENVOLVIMENTO'" style="background-color: rgb(255, 208, 0);">{{projeto.etapa}}</td>
+                    <td *ngIf="projeto.etapa=='TESTE'" style="background-color: rgb(166, 255, 0);">{{projeto.etapa}}</td>    
+                    <td *ngIf="projeto.etapa=='HOMOLOGACAO'" style="background-color: rgb(115, 255, 0);">{{projeto.etapa}}</td>
+                    <td *ngIf="projeto.etapa=='FIM'" style="background-color: rgb(0, 255, 0);">{{projeto.etapa}}</td>
+
+                    <td >{{projeto.metodologiaAplicada}}</td>
+                    <td >{{projeto.dataFim  | date: 'dd/MM/yyyy'}}</td>
+                    <td >{{projeto.ativo ? 'Sim' : 'Não' }}</td>
                     <td>
-  
-                      <a class="edit" title="Edit" href="javascript:void(0)" (click)="edit(projeto.id)"><i
+
+                      <a *ngIf="projeto.etapa!='FIM'" class="edit" title="Edit" href="javascript:void(0)" (click)="edit(projeto.id)"><i
                           class="bi bi-pencil-square"></i></a>
                       &nbsp;&nbsp;
                       
-                      <a class="del" title="Delete" href="javascript:void(0)" (click)="delete(projeto.id)"><i
+                      <a *ngIf="projeto.etapa=='INICIO' || projeto.etapa=='REQUISITOS'" class="del" title="Delete" href="javascript:void(0)" (click)="delete(projeto.id)"><i
                           class="bi bi-x-circle"></i></a>
   
-                      <a class="avancaEtapa" title="AvancaEtapa" href="javascript:void(0)" (click)="avancaEtapa(projeto.id)"><i
+                      <a *ngIf="projeto.etapa!='FIM'" class="avancaEtapa" title="AvancaEtapa" href="javascript:void(0)" (click)="avancaEtapa(projeto.id)"><i
                         class="bi bi-forward-fill"></i></a>
   
                     </td>

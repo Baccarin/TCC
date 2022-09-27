@@ -19,6 +19,7 @@ import { NgxJsonViewModule } from 'ng-json-view';
 import { NgxJsonViewerModule } from 'ngx-json-viewer';
 import { RecaptchaModule } from 'ng-recaptcha';
 import { RECAPTCHA_LANGUAGE } from "ng-recaptcha";
+// import { NgxMaskModule, IConfig } from 'ngx-mask';
 
 //tutoriais
 import { XPComponent } from './pages/tutorials/xp/xp.component';
@@ -39,6 +40,10 @@ import { UsuarioComponent } from './pages/cadastro/usuario/usuario.component';
 
 import { NgxPaginationModule } from 'ngx-pagination';
 import { RestComponent } from './pages/api/rest/rest.component';
+
+// const maskConfig: Partial<IConfig> = {
+//   validation: false,
+// };
 
 @NgModule({
   declarations: [
@@ -79,7 +84,8 @@ import { RestComponent } from './pages/api/rest/rest.component';
     NgxJsonViewModule,
     NgxJsonViewerModule,
     RecaptchaModule,
-    NgxPaginationModule
+    NgxPaginationModule,
+    // NgxMaskModule.forRoot(maskConfig),
   ],
   exports: [
     CommonModule,
@@ -93,4 +99,5 @@ import { RestComponent } from './pages/api/rest/rest.component';
   }],
   bootstrap: [AppComponent]
 })
+
 export class AppModule { }

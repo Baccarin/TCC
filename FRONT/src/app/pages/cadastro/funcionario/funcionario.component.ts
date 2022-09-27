@@ -3,7 +3,7 @@ import { FuncionarioService } from './funcionario.service';
 import { Router } from '@angular/router';
 import Swal from 'sweetalert2';
 
-
+declare var window: any;
 
 @Component({
   selector: 'app-register',
@@ -28,6 +28,8 @@ export class FuncionarioComponent implements OnInit {
 
   pesquisa: any;
 
+  formModal: any;
+
   constructor(
     private funcionarioService: FuncionarioService,
     private router: Router) { }
@@ -44,6 +46,9 @@ export class FuncionarioComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.formModal = new window.bootstrap.Modal(
+      document.getElementById('modalFuncionario'),
+    );
     this.init();
   }
 
@@ -67,8 +72,19 @@ export class FuncionarioComponent implements OnInit {
   }
 
 
-  edit(id: any) {
+  updateFuncionario(data: any) {
 
+  }
+
+  edit(data: any){
+    
+  }
+
+  openModal(id:any) {
+    this.funcionarioService.getFuncionario(id).subscribe(resp => {
+      this.data = resp
+    })
+    this.formModal.show();
   }
 
   delete(data: any) {
@@ -84,13 +100,6 @@ export class FuncionarioComponent implements OnInit {
     }).then((result) => {
         if (result.isConfirmed){
         this.funcionarioService.delete(data).subscribe(resp => {
-          // Swal.fire({
-          //   position: 'center',
-          //   icon: 'success',
-          //   title: 'Exclusão confirmada',
-          //   showConfirmButton: false,
-          //   timer: this.tempoNotificacao
-          // })
           this.init();
         })
       }
@@ -114,13 +123,10 @@ export class FuncionarioComponent implements OnInit {
   
   observaEmpresa(event: any){
     this.data.idEmpresa = event.target.value;
-    console.log(this.data.idEmpresa);
   }
   
   observaUsuario(event:any){
     this.data.idUsuario = event.target.value;
-    console.log(this.data.idUsuario);
-
   }
 
   getAllEmpresas(){

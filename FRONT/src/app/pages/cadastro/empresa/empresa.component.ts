@@ -1,9 +1,9 @@
-import { Component, OnInit  } from '@angular/core';
+import { APP_BOOTSTRAP_LISTENER, Component, OnInit  } from '@angular/core';
 import { EmpresaService } from './empresa.service';
 import { Router } from '@angular/router';
 import Swal from 'sweetalert2';
 
-
+declare var window: any;
 
 @Component({
   selector: 'app-register',
@@ -15,6 +15,7 @@ export class EmpresaComponent implements OnInit {
   tempoNotificacao = 2500;
 
   data = {
+    id: '',
     nome: '',
     cnpj: ''
   }
@@ -22,6 +23,8 @@ export class EmpresaComponent implements OnInit {
   empresas: any;
   filter: any ;
   pesquisa: any;
+
+  formModal: any;
 
 
   constructor(
@@ -36,6 +39,9 @@ export class EmpresaComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.formModal = new window.bootstrap.Modal(
+      document.getElementById('modalEmpresa'),
+    );
     this.init();
   }
 
@@ -54,6 +60,7 @@ export class EmpresaComponent implements OnInit {
   }
 
   limpaCampos(){
+    this.data.id = '';
     this.data.nome = '';
     this.data.cnpj = '';
   }
@@ -67,6 +74,29 @@ export class EmpresaComponent implements OnInit {
     this.empresaService.getEmpresa(id).subscribe(resp => {
       this.data = resp[0]
     })
+  }
+
+  updateEmpresa(data:any){
+    this.empresaService.atualizarEmpresa(data).subscribe(resp => {
+      Swal.fire({
+        position: 'center',
+        icon: 'success',
+        title: 'Registro atualizado com sucesso',
+        showConfirmButton: false,
+        timer: this.tempoNotificacao
+      })
+      this.formModal.hide();
+      this.init();
+      this.limpaCampos();
+    })
+  }
+
+
+  openModal(id:any) {
+    this.empresaService.getEmpresa(id).subscribe(resp => {
+      this.data = resp
+    })
+    this.formModal.show();
   }
 
   pesquisar(pesquisa:any){
@@ -84,8 +114,7 @@ export class EmpresaComponent implements OnInit {
     }
     this.empresaService.getEmpresaFilter(this.pesquisa).subscribe(resp => {
       this.empresas = resp
-    }
-    )
+    })
   }
 
   delete(data: any) {

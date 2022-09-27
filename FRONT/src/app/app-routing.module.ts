@@ -18,6 +18,7 @@ import { CrystalComponent } from './pages/tutorials/crystal/crystal.component';
 // API
 import { RestComponent } from './pages/api/rest/rest.component';
 import { SoapComponent } from './pages/api/soap/soap.component';
+import { WebsocketComponent } from './pages/api/websocket/websocket.component';
 
 
 //CADASTRO
@@ -53,7 +54,7 @@ const routes: Routes = [
   //API
   { path: 'api/rest', component: RestComponent },
   { path: 'api/soap', component: SoapComponent },
-
+  { path: 'api/websocket', component: WebsocketComponent },
 
   { path: 'login', component: LoginComponent },
 

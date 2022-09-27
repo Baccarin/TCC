@@ -95,6 +95,15 @@ export class FuncionarioService {
     
   }
 
+  getFuncionario(data: any){
+
+    this.cabecalho.Authorization = sessionStorage.getItem('token')
+    return this.http.post(`${this.baseUrl}/funcionario/buscaById`, data,{headers: this.cabecalho}).pipe(
+        map((response) => response),
+        catchError(async (error) => this.errorHandler(error))
+      );
+  }
+
   getFuncionarioFilter(pesquisa:any){
     var postData = {
       texto: pesquisa

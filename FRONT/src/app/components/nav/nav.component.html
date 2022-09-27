@@ -1,13 +1,21 @@
 <aside id="sidebar" class="sidebar">
 
     <ul class="sidebar-nav" id="sidebar-nav">
-
+        
+        <li class="nav-item">
+            <a class="nav-link collapsed" routerLink="/profile">
+                <i class="bi bi-person"></i>
+                <span>Sobre mim</span>
+            </a>
+        </li>
+        
         <li class="nav-item">
             <a class="nav-link collapsed" routerLink="/">
                 <i class="bi bi-house"></i>
                 <span>Home</span>
             </a>
         </li>
+
 
         <li class="nav-item">
             <a class="nav-link collapsed" href="javascript:void(0)" (click)="logout()">
@@ -80,13 +88,6 @@
                 </li>
 
                 <li class="nav-item">
-                    <a class="nav-link collapsed" routerLink="/api/rpc">
-                        <i class="bi bi-circle-fill"></i>
-                        <span>RPC</span>
-                    </a>
-                </li>
-
-                <li class="nav-item">
                     <a class="nav-link collapsed" routerLink="/api/soap">
                         <i class="bi bi-circle-fill"></i>
                         <span>Soap</span>
@@ -95,28 +96,6 @@
 
             </ul>
         </li>
-
-        <li class="nav-item">
-            <a class="nav-link collapsed" routerLink="/profile">
-                <i class="bi bi-person"></i>
-                <span>Sobre mim</span>
-            </a>
-        </li>
-
-        <li class="nav-item">
-            <a class="nav-link collapsed" data-bs-target="#icons-nav" data-bs-toggle="collapse" href="#"> <i
-                    class="bi bi-lock"></i><span>Restricted</span><i class="bi bi-chevron-down ms-auto"></i> </a>
-            <ul id="icons-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
-        
-                <li class="nav-item">
-                    <a class="nav-link collapsed" href="javascript:void(0)" (click)="logout()">
-                        <i class="bi bi-circle-fill"></i>
-                        <span>Sair</span>
-                    </a>
-                </li>
-            </ul>
-        </li>
-
 
         <li class="nav-item">
             <a class="nav-link collapsed" data-bs-target="#components-nav-cadastros" data-bs-toggle="collapse" href="#"> <i

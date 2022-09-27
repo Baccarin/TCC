@@ -89,6 +89,16 @@ export class EmpresaService {
     )
   }
 
+  atualizarEmpresa(data:any): Observable<any>{    
+    this.cabecalho.Authorization = sessionStorage.getItem('token')
+    return this.http.post(`${this.baseUrl}/empresa/atualizar`, data,{headers: this.cabecalho})
+    .pipe(
+      map((response) => { 
+        return response
+      }),catchError((error) => this.errorHandler(error))
+    )
+  }
+
   delete(data: any): Observable<any> {
 
     var postData = {

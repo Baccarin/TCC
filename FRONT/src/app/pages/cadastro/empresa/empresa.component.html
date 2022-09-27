@@ -27,8 +27,8 @@
                 
                 <div class="form-group col-md-6">
                   <label for="cnpj">CNPJ</label>
-                  <input type="cnpj" name="cnpj"  [(ngModel)]="data.cnpj" class="form-control" 
-                    aria-describedby="cnpj" required minlength="4" #nome="ngModel">
+                  <input type="text" name="cnpj" [(ngModel)]="data.cnpj" class="form-control" 
+                    aria-describedby="cnpj" required minlength="4" #nome="ngModel" mask="000.000.000-00">
                 </div>            
 
               </div>
@@ -46,7 +46,6 @@
                               class="form-control" placeholder="Pesquisar">
                       </div>
 
-                      
                   </div>
                   &nbsp;&nbsp;
                   <div class="mb-3">
@@ -54,14 +53,9 @@
                           <button type="button" class="btn btn-primary"
                               (click)="pesquisar(pesquisa)">Pesquisar</button>
                       </div>
-                  </div>
-
-
-              </div>
-
-        
+                    </div>
+              </div>      
           </div>
-
 
            <br>
             <div id="container">
@@ -80,29 +74,61 @@
                     <td>{{empresa.cnpj}}</td>
                     <td>
 
-
-                      <a class="edit" title="Edit" href="javascript:void(0)" (click)="edit(empresa.id)"><i
+                      <a class="edit" title="Edit" href="javascript:void(0)" (click)="openModal(empresa.id)"><i
                           class="bi bi-pencil-square"></i></a>
                       &nbsp;&nbsp;
                       <a class="del" title="Delete" href="javascript:void(0)" (click)="delete(empresa.id)"><i
                           class="bi bi-x-circle"></i></a>
 
-
-
                     </td>
                   </tr>
-
                 </tbody>
               </table>
-            </div>
-           
+            </div>        
           </div>
         </div>
-
       </div>
-
-
     </div>
   </section>
 
 </main>
+
+
+
+<!-- Modal -->
+<div class="modal fade" id="modalEmpresa" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+          <div class="modal-header">
+              <h5 class="card-title">Atualiza empresa</h5>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+
+              <form (ngSubmit)="updateEmpresa(data)">
+
+                  <div class="mb-3">
+                      <div class=" col-md-12">
+                          <label for="nome" class="form-label">Nome</label>
+                          <input type="text" class="form-control" id="nome"
+                              [(ngModel)]="data.nome" name="nome" placeholder="data.nome">
+                      </div>
+                  </div>
+                  <div class="mb-3">
+                      <div class=" col-md-12">
+                          <label for="cnpj" class="form-label">CNPJ</label>
+                          <input type="text" class="form-control" id="cnpj"
+                              [(ngModel)]="data.cnpj" name="cnpj" placeholder="data.cnpj">
+                      </div>
+                  </div>
+
+                  <div class="modal-footer">
+                      <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                      <button type="submit" class="btn btn-primary">Atualizar</button>
+                  </div>
+              </form>
+
+          </div>
+      </div>
+  </div>
+</div>
