@@ -23,6 +23,7 @@ import br.com.ucpel.tcc.repository.api.PessoaRepository;
 import br.com.ucpel.tcc.repository.api.UsuarioRepository;
 import br.com.ucpel.tcc.service.api.UsuarioService;
 import br.com.ucpel.tcc.vo.EmpresaVO;
+import br.com.ucpel.tcc.vo.FuncionarioVO;
 import br.com.ucpel.tcc.vo.UsuarioVO;
 import io.swagger.annotations.ApiOperation;
 import lombok.RequiredArgsConstructor;
@@ -96,6 +97,18 @@ public class UsuarioResource {
 		return new ResponseEntity<List<Usuario>>(usuarios, HttpStatus.OK);
 	}
 	
+	@PostMapping("buscaLista/byId")
+	@CrossOrigin(origins = "*")
+	@ApiOperation(value = "Busca lista de usuarios por usuário cadastradas.")
+	@Produces(MediaType.APPLICATION_JSON)
+	public ResponseEntity<Usuario> buscaUsuarioById(@RequestBody UsuarioVO vo) {
+		Usuario usuario = repository.findById(vo.getIdUsuario()).orElse(null);
+		if (Objects.isNull(usuario)) {
+			return new ResponseEntity<Usuario>(HttpStatus.NO_CONTENT);
+		}
+		return new ResponseEntity<Usuario>(usuario, HttpStatus.OK);
+	}
+	
 	@PostMapping("buscaLista/byTextoGenerico")
 	@CrossOrigin(origins = "*")
 	@ApiOperation(value = "Busca lista de usuarios por texto genérico.")
@@ -138,7 +151,7 @@ public class UsuarioResource {
 	@ApiOperation(value = "Atualizar usuário.")
 	@Produces(MediaType.APPLICATION_JSON)
 	public ResponseEntity<Usuario> atualizarUsuario(@RequestBody UsuarioVO vo) {
-		Usuario usuario = service.inserirUsuario(vo);
+		Usuario usuario = service.atualizarUsuario(vo);
 		if (Objects.isNull(usuario)) {
 			return new ResponseEntity<Usuario>(HttpStatus.NO_CONTENT);
 		}

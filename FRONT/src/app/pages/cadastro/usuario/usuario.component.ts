@@ -5,6 +5,7 @@ import Swal from 'sweetalert2';
 import { UsuarioService } from './usuario.service';
 import { Router } from '@angular/router';
 
+declare var window: any;
 
 @Component({
   selector: 'app-notes',
@@ -16,7 +17,7 @@ export class UsuarioComponent implements OnInit {
 
   tempoNotificacao = 2500;
 
-  data = {
+  data:any = {
     idPessoa: '',
     login: '',
     senha: ''
@@ -28,11 +29,17 @@ export class UsuarioComponent implements OnInit {
 
   pesquisa: any;
 
+  formModal: any;
+
+
   constructor(
     private usuarioService: UsuarioService,
     private router: Router) { }
 
   ngOnInit(): void {
+    this.formModal = new window.bootstrap.Modal(
+      document.getElementById('modalUsuario'),
+    );
     this.init();
   }
 
@@ -45,6 +52,20 @@ export class UsuarioComponent implements OnInit {
     this.limpaCampos();
   }
 
+  atualizarUsuario(data:any){
+    this.usuarioService.atualizarUsuario(data).subscribe(resp => {
+      Swal.fire({
+        position: 'center',
+        icon: 'success',
+        title: 'Registro atualizado com sucesso',
+        showConfirmButton: false,
+        timer: this.tempoNotificacao
+      })
+      this.formModal.hide();
+      this.init();
+      this.limpaCampos();
+    })
+  }
   
   limpaCampos(){
     this.data.idPessoa = '';
@@ -67,9 +88,15 @@ export class UsuarioComponent implements OnInit {
 
   }
 
-  edit(id: any) {
-
+  openModal(id:any) {
+    this.usuarioService.getUsuarioById(id).subscribe(resp => {
+      this.data = resp;
+      this.data.idUsuario = id;
+    })
+    this.formModal.show();
   }
+
+
 
   delete(data: any) {
     Swal.fire({

@@ -78,7 +78,7 @@
                     <td>{{usuario.login}}</td>
                     <td>
       
-                      <a class="edit" title="Edit" href="javascript:void(0)" (click)="edit(usuario.id)"><i
+                      <a class="edit" title="Edit" href="javascript:void(0)" (click)="openModal(usuario.id)"><i
                           class="bi bi-pencil-square"></i></a>
                       &nbsp;&nbsp;
                       
@@ -102,3 +102,48 @@
   </section>
 
 </main>
+
+
+
+
+<!-- Modal -->
+<div class="modal fade" id="modalUsuario" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+          <div class="modal-header">
+              <h5 class="card-title">Atualiza usuário</h5>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+
+              <form (ngSubmit)="atualizarUsuario(data)">
+
+                <div class="mb-3">
+                  <label for="name">Pessoa</label>
+                  <select class="form-select"   >
+                      <option *ngFor="let pessoa of pessoas" [value]="pessoa.id">{{pessoa.nome}}</option>
+                  </select>
+                </div>
+
+                <div class="mb-3">
+                  <label for="login">Login</label>
+                  <input type="login" name="login"  [(ngModel)]="data.login" class="form-control" 
+                    aria-describedby="login" required minlength="4" #nome="ngModel">
+                </div>
+
+                <div class="mb-3">
+                  <label for="password">Senha</label>
+                  <input type="password" name="password"  [(ngModel)]="data.senha" class="form-control" 
+                    aria-describedby="password" required minlength="4" #nome="ngModel">
+                </div>
+
+                  <div class="modal-footer">
+                      <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                      <button type="submit" class="btn btn-primary">Atualizar</button>
+                  </div>
+              </form>
+
+          </div>
+      </div>
+  </div>
+</div>

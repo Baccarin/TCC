@@ -65,6 +65,30 @@ export class UsuarioService {
     );
   }
 
+  getUsuarioById(data: any){
+    
+    var postData = {
+      idUsuario: data
+    };
+
+    this.cabecalho.Authorization = sessionStorage.getItem('token')
+    return this.http.post(`${this.baseUrl}/usuario/buscaLista/byId`, postData,{headers: this.cabecalho})
+    .pipe(
+      map((response) => response),
+      catchError((error) => this.errorHandler(error))
+    )
+  }  
+
+  atualizarUsuario(data: any){
+    this.cabecalho.Authorization = sessionStorage.getItem('token')
+    return this.http.post(`${this.baseUrl}/usuario/atualizar`, data,{headers: this.cabecalho})
+    .pipe(
+      map((response) => { 
+        return response
+      }),catchError((error) => this.errorHandler(error))
+    )
+  }
+
   errorHandler(error: any): any {
     if (error.status == 200){
       Swal.fire({

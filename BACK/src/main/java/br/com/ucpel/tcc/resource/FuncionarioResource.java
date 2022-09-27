@@ -58,6 +58,7 @@ public class FuncionarioResource {
 		return new ResponseEntity<List<Funcionario>>(funcionarios, HttpStatus.OK);
 	}
 	
+	
 	@PostMapping("buscaLista/byTextoGenerico")
 	@CrossOrigin(origins = "*")
 	@ApiOperation(value = "Busca lista de funcionarios por texto genérico.")

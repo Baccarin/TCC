@@ -1,4 +1,4 @@
-import { APP_BOOTSTRAP_LISTENER, Component, OnInit  } from '@angular/core';
+import { Component, OnInit  } from '@angular/core';
 import { EmpresaService } from './empresa.service';
 import { Router } from '@angular/router';
 import Swal from 'sweetalert2';
