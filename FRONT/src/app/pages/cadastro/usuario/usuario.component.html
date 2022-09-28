@@ -19,9 +19,9 @@
               <div class="row gy-4">
 
                 <div class="form-group col-md-4">
-                  <label for="name">Pessoa</label>
-                  <select class="form-select"   >
-                      <option *ngFor="let pessoa of pessoas" [value]="pessoa.id">{{pessoa.nome}}</option>
+                  <label for="name">Funcionário</label>
+                  <select class="form-select" (change)="observaFuncionario($event)"  >
+                      <option *ngFor="let funcionario of funcionarios" [value]="funcionario.id">{{funcionario.pessoa.nome}}</option>
                   </select>
                 </div>
 
@@ -74,7 +74,7 @@
                 <tbody>
                   <tr *ngFor="let usuario of usuarios | filter:filter; let i = index">
       
-                    <th scope="row">{{usuario.pessoa.nome}}</th>
+                    <th scope="row">{{usuario.funcionario.pessoa.nome}}</th>
                     <td>{{usuario.login}}</td>
                     <td>
       
@@ -119,9 +119,9 @@
               <form (ngSubmit)="atualizarUsuario(data)">
 
                 <div class="mb-3">
-                  <label for="name">Pessoa</label>
+                  <label for="name">Funcionário</label>
                   <select class="form-select"   >
-                      <option *ngFor="let pessoa of pessoas" [value]="pessoa.id">{{pessoa.nome}}</option>
+                      <option *ngFor="let funcionario of funcionarios" [value]="funcionario.id">{{funcionario.pessoa.nome}}</option>
                   </select>
                 </div>
 

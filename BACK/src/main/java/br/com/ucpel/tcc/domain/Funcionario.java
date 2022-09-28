@@ -25,15 +25,15 @@ public class Funcionario {
 	private long id;
 	
 	@OneToOne
-    @JoinColumn(name = "id_usuario")
-	private Usuario usuario;
+    @JoinColumn(name = "id_pessoa")
+	private Pessoa pessoa;
 	
 	@ManyToOne	
 	@JoinColumn(name="id_empresa")
 	private Empresa empresa;
 	
-	public Funcionario (Usuario usuario) {
-		this.usuario = usuario;
+	public Funcionario (Pessoa pessoa) {
+		this.pessoa = pessoa;
 	}
 	
 }

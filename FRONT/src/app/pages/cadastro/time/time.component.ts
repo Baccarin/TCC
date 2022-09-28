@@ -1,10 +1,9 @@
-
-
 import { Component, OnInit } from '@angular/core';
 import Swal from 'sweetalert2';
 import { TimeService } from './time.service';
 import { Router } from '@angular/router';
 
+declare var window: any;
 
 @Component({
   selector: 'app-notes',
@@ -17,6 +16,7 @@ export class TimeComponent implements OnInit {
   tempoNotificacao = 2500;
 
   data = {
+    id: '',
     nome: '',
     idLider: ''
   }
@@ -26,16 +26,21 @@ export class TimeComponent implements OnInit {
   liders: any;
 
   pesquisa: any;
+  formModal: any;
 
   constructor(
-    private timeService: TimeService,
-    private router: Router) { }
+    private timeService: TimeService) { }
 
   ngOnInit(): void {
     this.init();
   }
 
   init() {
+
+    this.formModal = new window.bootstrap.Modal(
+      document.getElementById('modalTime'),
+      );
+
     this.timeService.getAll().subscribe(response =>{
       this.times = response;
     })
@@ -48,6 +53,7 @@ export class TimeComponent implements OnInit {
   limpaCampos(){
     this.data.nome = '';
     this.data.idLider = '';
+    this.data.id = '';
   }
 
   onSubmit(data: any) {
@@ -55,7 +61,7 @@ export class TimeComponent implements OnInit {
       Swal.fire({
         position: 'center',
         icon: 'success',
-        title: 'Registro salvo com sucesso',
+        title: 'Operação realizada com sucesso',
         showConfirmButton: false,
         timer: this.tempoNotificacao
       })
@@ -64,12 +70,12 @@ export class TimeComponent implements OnInit {
 
 
   }
-  navigate(): void {
-    this.router.navigate(['/cadastro/time'])
-  }
 
-  edit(id: any) {
-
+  openModal(id: any) {
+    this.timeService.getTime(id).subscribe(resp => {
+      this.data = resp
+    })
+    this.formModal.show();
   }
 
   delete(data: any) {
@@ -121,6 +127,33 @@ export class TimeComponent implements OnInit {
       this.data.idLider = resp[0].id;
       this.liders = resp;
     })
+  }
+
+  updateTime(data:any){
+
+    var postData = {
+      idTime: data.id,
+      idLider: this.data.idLider,
+      nome: data.nome
+    };
+
+    this.timeService.atualizarTime(postData).subscribe(resp => {
+      Swal.fire({
+        position: 'center',
+        icon: 'success',
+        title: 'Registro atualizado com sucesso',
+        showConfirmButton: false,
+        timer: this.tempoNotificacao
+      })
+      this.formModal.hide();
+      this.init();
+      this.limpaCampos();
+    })
+  }
+
+  observaLider(event: any){
+    console.log(event.target.value)
+    this.data.idLider = event.target.value;
   }
 
 }

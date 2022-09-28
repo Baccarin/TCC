@@ -1,9 +1,8 @@
 import { Component, OnInit  } from '@angular/core';
 import { PessoaService } from './pessoa.service';
-import { Router } from '@angular/router';
 import Swal from 'sweetalert2';
 
-
+declare var window: any;
 
 @Component({
   selector: 'app-register',
@@ -15,9 +14,10 @@ export class PessoaComponent implements OnInit {
   tempoNotificacao = 2500;
 
   data = {
+    idPessoa: '',
     nome: '',
     email: '',
-    sexo: 'OUTRO',
+    sexo: '',
     dataNascimento: ''
   }
 
@@ -25,30 +25,65 @@ export class PessoaComponent implements OnInit {
   filter: any;
 
   pesquisa: any;
+  sexos: any;
+
+  formModal: any;
 
   constructor(
-    private pessoaService: PessoaService,
-    private router: Router) { }
+    private pessoaService: PessoaService) { }
 
   ngOnInit() {
     this.init();
   }
 
   init(){
-    this.pessoaService.getAll().subscribe(response =>{
-      this.pessoas = response;
-    })
+    
+    this.formModal = new window.bootstrap.Modal(
+      document.getElementById('modalPessoa'),
+      );
+      
+      this.pessoaService.getAll().subscribe(response =>{
+        this.pessoas = response;
+      })
+      
+      this.pessoaService.getSexos().subscribe(response =>{
+        this.sexos = response;
+        this.data.sexo = response[0];
+      })
+      
    this.limpaCampos(); 
   }
 
   limpaCampos(){
+    this.data.idPessoa = '';
     this.data.nome = '';
     this.data.email = '';
+    this.data.sexo = this.sexos[0];
+    this.data.dataNascimento = '';
   }
 
 
-  edit(id: any) {
+  openModal(id: any) {
+    this.pessoaService.getPessoa(id).subscribe(resp => {
+      this.data = resp
+    })
+    this.formModal.show();
+  }
 
+  updatePessoa(data:any){
+    this.data.idPessoa = data.id;
+    this.pessoaService.atualizarPessoa(data).subscribe(resp => {
+      Swal.fire({
+        position: 'center',
+        icon: 'success',
+        title: 'Registro atualizado com sucesso',
+        showConfirmButton: false,
+        timer: this.tempoNotificacao
+      })
+      this.formModal.hide();
+      this.init();
+      this.limpaCampos();
+    })
   }
 
   delete(data: any) {
@@ -82,11 +117,6 @@ export class PessoaComponent implements OnInit {
       })
       this.init();
     })
-
-
-  }
-  navigate(): void {
-    this.router.navigate(['/register'])
   }
 
   pesquisar(pesquisa:any){
@@ -104,6 +134,17 @@ export class PessoaComponent implements OnInit {
     }
     this.pessoaService.getPessoasFilter(this.pesquisa).subscribe(resp => {
       this.pessoas = resp
+    })
+  }
+
+  observaSexo(event: any){
+    this.data.sexo = event.target.value;
+  }
+
+  getAllSexo(){
+    this.pessoaService.getSexos().subscribe(resp => {
+      this.data.sexo = resp[0];
+      this.sexos = resp;
     })
   }
 

@@ -49,16 +49,16 @@ public class UsuarioResource {
 		return new ResponseEntity<List<Usuario>>(usuarios, HttpStatus.OK);
 	}
 
-	@PostMapping("buscaLista/byIdPessoa")
+	@PostMapping("buscaLista/byIdFuncionario")
 	@CrossOrigin(origins = "*")
-	@ApiOperation(value = "Busca lista de usuários por id da pessoa cadastradas.")
+	@ApiOperation(value = "Usuário por id do funcionário cadastrada.")
 	@Produces(MediaType.APPLICATION_JSON)
-	public ResponseEntity<List<Usuario>> buscaListaUsuarioByIdPessoa(@RequestBody UsuarioVO vo) {
-		List<Usuario> usuarios = repository.findUsuarioByIdPessoa(vo.getIdPessoa());
-		if (usuarios.isEmpty()) {
-			return new ResponseEntity<List<Usuario>>(HttpStatus.NO_CONTENT);
+	public ResponseEntity<Usuario> buscaListaUsuarioByIdFuncionario(@RequestBody UsuarioVO vo) {
+		Usuario usuario = repository.findUsuarioByIdFuncionario(vo.getIdFuncionario()).orElse(null);
+		if (Objects.isNull(usuario)) {
+			return new ResponseEntity<Usuario>(HttpStatus.NO_CONTENT);
 		}
-		return new ResponseEntity<List<Usuario>>(usuarios, HttpStatus.OK);
+		return new ResponseEntity<Usuario>(usuario, HttpStatus.OK);
 	}
 
 	@PostMapping("buscaLista/byLogin")

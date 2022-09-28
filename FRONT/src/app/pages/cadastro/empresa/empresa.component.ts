@@ -65,11 +65,6 @@ export class EmpresaComponent implements OnInit {
     this.data.cnpj = '';
   }
 
-  navigate(): void {
-    this.router.navigate(['/cadastro/empresa'])
-  }
-
-
   edit(id: any) {
     this.empresaService.getEmpresa(id).subscribe(resp => {
       this.data = resp[0]

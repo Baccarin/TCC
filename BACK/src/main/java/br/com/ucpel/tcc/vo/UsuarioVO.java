@@ -12,7 +12,7 @@ import lombok.NoArgsConstructor;
 public class UsuarioVO extends BuscaGenericaVO{
 
 	private Long idUsuario;
-	private Long idPessoa;
+	private Long idFuncionario;
 	private String login;
 	private String senha;
 	private Calendar dataCadastro;

@@ -15,15 +15,15 @@
           <div class="card-body">
             <h5 class="card-title">Novo Funcinário</h5>
 
-            <form (ngSubmit)="teste()">
+            <form (ngSubmit)="onSubmit()">
               <div class="row gy-4">
 
                 <div class="form-group col-md-6">
-                <label for="name">Usuário</label>
-                <select class="form-select" (change)="observaUsuario($event)"  >
-                    <option *ngFor="let usuario of usuarios" [value]="data.idUsuario">{{usuario.pessoa.nome}}</option>
-                </select>
-              </div>
+                  <label for="name">Pessoa</label>
+                  <select class="form-select" (change)="observaPessoa($event)"  >
+                      <option *ngFor="let pessoa of pessoas" [value]="pessoa.id">{{pessoa.nome}}</option>
+                  </select>
+                </div>
 
               <div class="form-group col-md-6">
                 <label for="name">Empresa</label>
@@ -69,7 +69,7 @@
               <table class="table">
                 <thead>
                   <tr>
-                    <th scope="col">Funcionário</th>
+                    <th scope="col">Pessoa</th>
                     <th scope="col">Empresa</th>
                   </tr>
                 </thead>
@@ -77,11 +77,11 @@
                 <tbody>
                   <tr *ngFor="let funcionario of funcionarios | filter:filter; let i = index">
 
-                    <th scope="row">{{funcionario.usuario.pessoa.nome}}</th>
+                    <th scope="row">{{funcionario.pessoa.nome}}</th>
                     <td>{{funcionario.empresa.nome}}</td>
                     <td>
 
-                      <a class="edit" title="Edit" href="javascript:void(0)" (click)="edit(funcionario.id)"><i
+                      <a class="edit" title="Edit" href="javascript:void(0)" (click)="openModal(funcionario.id)"><i
                           class="bi bi-pencil-square"></i></a>
                       &nbsp;&nbsp;
                       
@@ -124,14 +124,14 @@
 
               <form (ngSubmit)="updateFuncionario(data)">
 
-                <div class="form-group col-md-6">
-                  <label for="name">Usuário</label>
-                  <select class="form-select" (change)="observaUsuario($event)"  >
-                      <option *ngFor="let usuario of usuarios" [value]="data.idUsuario">{{usuario.pessoa.nome}}</option>
+                <div class="form-group col-md-12">
+                  <label for="name">Pessoa</label>
+                  <select class="form-select" (change)="observaPessoa($event)"  >
+                      <option *ngFor="let pessoa of pessoas" [value]="pessoa.id">{{pessoa.nome}}</option>
                   </select>
                 </div>
   
-                <div class="form-group col-md-6">
+                <div class="form-group col-md-12">
                   <label for="name">Empresa</label>
                   <select class="form-select" (change)="observaEmpresa($event)" >
                       <option *ngFor="let empresa of empresas" [value]="empresa.id">{{empresa.nome}}</option>

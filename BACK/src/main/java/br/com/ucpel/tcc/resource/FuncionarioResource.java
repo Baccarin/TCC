@@ -46,12 +46,12 @@ public class FuncionarioResource {
 		return new ResponseEntity<List<Funcionario>>(funcionarios, HttpStatus.OK);
 	}
 	
-	@PostMapping("buscaLista/byIdUsuario")
+	@PostMapping("buscaLista/byIdPessoa")
 	@CrossOrigin(origins = "*")
-	@ApiOperation(value = "Busca lista de funcionários por usuário cadastradas.")
+	@ApiOperation(value = "Busca lista de funcionários por pessoa cadastradas.")
 	@Produces(MediaType.APPLICATION_JSON)
-	public ResponseEntity<List<Funcionario>> buscaListaFuncionarioByIdUsuario(@RequestBody FuncionarioVO vo) {
-		List<Funcionario> funcionarios = repository.findFuncionarioByIdUsuario(vo.getIdUsuario());
+	public ResponseEntity<List<Funcionario>> buscaListaFuncionarioByIdPessoa(@RequestBody FuncionarioVO vo) {
+		List<Funcionario> funcionarios = repository.findFuncionarioByIdPessoa(vo.getIdPessoa());
 		if (funcionarios.isEmpty()) {
 			return new ResponseEntity<List<Funcionario>>(HttpStatus.NO_CONTENT);
 		}
@@ -63,12 +63,25 @@ public class FuncionarioResource {
 	@CrossOrigin(origins = "*")
 	@ApiOperation(value = "Busca lista de funcionarios por texto genérico.")
 	@Produces(MediaType.APPLICATION_JSON)
-	public ResponseEntity<List<Funcionario>> buscaListaFuncionarioByTextoGenerico(@RequestBody EmpresaVO vo) {
+	public ResponseEntity<List<Funcionario>> buscaListaFuncionarioByTextoGenerico(@RequestBody FuncionarioVO vo) {
 		List<Funcionario> funcionarios = repository.findFuncionarioTextoGenerico(vo.getTexto());
 		if (funcionarios.isEmpty()) {
 			return new ResponseEntity<List<Funcionario>>(HttpStatus.NO_CONTENT);
 		}
 		return new ResponseEntity<List<Funcionario>>(funcionarios, HttpStatus.OK);
+	}
+	
+	
+	@PostMapping("buscaById")
+	@CrossOrigin(origins = "*")
+	@ApiOperation(value = "Busca funcionario pelo id.")
+	@Produces(MediaType.APPLICATION_JSON)
+	public ResponseEntity<Funcionario> buscaFuncionarioById(@RequestBody FuncionarioVO vo) {
+		Funcionario funcionario = repository.findById(vo.getId()).orElse(null);
+		if (Objects.isNull(funcionario)) {
+			return new ResponseEntity<Funcionario>(HttpStatus.NO_CONTENT);
+		}
+		return new ResponseEntity<Funcionario>(funcionario, HttpStatus.OK);
 	}
 
 

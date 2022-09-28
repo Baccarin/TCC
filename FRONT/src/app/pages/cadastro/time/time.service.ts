@@ -99,4 +99,27 @@ export class TimeService {
         catchError(async (error) => this.errorHandler(error))
       );
   }
+
+  getTime(data: any){
+
+    var postData = {
+      idTime: data
+    };
+
+    this.cabecalho.Authorization = sessionStorage.getItem('token')
+    return this.http.post(`${this.baseUrl}/time/buscaById`, postData,{headers: this.cabecalho}).pipe(
+        map((response) => response),
+        catchError(async (error) => this.errorHandler(error))
+      );
+  }
+
+  atualizarTime(data:any){
+    this.cabecalho.Authorization = sessionStorage.getItem('token')
+    return this.http.post(`${this.baseUrl}/time/atualizar`, data,{headers: this.cabecalho})
+    .pipe(
+      map((response) => { 
+        return response
+      }),catchError((error) => this.errorHandler(error))
+    )
+  }
 }

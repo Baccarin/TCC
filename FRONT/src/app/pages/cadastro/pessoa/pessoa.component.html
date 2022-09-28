@@ -18,25 +18,31 @@
             <form (ngSubmit)="onSubmit(data)">
               <div class="row gy-4">
 
-                <div class="form-group col-md-6">
+                <div class="form-group col-md-5">
                   <label for="name">Nome</label>
                   <input type="nome" name="nome" [(ngModel)]="data.nome" class="form-control" 
                     aria-describedby="nome" required minlength="4" #nome="ngModel">
 
                 </div>
                 
-                <div class="form-group col-md-6">
+                <div class="form-group col-md-5">
                   <label for="email">E-mail</label>
                   <input type="email" name="email"  [(ngModel)]="data.email" class="form-control" 
                     aria-describedby="email" required minlength="4" #nome="ngModel">
                 </div>
 
-                <div class="form-group col-md-3">
+                <div class="form-group col-md-5">
+                  <label for="name">Sexo</label>
+                  <select class="form-select" (change)="observaSexo($event)"  >
+                      <option *ngFor="let sexo of sexos" [value]="sexo">{{sexo}}</option>
+                  </select>
+                </div>
+
+                <div class="form-group col-md-5">
                   <label for="dataNascimento">Data de nascimento</label>
                   <input type="date" name="dataNascimento" class="form-control" [(ngModel)]="data.dataNascimento"
                     aria-describedby="dataNascimento"  id="dataNascimento"  placeholder="dd/mm/yyyy">
                 </div>
-            
 
               </div>
               <br>
@@ -83,7 +89,7 @@
                   <td>{{pessoa.dataNascimento  | date: 'dd/MM/yyyy'}}</td>
                   <td>
 
-                    <a class="edit" title="Edit" href="javascript:void(0)" (click)="edit(pessoa.id)"><i
+                    <a class="edit" title="Edit" href="javascript:void(0)" (click)="openModal(pessoa.id)"><i
                         class="bi bi-pencil-square"></i></a>
                     &nbsp;&nbsp;
                     
@@ -97,22 +103,62 @@
             </table>
           </div>
 
-
           </div >
-
-          
-          <br>
-          
-
-
-
-
         </div>
 
       </div>
-
-
     </div>
   </section>
 
 </main>
+
+
+<!-- Modal -->
+<div class="modal fade" id="modalPessoa" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+          <div class="modal-header">
+              <h5 class="card-title">Atualiza pessoa</h5>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+
+              <form (ngSubmit)="updatePessoa(data)">
+
+                <div class="form-group col-md-12">
+                  <label for="name">Nome</label>
+                  <input type="nome" name="nome" [(ngModel)]="data.nome" class="form-control" 
+                    aria-describedby="nome" required minlength="4" #nome="ngModel">
+
+                </div>
+                
+                <div class="form-group col-md-12">
+                  <label for="email">E-mail</label>
+                  <input type="email" name="email"  [(ngModel)]="data.email" class="form-control" 
+                    aria-describedby="email" required minlength="4" #nome="ngModel">
+                </div>
+
+                <div class="form-group col-md-12">
+                  <label for="name">Sexo</label>
+                  <select class="form-select" (change)="observaSexo($event)"  >
+                      <option *ngFor="let sexo of sexos" [value]="sexo">{{sexo}}</option>
+                  </select>
+                </div>
+
+                <div class="form-group col-md-12">
+                  <label for="dataNascimento">Data de nascimento</label>
+                  <input type="date" name="dataNascimento" class="form-control" [(ngModel)]="data.dataNascimento"
+                    aria-describedby="dataNascimento"  id="dataNascimento"  placeholder="dd/mm/yyyy">
+                </div>
+          
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                  <button type="submit" class="btn btn-primary">Atualizar</button>
+              </div>
+
+              </form>
+
+          </div>
+      </div>
+  </div>
+</div>

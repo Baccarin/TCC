@@ -82,16 +82,28 @@ public class TimeResource {
 		return new ResponseEntity<List<Time>>(times, HttpStatus.OK);
 	}
 	
+	@PostMapping("buscaById")
+	@CrossOrigin(origins = "*")
+	@ApiOperation(value = "Busca time pelo id.")
+	@Produces(MediaType.APPLICATION_JSON)
+	public ResponseEntity<Time> buscaTimeById(@RequestBody TimeVO vo) {
+		Time time = repository.findById(vo.getIdTime()).orElse(null);
+		if (Objects.isNull(time)) {
+			return new ResponseEntity<Time>(HttpStatus.NO_CONTENT);
+		}
+		return new ResponseEntity<Time>(time, HttpStatus.OK);
+	}
+	
 	@PostMapping("salvar")
 	@CrossOrigin(origins = "*")
 	@ApiOperation(value = "Inserir novo time.")
 	@Produces(MediaType.APPLICATION_JSON)
 	public ResponseEntity<Time> inserirNovoTime(@RequestBody TimeVO vo) {
-		Time pessoa = service.salvarTime(vo);
-		if (Objects.isNull(pessoa)) {
+		Time time = service.salvarTime(vo);
+		if (Objects.isNull(time)) {
 			return new ResponseEntity<Time>(HttpStatus.NO_CONTENT);
 		}
-		return new ResponseEntity<Time>(pessoa, HttpStatus.OK);
+		return new ResponseEntity<Time>(time, HttpStatus.OK);
 	}
 
 	@PostMapping("deletar")

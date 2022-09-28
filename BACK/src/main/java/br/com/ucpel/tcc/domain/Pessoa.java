@@ -37,7 +37,7 @@ public class Pessoa {
 	
 	@Enumerated(EnumType.STRING)
 	@Column(name = "sexo", nullable = false, updatable = true)
-	private Sexo sexo;
+	private Sexo sexo;	
 	
 	@Temporal(TemporalType.TIMESTAMP)
 	@Column(name = "data_nascimento", nullable = true, updatable = true)

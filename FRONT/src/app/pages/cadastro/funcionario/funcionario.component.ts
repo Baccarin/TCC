@@ -2,6 +2,7 @@ import { Component, OnInit  } from '@angular/core';
 import { FuncionarioService } from './funcionario.service';
 import { Router } from '@angular/router';
 import Swal from 'sweetalert2';
+import { THIS_EXPR } from '@angular/compiler/src/output/output_ast';
 
 declare var window: any;
 
@@ -16,7 +17,8 @@ export class FuncionarioComponent implements OnInit {
   tempoNotificacao = 2500;
 
   data = {
-    idUsuario: '',
+    id: '',
+    idPessoa: '',
     idEmpresa: ''
   }
 
@@ -24,15 +26,12 @@ export class FuncionarioComponent implements OnInit {
   empresas:any;
   filter: any;
 
-  usuarios: any;
-
+  pessoas: any;
   pesquisa: any;
-
   formModal: any;
 
   constructor(
-    private funcionarioService: FuncionarioService,
-    private router: Router) { }
+    private funcionarioService: FuncionarioService) { }
 
 
   init(){
@@ -41,7 +40,7 @@ export class FuncionarioComponent implements OnInit {
     })
 
     this.getAllEmpresas();
-    this.getAllUsuarios();
+    this.getAllPessoas();
 
   }
 
@@ -53,8 +52,8 @@ export class FuncionarioComponent implements OnInit {
   }
 
 
-  onSubmit(data: any) {
-    this.funcionarioService.register(data).subscribe(resp => {
+  onSubmit() {
+    this.funcionarioService.register(this.data).subscribe(resp => {
       Swal.fire({
         position: 'center',
         icon: 'success',
@@ -62,27 +61,45 @@ export class FuncionarioComponent implements OnInit {
         showConfirmButton: false,
         timer: this.tempoNotificacao
       })
-      this.init()
-    })
+      this.init();
+      this.limpaCampos();
+   })
   }
 
   limpaCampos(){
-    this.data.idUsuario = '';
+    this.data.idPessoa = '';
     this.data.idEmpresa = '';
   }
 
 
   updateFuncionario(data: any) {
 
-  }
+    var postData = {
+      id: data.id,
+      idPessoa: data.idPessoa,
+      idEmpresa: data.idEmpresa
+    };
 
-  edit(data: any){
-    
+    this.funcionarioService.atualizarFuncionario(postData).subscribe(resp => {
+      Swal.fire({
+        position: 'center',
+        icon: 'success',
+        title: 'Registro atualizado com sucesso',
+        showConfirmButton: false,
+        timer: this.tempoNotificacao
+      })
+      this.formModal.hide();
+      this.init();
+      this.limpaCampos();
+    })
   }
 
   openModal(id:any) {
     this.funcionarioService.getFuncionario(id).subscribe(resp => {
-      this.data = resp
+      console.log(resp)
+      this.data.id = id;
+      this.data.idPessoa = resp.pessoa.id;
+      this.data.idEmpresa = resp.empresa.id;
     })
     this.formModal.show();
   }
@@ -106,27 +123,12 @@ export class FuncionarioComponent implements OnInit {
     })
   }
 
-
-  teste(){
-    this.funcionarioService.register(this.data).subscribe(resp => {
-      Swal.fire({
-        position: 'center',
-        icon: 'success',
-        title: 'Funcionário salvo com sucesso',
-        showConfirmButton: false,
-        timer: this.tempoNotificacao
-      })
-      this.init();
-   })
-  }
-
-  
   observaEmpresa(event: any){
     this.data.idEmpresa = event.target.value;
   }
   
-  observaUsuario(event:any){
-    this.data.idUsuario = event.target.value;
+  observaPessoa(event:any){
+    this.data.idPessoa = event.target.value;
   }
 
   getAllEmpresas(){
@@ -136,10 +138,10 @@ export class FuncionarioComponent implements OnInit {
     })
   }
 
-  getAllUsuarios(){
-    this.funcionarioService.getAllUsuarios().subscribe(resp => {
-      this.data.idUsuario = resp[0].id
-      this.usuarios = resp;
+  getAllPessoas(){
+    this.funcionarioService.getAllPessoas().subscribe(resp => {
+      this.data.idPessoa = resp[0].id
+      this.pessoas = resp;
     })
   }
 

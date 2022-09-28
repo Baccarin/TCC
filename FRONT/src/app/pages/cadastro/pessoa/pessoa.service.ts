@@ -57,6 +57,16 @@ export class PessoaService {
     );
   }
 
+  atualizarPessoa(data:any){
+    this.cabecalho.Authorization = sessionStorage.getItem('token')
+    return this.http.post(`${this.baseUrl}/pessoa/atualizar`, data,{headers: this.cabecalho})
+    .pipe(
+      map((response) => { 
+        return response
+      }),catchError((error) => this.errorHandler(error))
+    )
+  }
+
 
   errorHandler(error: any): any {
     if (error.status == 200){
@@ -69,13 +79,12 @@ export class PessoaService {
       })
     } else {
       Swal.fire({
-        title: 'Erro ao salvar cadastro',
+        title: 'Operação não pode ser realizada.',
         text: error.error,
         icon: 'error',
         confirmButtonText: 'OK',
         confirmButtonColor: 'red',
       })
-      sessionStorage.setItem('token' , error.error.text);
     }
     
   }
@@ -92,5 +101,25 @@ export class PessoaService {
       );
   }
 
+  getSexos(){
+    this.cabecalho.Authorization = sessionStorage.getItem('token')
+    return this.http.get(`${this.baseUrl}/pessoa/buscaLista/sexos`,{headers: this.cabecalho}).pipe(
+        map((response) => response),
+        catchError(async (error) => this.errorHandler(error))
+      );
+  }
+
+  getPessoa(data: any){
+
+    var postData = {
+      idPessoa: data
+    };
+
+    this.cabecalho.Authorization = sessionStorage.getItem('token')
+    return this.http.post(`${this.baseUrl}/pessoa/buscaById`, postData,{headers: this.cabecalho}).pipe(
+        map((response) => response),
+        catchError(async (error) => this.errorHandler(error))
+      );
+  }
 
 }

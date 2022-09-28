@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import br.com.ucpel.tcc.domain.Empresa;
 import br.com.ucpel.tcc.domain.Pessoa;
+import br.com.ucpel.tcc.enums.Sexo;
 import br.com.ucpel.tcc.exception.RegistroNaoEncontradoException;
 import br.com.ucpel.tcc.function.PessoaFunction;
 import br.com.ucpel.tcc.repository.api.PessoaRepository;
@@ -45,6 +46,19 @@ public class PessoaResource {
 			return new ResponseEntity<List<Pessoa>>(HttpStatus.NO_CONTENT);
 		}
 		return new ResponseEntity<List<Pessoa>>(pessoas, HttpStatus.OK);
+	}
+	
+	
+	@PostMapping("buscaById")
+	@CrossOrigin(origins = "*")
+	@ApiOperation(value = "Busca pessoa pelo id cadastrado.")
+	@Produces(MediaType.APPLICATION_JSON)
+	public ResponseEntity<Pessoa> buscaPessoaById(@RequestBody PessoaVO vo) {
+		Pessoa pessoa = repository.findById(vo.getIdPessoa()).orElse(null);
+		if (Objects.isNull(pessoa)) {
+			return new ResponseEntity<Pessoa>(HttpStatus.NO_CONTENT);
+		}
+		return new ResponseEntity<Pessoa>(pessoa, HttpStatus.OK);
 	}
 
 	@PostMapping("buscaLista/byNome")
@@ -105,6 +119,14 @@ public class PessoaResource {
 			return new ResponseEntity<List<Pessoa>>(HttpStatus.NO_CONTENT);
 		}
 		return new ResponseEntity<List<Pessoa>>(pessoas, HttpStatus.OK);
+	}
+	
+	@GetMapping("buscaLista/sexos")
+	@CrossOrigin(origins = "*")
+	@ApiOperation(value = "Busca lista de sexos cadastradas.")
+	@Produces(MediaType.APPLICATION_JSON)
+	public ResponseEntity<List<Sexo>> buscaListaSexos() {
+		return new ResponseEntity<List<Sexo>>(Sexo.getListaSexos(), HttpStatus.OK);
 	}
 
 	

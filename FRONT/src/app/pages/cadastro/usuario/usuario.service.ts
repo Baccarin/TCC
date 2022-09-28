@@ -43,9 +43,9 @@ export class UsuarioService {
       );
   }
 
-  getAllPessoas(){
+  getAllFuncionarios(){
     this.cabecalho.Authorization = sessionStorage.getItem('token')
-    return this.http.get<any>(`${this.baseUrl}/pessoa/buscaLista`, {headers: this.cabecalho})
+    return this.http.get<any>(`${this.baseUrl}/funcionario/buscaLista`, {headers: this.cabecalho})
       .pipe(
         map((response) => response),
         catchError(async (error) => this.errorHandler(error))

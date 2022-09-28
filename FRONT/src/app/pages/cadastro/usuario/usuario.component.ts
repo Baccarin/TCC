@@ -18,12 +18,13 @@ export class UsuarioComponent implements OnInit {
   tempoNotificacao = 2500;
 
   data:any = {
-    idPessoa: '',
+    id: '',
+    idFuncionario: '',
     login: '',
     senha: ''
   }
 
-  pessoas: any;
+  funcionarios: any;
   filter: any;
   usuarios: any;
 
@@ -33,8 +34,7 @@ export class UsuarioComponent implements OnInit {
 
 
   constructor(
-    private usuarioService: UsuarioService,
-    private router: Router) { }
+    private usuarioService: UsuarioService) { }
 
   ngOnInit(): void {
     this.formModal = new window.bootstrap.Modal(
@@ -48,7 +48,7 @@ export class UsuarioComponent implements OnInit {
       this.usuarios = response;
     })
 
-    this.getAllPessoas();
+    this.getAllFuncionarios();
     this.limpaCampos();
   }
 
@@ -142,11 +142,15 @@ export class UsuarioComponent implements OnInit {
     })
   }
 
-  getAllPessoas(){
-    this.usuarioService.getAllPessoas().subscribe(resp => {
-      this.data.idPessoa = resp[0].id;
-      this.pessoas = resp;
+  getAllFuncionarios(){
+    this.usuarioService.getAllFuncionarios().subscribe(resp => {
+      this.data.idFuncionario = resp[0].id;
+      this.funcionarios = resp;
     })
+  }
+
+  observaFuncionario(event: any){
+    this.data.idFuncionario = event.target.value;
   }
 
 }

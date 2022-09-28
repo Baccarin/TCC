@@ -1,6 +1,7 @@
 package br.com.ucpel.tcc.service.impl;
 
 import java.util.List;
+import java.util.Optional;
 
 import javax.transaction.Transactional;
 
@@ -13,6 +14,7 @@ import br.com.ucpel.tcc.exception.ExclusaoInvalidaRegistrosDependentesException;
 import br.com.ucpel.tcc.exception.RegistroNaoEncontradoException;
 import br.com.ucpel.tcc.function.FuncionarioFunction;
 import br.com.ucpel.tcc.repository.api.FuncionarioRepository;
+import br.com.ucpel.tcc.repository.api.PessoaRepository;
 import br.com.ucpel.tcc.repository.api.TimeRepository;
 import br.com.ucpel.tcc.repository.api.UsuarioRepository;
 import br.com.ucpel.tcc.service.api.FuncionarioService;
@@ -25,14 +27,12 @@ import lombok.RequiredArgsConstructor;
 public class FuncionarioServiceImpl implements FuncionarioService {
 
 	private final FuncionarioRepository repository;
-	private final UsuarioRepository usuarioRepository;
 	private final TimeRepository timeRepository;
 	
 	private final FuncionarioFunction funcionarioFunction;
 
 
 	@Override
-	// Ao deletar funcionário, inativa seu respectivo usuário;
 	public void deletarFuncionario(FuncionarioVO vo) throws RegistroNaoEncontradoException, ExclusaoInvalidaRegistrosDependentesException {
 		
 		List<Time> times = timeRepository.findTimeByIdLider(vo.getId());
@@ -42,13 +42,6 @@ public class FuncionarioServiceImpl implements FuncionarioService {
 		
 		Funcionario f = repository.findById(vo.getId())
 				.orElseThrow(() -> new RegistroNaoEncontradoException(Funcionario.class, vo.getId()));
-
-		Usuario u = usuarioRepository.findById(f.getUsuario().getId())
-				.orElseThrow(() -> new RegistroNaoEncontradoException(Usuario.class, vo.getIdUsuario()));
-		
-
-		u.setAtivo(false);
-		usuarioRepository.save(u);
 
 		repository.delete(f);
 	}

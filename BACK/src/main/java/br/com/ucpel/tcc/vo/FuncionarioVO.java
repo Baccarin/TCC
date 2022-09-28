@@ -10,6 +10,6 @@ import lombok.NoArgsConstructor;
 public class FuncionarioVO extends BuscaGenericaVO{
 
 	private Long id;
-	private Long idUsuario;
+	private Long idPessoa;
 	private Long idEmpresa;
 }

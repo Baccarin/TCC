@@ -65,9 +65,9 @@ export class FuncionarioService {
       );
   }
 
-  getAllUsuarios(){
+  getAllPessoas(){
     this.cabecalho.Authorization = sessionStorage.getItem('token')
-    return this.http.get<any>(`${this.baseUrl}/usuario/buscaLista`, {headers: this.cabecalho})
+    return this.http.get<any>(`${this.baseUrl}/pessoa/buscaLista`, {headers: this.cabecalho})
       .pipe(
         map((response) => response),
         catchError(async (error) => this.errorHandler(error))
@@ -97,8 +97,12 @@ export class FuncionarioService {
 
   getFuncionario(data: any){
 
+    var postData = {
+      id: data
+    };
+
     this.cabecalho.Authorization = sessionStorage.getItem('token')
-    return this.http.post(`${this.baseUrl}/funcionario/buscaById`, data,{headers: this.cabecalho}).pipe(
+    return this.http.post(`${this.baseUrl}/funcionario/buscaById`, postData,{headers: this.cabecalho}).pipe(
         map((response) => response),
         catchError(async (error) => this.errorHandler(error))
       );
@@ -114,5 +118,15 @@ export class FuncionarioService {
         map((response) => response),
         catchError(async (error) => this.errorHandler(error))
       );
+  }
+
+  atualizarFuncionario(data:any){
+    this.cabecalho.Authorization = sessionStorage.getItem('token')
+    return this.http.post(`${this.baseUrl}/funcionario/atualizar`, data,{headers: this.cabecalho})
+    .pipe(
+      map((response) => { 
+        return response
+      }),catchError((error) => this.errorHandler(error))
+    )
   }
 }

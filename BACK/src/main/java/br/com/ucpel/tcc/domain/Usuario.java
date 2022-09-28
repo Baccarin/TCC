@@ -29,13 +29,13 @@ public class Usuario {
 	private long id;
 
 	@OneToOne
-	@JoinColumn(name = "id_pessoa", nullable = true, updatable = false)
-	private Pessoa pessoa;
+	@JoinColumn(name = "id_funcionario", nullable = true, updatable = false)
+	private Funcionario funcionario;
 
-	@Column(name = "login", columnDefinition = "TEXT", nullable = false, updatable = false, unique = true)
+	@Column(name = "login", columnDefinition = "TEXT", nullable = false, updatable = true, unique = true)
 	private String login;
 
-	@Column(name = "senha", columnDefinition = "TEXT", nullable = false, updatable = true)
+	@Column(name = "senha", columnDefinition = "TEXT", nullable = true, updatable = true)
 	private String senha;
 
 	@Column(name = "ativo", columnDefinition = "boolean default true", nullable = false, updatable = true)
@@ -50,8 +50,8 @@ public class Usuario {
 		this.ativo = true;
 	}
 	
-	public Usuario (Pessoa pessoa, String login, String senha, Calendar dataCadastro) {
-		this.pessoa = pessoa;
+	public Usuario (Funcionario funcionario, String login, String senha, Calendar dataCadastro) {
+		this.funcionario = funcionario;
 		this.login = login;
 		this.senha = senha;
 		this.dataCadastro = dataCadastro;
