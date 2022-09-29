@@ -1,10 +1,8 @@
 import { Component, OnInit  } from '@angular/core';
 import { ProjetoService } from './projeto.service';
-import { Router } from '@angular/router';
 import Swal from 'sweetalert2';
-import { FormBuilder, FormGroup } from '@angular/forms';
 
-
+declare var window: any;
 
 @Component({
   selector: 'app-register',
@@ -21,13 +19,18 @@ export class ProjetoComponent implements OnInit {
     dataFim: '',
     etapa: 'INICIO',
     metodologia: 'XP',
-    ativo: true
+    ativo: true,
+    idTime: ''
   }
 
+  etapas: any;
   projetos:any;
+  times: any;
+
   filter: any;
 
   pesquisa: any;
+  formModal: any;
 
   constructor(
     private projetoService: ProjetoService) { }
@@ -37,9 +40,17 @@ export class ProjetoComponent implements OnInit {
   }
 
   init(){
+    this.limpaCampos();
+    this.formModal = new window.bootstrap.Modal(
+      document.getElementById('modalProjeto'),
+    );
+
     this.projetoService.getAll().subscribe(response =>{
       this.projetos = response;
     })
+
+    this.getAllEtapas();
+    this.getAllTimes();
   }
 
   limpaCampos(){
@@ -48,9 +59,21 @@ export class ProjetoComponent implements OnInit {
     this.data.dataFim = '';
   }
 
-  edit(id: any) {
-
+  openModal(id: any) {
+    this.projetoService.getProjeto(id).subscribe(resp => {
+      this.data = resp
+    })
+    this.formModal.show();
   }
+
+  observaEtapa(event:any){
+    this.data.etapa = event.target.value;
+  }
+
+  observaTime(event:any){
+    this.data.idTime = event.target.value;
+  }
+
 
   delete(data: any) {
     Swal.fire({
@@ -114,6 +137,34 @@ export class ProjetoComponent implements OnInit {
 
   }
 
+  updateProjeto(data:any){
+    
+    console.log(data)
+
+    var postData = {
+      idProjeto: data.id,
+      nome: data.nome,
+      idTime: data.time,
+      dataInicio: data.dataInicio,
+      dataFim: data.dataFim,
+      etapa: data.etapa,
+      metodologia: data.metodologia
+    };
+
+
+    this.projetoService.atualizarProjeto(postData).subscribe(resp => {
+      Swal.fire({
+        position: 'center',
+        icon: 'success',
+        title: 'Registro atualizado com sucesso',
+        showConfirmButton: false,
+        timer: this.tempoNotificacao
+      })
+      this.formModal.hide();
+      this.init();
+      this.limpaCampos();
+    })
+  }
 
 
   pesquisar(pesquisa:any){
@@ -131,6 +182,21 @@ export class ProjetoComponent implements OnInit {
     }
     this.projetoService.getProjetoFilter(this.pesquisa).subscribe(resp => {
       this.projetos = resp
+    })
+  }
+
+
+  getAllEtapas(){
+    this.projetoService.getAllEtapas().subscribe(resp => {
+      this.data.etapa = resp[0].id;
+      this.etapas = resp;
+    })
+  }
+
+  getAllTimes(){
+    this.projetoService.getAllTimes().subscribe(resp => {
+      this.data.idTime = resp[0].id;
+      this.times = resp;
     })
   }
 

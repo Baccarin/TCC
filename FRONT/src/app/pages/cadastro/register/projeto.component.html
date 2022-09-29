@@ -22,7 +22,13 @@
                   <label for="name">Nome</label>
                   <input type="nome" name="nome"  [(ngModel)]="data.nome" class="form-control" 
                     aria-describedby="nome" required minlength="4" #nome="ngModel">
+                </div>
 
+                <div class="form-group col-md-6">
+                  <label for="etapa">Time</label>
+                  <select class="form-select" (change)="observaTime($event)" >
+                      <option *ngFor="let time of times" [value]="time.nome">{{time.nome}}</option>
+                  </select>
                 </div>
                 
                 <div class="form-group col-md-3">
@@ -68,6 +74,7 @@
                 <thead>
                   <tr>
                     <th scope="col">Nome</th>
+                    <th scope="col">Time</th>
                     <th scope="col">Data início</th>
                     <th scope="col">Etapa</th>
                     <th scope="col">Metodologia aplicada</th>
@@ -80,6 +87,7 @@
                   <tr *ngFor="let projeto of projetos | filter:filter; let i = index">
   
                     <th scope="row">{{projeto.nome}}</th>
+                    <td>{{projeto.time == null ? "Sem time" : projeto.time.nome}}</td>
                     <td>{{projeto.dataInicio  | date: 'dd/MM/yyyy'}}</td>
                     <td *ngIf="projeto.etapa=='INICIO'" style="background-color: rgb(216, 34, 21); text-align: center">{{projeto.etapa}}</td>
                     <td *ngIf="projeto.etapa=='REQUISITOS'" style="background-color: rgba(255, 72, 0, 0.856);">{{projeto.etapa}}</td>
@@ -93,7 +101,7 @@
                     <td >{{projeto.ativo ? 'Sim' : 'Não' }}</td>
                     <td>
 
-                      <a *ngIf="projeto.etapa!='FIM'" class="edit" title="Edit" href="javascript:void(0)" (click)="edit(projeto.id)"><i
+                      <a *ngIf="projeto.etapa!='FIM'" class="edit" title="Edit" href="javascript:void(0)" (click)="openModal(projeto.id)"><i
                           class="bi bi-pencil-square"></i></a>
                       &nbsp;&nbsp;
                       
@@ -120,3 +128,60 @@
   </section>
 
 </main>
+
+
+
+
+
+<!-- Modal -->
+<div class="modal fade" id="modalProjeto" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+          <div class="modal-header">
+              <h5 class="card-title">Atualiza projeto</h5>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+
+              <form (ngSubmit)="updateProjeto(data)">
+
+                <div class="row gy-4">
+
+                  <div class="form-group col-md-12">
+                    <label for="name">Nome</label>
+                    <input type="nome" name="nome"  [(ngModel)]="data.nome" class="form-control" 
+                      aria-describedby="nome" required minlength="4" #nome="ngModel">
+                  </div>
+
+                  <div class="form-group col-md-12">
+                    <label for="etapa">Etapa</label>
+                    <select class="form-select" (change)="observaEtapa($event)" >
+                        <option *ngFor="let etapa of etapas" [value]="etapa">{{etapa}}</option>
+                    </select>
+                  </div>
+                  
+                  <div class="form-group col-md-6">
+                    <label for="dataInicio">Data de início</label>
+                    <input type="date" name="dataInicio" class="form-control" [(ngModel)]="data.dataInicio"
+                      aria-describedby="dataInicio"  id="dataInicio"  placeholder="dd/mm/yyyy" >
+                  </div>
+  
+                  <div class="form-group col-md-6">
+                    <label for="dataFim">Data de entrega</label>
+                    <input type="date" name="dataFim" class="form-control" [(ngModel)]="data.dataFim"
+                      aria-describedby="dataFim"  id="dataFim"  placeholder="dd/mm/yyyy">
+                  </div>
+  
+                </div>
+          
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                  <button type="submit" class="btn btn-primary">Atualizar</button>
+              </div>
+
+              </form>
+
+          </div>
+      </div>
+  </div>
+</div>

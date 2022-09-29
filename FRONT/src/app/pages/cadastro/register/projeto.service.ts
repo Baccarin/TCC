@@ -99,4 +99,46 @@ export class ProjetoService {
         catchError(async (error) => this.errorHandler(error))
       );
   }
+
+  getProjeto(data: any){
+
+    var postData = {
+      idProjeto: data
+    };
+
+    this.cabecalho.Authorization = sessionStorage.getItem('token')
+    return this.http.post(`${this.baseUrl}/projeto/buscaById`, postData,{headers: this.cabecalho}).pipe(
+        map((response) => response),
+        catchError(async (error) => this.errorHandler(error))
+      );
+  }
+
+  atualizarProjeto(data:any){
+    this.cabecalho.Authorization = sessionStorage.getItem('token')
+    return this.http.post(`${this.baseUrl}/projeto/atualizar`, data,{headers: this.cabecalho})
+    .pipe(
+      map((response) => { 
+        return response
+      }),catchError((error) => this.errorHandler(error))
+    )
+  }
+
+  getAllEtapas(){
+    this.cabecalho.Authorization = sessionStorage.getItem('token')
+    return this.http.get<any>(`${this.baseUrl}/etapa/buscaLista`, {headers: this.cabecalho})
+      .pipe(
+        map((response) => response),
+        catchError(async (error) => this.errorHandler(error))
+      );
+  }
+
+  getAllTimes(){
+    this.cabecalho.Authorization = sessionStorage.getItem('token')
+    return this.http.get<any>(`${this.baseUrl}/time/buscaLista`, {headers: this.cabecalho})
+      .pipe(
+        map((response) => response),
+        catchError(async (error) => this.errorHandler(error))
+      );
+  }
+
 }

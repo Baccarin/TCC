@@ -109,12 +109,24 @@ public class ProjetoResource {
 	@CrossOrigin(origins = "*")
 	@ApiOperation(value = "Busca lista de projetos por texto genérico.")
 	@Produces(MediaType.APPLICATION_JSON)
-	public ResponseEntity<List<Projeto>> buscaListaProjetosByTextoGenerico(@RequestBody TimeVO vo) {
+	public ResponseEntity<List<Projeto>> buscaListaProjetosByTextoGenerico(@RequestBody ProjetoVO vo) {
 		List<Projeto> projetos = repository.findProjetoByTextoGenerico(vo.getTexto());
 		if (projetos.isEmpty()) {
 			return new ResponseEntity<List<Projeto>>(HttpStatus.NO_CONTENT);
 		}
 		return new ResponseEntity<List<Projeto>>(projetos, HttpStatus.OK);
+	}
+	
+	@PostMapping("buscaById")
+	@CrossOrigin(origins = "*")
+	@ApiOperation(value = "Busca projeto pelo id.")
+	@Produces(MediaType.APPLICATION_JSON)
+	public ResponseEntity<Projeto> buscaProjetoById(@RequestBody ProjetoVO vo) {
+		Projeto projeto = repository.findById(vo.getIdProjeto()).orElse(null);
+		if (Objects.isNull(projeto)) {
+			return new ResponseEntity<Projeto>(HttpStatus.NO_CONTENT);
+		}
+		return new ResponseEntity<Projeto>(projeto, HttpStatus.OK);
 	}
 	
 	@PostMapping("salvar")

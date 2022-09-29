@@ -27,7 +27,6 @@ import lombok.NoArgsConstructor;
 @Data
 @EqualsAndHashCode
 @Entity
-@NoArgsConstructor
 @Table(name = "projeto", schema = "engenhariasoftware", uniqueConstraints = {})
 public class Projeto {
 
@@ -61,5 +60,8 @@ public class Projeto {
 	@Column(name = "ativo",columnDefinition = "boolean default true", nullable = true, updatable = true)	
 	private Boolean ativo;
 	
+	public Projeto() {
+		this.etapa = EtapaProjeto.INICIO;
+	}
 	
 }

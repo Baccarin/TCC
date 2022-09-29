@@ -44,7 +44,7 @@ public class ProjetoFunction implements Converter<ProjetoVO, Projeto> {
 		}
 
 		if (Objects.nonNull(vo.getEtapa())) {
-			projeto.setEtapa(EtapaProjeto.valueOf(vo.getEtapa()));
+			projeto.setEtapa(EtapaProjeto.converteEtapaProjeto(vo.getEtapa()));
 		}
 
 		if (Objects.nonNull(vo.getMetodologia())) {

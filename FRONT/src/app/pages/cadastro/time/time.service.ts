@@ -3,18 +3,16 @@ import { Injectable } from '@angular/core';
 import { catchError, map, Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import Swal from 'sweetalert2';
-import { Router } from '@angular/router';
-
-
 
 @Injectable({
   providedIn: 'root'
 })
+
 export class TimeService {
 
   baseUrl = environment.baseUrl
 
-  constructor(private http: HttpClient, private router : Router) { }
+  constructor(private http: HttpClient) { }
 
 
   cabecalho:any = {
@@ -68,21 +66,20 @@ export class TimeService {
     if (error.status == 200){
       Swal.fire({
         position: 'center',
-        title: 'Cadastro salvo com sucesso',
+        title: 'Operação realizada com sucesso',
         icon: 'success',
         showConfirmButton: false,
         timer: 2000
       })
     } else {
       Swal.fire({
-        title: 'Erro ao salvar cadastro',
-        text: 'Não foi possível salvar o registro.',
+        title: 'Erro ao realizar operação.',
+        text: error.error,
         icon: 'error',
         confirmButtonText: 'OK',
         confirmButtonColor: 'red',
       })
-      sessionStorage.setItem('token' , error.error.text);
-      this.router.navigate(['/'])
+
     }
     
   }

@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import Swal from 'sweetalert2';
 import { TimeService } from './time.service';
-import { Router } from '@angular/router';
 
 declare var window: any;
 
@@ -39,7 +38,7 @@ export class TimeComponent implements OnInit {
 
     this.formModal = new window.bootstrap.Modal(
       document.getElementById('modalTime'),
-      );
+    );
 
     this.timeService.getAll().subscribe(response =>{
       this.times = response;
@@ -91,13 +90,6 @@ export class TimeComponent implements OnInit {
     }).then((result) => {
         if (result.isConfirmed){
         this.timeService.delete(data).subscribe(resp => {
-          Swal.fire({
-            position: 'top-end',
-            icon: 'success',
-            title: 'Exclusão confirmada',
-            showConfirmButton: false,
-            timer: this.tempoNotificacao
-          })
           this.init();
         })
       }
