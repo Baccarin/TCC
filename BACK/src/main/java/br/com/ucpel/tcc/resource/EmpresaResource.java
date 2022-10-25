@@ -3,6 +3,7 @@ package br.com.ucpel.tcc.resource;
 import java.util.List;
 import java.util.Objects;
 
+import javax.validation.Valid;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 
@@ -17,10 +18,8 @@ import org.springframework.web.bind.annotation.RestController;
 
 import br.com.ucpel.tcc.domain.Empresa;
 import br.com.ucpel.tcc.exception.ExclusaoInvalidaRegistrosDependentesException;
-import br.com.ucpel.tcc.exception.RegistroNaoEncontradoException;
 import br.com.ucpel.tcc.repository.api.EmpresaRepository;
 import br.com.ucpel.tcc.service.api.EmpresaService;
-import br.com.ucpel.tcc.vo.EmpresaVO;
 import br.com.ucpel.tcc.vo.EmpresaVO;
 import io.swagger.annotations.ApiOperation;
 import lombok.RequiredArgsConstructor;
@@ -98,7 +97,7 @@ public class EmpresaResource {
 	@CrossOrigin(origins = "*")
 	@ApiOperation(value = "Inserir nova empresa.")
 	@Produces(MediaType.APPLICATION_JSON)
-	public ResponseEntity<Empresa> inserirNovoEmpresa(@RequestBody EmpresaVO vo) {
+	public ResponseEntity<Empresa> inserirNovoEmpresa(@Valid @RequestBody EmpresaVO vo) {
 		Empresa empresa = service.salvarEmpresa(vo);
 		if (Objects.isNull(empresa)) {
 			return new ResponseEntity<Empresa>(HttpStatus.NO_CONTENT);

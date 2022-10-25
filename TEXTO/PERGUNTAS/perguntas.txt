@@ -1,0 +1,39 @@
+SCRUM 
+    REUNIÕES DIARIAS
+    ENTREGAS EM 30 DIAS 
+    TIMES AUTO-ORGANIZADOS
+    PLANEJAMENTO DE SPRINTS
+    TIME 5 - 10
+
+CRYSTAL
+    TRABAHLO COM EXPERT
+    ENTREGAS FREQUENTES
+    CLIENTE SEMPRE ACESSIVEL
+    AMOSTRA DO PROJETO
+        Crystal Clear 1-6  working out of a single workspace on a fixed price, short-term project
+        Crystal Yellow  7-20  teams take feedback from real users and automated testing
+        Crystal Orange 21 to 40 Medium sized projects that last for 1-2 years and there’s a release every 3-4 months.
+        Crystal Orange Web 21 to 40 people. codebase is continuously evolving and a series of initiatives needing coding are dealt with.
+        Crystal Red 40 to 80 members. smaller teams are formed and divided based on the need and a more traditional software development method is followed.
+
+FDD 
+    Build feature list
+    MODELAGEM DO DOMINIO DE OBJETO
+    DESENVOLVIMENTO POR FUNCIONALIDADE
+    VERSÕES REGULARES
+    long-term, complex projects
+    Documentation
+    The smaller, the better, sprint size is 2 to 10 days
+
+XP
+    REFATORAMENTO
+    PROGRAMAÇÃO EM PARES
+    PEQUENAS ENTREGAS
+    DESIGN SIMPLES
+    INTEGRAÇÃO CONTINUA
+    TESTES CONSTANTES
+    PROPRIEDADE COLETIVA
+
+KANBAN
+    TIME AUTOORGANIZADOR
+    DIVISAO CLARA DE ETAPAS

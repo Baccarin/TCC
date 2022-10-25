@@ -28,8 +28,7 @@ export class EmpresaComponent implements OnInit {
 
 
   constructor(
-    private empresaService: EmpresaService,
-    private router: Router) { }
+    private empresaService: EmpresaService) { }
 
 
   init() {
@@ -46,6 +45,19 @@ export class EmpresaComponent implements OnInit {
   }
 
   onSubmit(data: any) {
+    if (data.nome == '' || data.nome == null || data.nome == "undefined" || 
+        data.cnpj == '' || data.cnpj == null || data.cnpj == "undefined"){
+      Swal.fire({
+        position: 'center',
+        icon: 'error',
+        title: 'Atenção!',
+        text: 'É necessário informar ambos os campos para cadastrar. ',
+        showConfirmButton: true,
+        confirmButtonColor:'red'
+      });
+      return;
+    }
+
     this.empresaService.register(data).subscribe(resp => {
       Swal.fire({
         position: 'center',

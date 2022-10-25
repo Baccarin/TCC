@@ -74,6 +74,21 @@ export class UsuarioComponent implements OnInit {
   }
 
   onSubmit(data: any) {
+
+    if (data.idFuncionario == '' || data.idFuncionario == null || data.idFuncionario == "undefined" || 
+    data.login == '' || data.login == null || data.login == "undefined" ||
+    data.senha == '' || data.senha == null || data.senha == "undefined"){
+      Swal.fire({
+        position: 'center',
+        icon: 'error',
+        title: 'Atenção!',
+        text: 'É necessário informar todos os campos para cadastrar. ',
+        showConfirmButton: true,
+        confirmButtonColor:'red'
+      });
+      return;
+    }
+
     this.usuarioService.register(data).subscribe(resp => {
       Swal.fire({
         position: 'center',

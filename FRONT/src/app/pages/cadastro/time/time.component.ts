@@ -56,6 +56,20 @@ export class TimeComponent implements OnInit {
   }
 
   onSubmit(data: any) {
+
+    if (data.nome == '' || data.nome == null || data.nome == "undefined" || 
+        data.idLider == '' || data.idLider == null || data.idLider == "undefined" ){
+      Swal.fire({
+        position: 'center',
+        icon: 'error',
+        title: 'Atenção!',
+        text: 'É necessário informar todos os campos para cadastrar. ',
+        showConfirmButton: true,
+        confirmButtonColor:'red'
+      });
+      return;
+    }
+
     this.timeService.register(data).subscribe(resp => {
       Swal.fire({
         position: 'center',

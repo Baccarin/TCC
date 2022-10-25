@@ -53,6 +53,22 @@ export class FuncionarioComponent implements OnInit {
 
 
   onSubmit() {
+
+
+    if (this.data.idPessoa == '' || this.data.idPessoa == null || this.data.idPessoa == "undefined" || 
+        this.data.idEmpresa == '' || this.data.idEmpresa == null || this.data.idEmpresa == "undefined"){
+      Swal.fire({
+        position: 'center',
+        icon: 'error',
+        title: 'Atenção!',
+        text: 'É necessário informar todos os campos para cadastrar. ',
+        showConfirmButton: true,
+        confirmButtonColor:'red'
+      });
+      return;
+    }
+
+
     this.funcionarioService.register(this.data).subscribe(resp => {
       Swal.fire({
         position: 'center',

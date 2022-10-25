@@ -107,6 +107,21 @@ export class PessoaComponent implements OnInit {
 
   onSubmit(data: any) {
 
+    if (data.nome == '' || data.nome == null || data.nome == "undefined" || 
+        data.email == '' || data.email == null || data.email == "undefined" ||
+        data.sexo == '' || data.sexo == null || data.sexo == "undefined" ||
+        data.dataNascimento == '' || data.dataNascimento == null || data.dataNascimento == "undefined" ){
+      Swal.fire({
+        position: 'center',
+        icon: 'error',
+        title: 'Atenção!',
+        text: 'É necessário informar todos os campos para cadastrar. ',
+        showConfirmButton: true,
+        confirmButtonColor:'red'
+      });
+      return;
+    }
+    
     this.pessoaService.register(data).subscribe(resp => {
       Swal.fire({
         position: 'center',

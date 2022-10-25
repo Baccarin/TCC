@@ -123,6 +123,23 @@ export class ProjetoComponent implements OnInit {
 
   onSubmit(data: any) {
 
+    if (data.nome == '' || data.nome == null || data.nome == "undefined" || 
+        data.dataInicio == '' || data.dataInicio == null || data.dataInicio == "undefined" ||
+        data.dataFim == '' || data.dataFim == null || data.dataFim == "undefined" || 
+        data.metodologia == '' || data.metodologia == null || data.metodologia == "undefined" || 
+        data.ativo == '' || data.ativo == null || data.ativo == "undefined" || 
+        data.idTime == '' || data.idTime == null || data.idTime == "undefined" ){
+      Swal.fire({
+        position: 'center',
+        icon: 'error',
+        title: 'Atenção!',
+        text: 'É necessário informar todos os campos para cadastrar. ',
+        showConfirmButton: true,
+        confirmButtonColor:'red'
+      });
+      return;
+    }
+
     this.projetoService.register(data).subscribe(resp => {
       Swal.fire({
         position: 'center',
