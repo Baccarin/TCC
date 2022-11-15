@@ -1,6 +1,11 @@
 h1 {
     font-family: NewYorkTimes;
 }
+
+.mat-radio-button ~ .mat-radio-button {
+    margin-left: 16px;
+}
+
 .cor{
     color:red;
     font-size:12px;

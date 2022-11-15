@@ -1,6 +1,7 @@
 package br.com.ucpel.tcc.resource;
 
 import java.util.Comparator;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Objects;
 
@@ -20,6 +21,7 @@ import org.springframework.web.bind.annotation.RestController;
 import br.com.ucpel.tcc.domain.Pessoa;
 import br.com.ucpel.tcc.domain.Projeto;
 import br.com.ucpel.tcc.domain.Time;
+import br.com.ucpel.tcc.enums.PerguntasMetodologias;
 import br.com.ucpel.tcc.exception.ProximaEtapaProjetoInvalidaException;
 import br.com.ucpel.tcc.exception.RegistroInativoException;
 import br.com.ucpel.tcc.exception.RegistroNaoEncontradoException;
@@ -177,6 +179,25 @@ public class ProjetoResource {
 			return new ResponseEntity<Projeto>(HttpStatus.NO_CONTENT);
 		}
 		return new ResponseEntity<Projeto>(projeto, HttpStatus.OK);
+	}
+	
+	@GetMapping("buscaListaPerguntasMetodologias")
+	@CrossOrigin(origins = "*")
+	@ApiOperation(value = "Busca lista de projetos cadastrados.")
+	@Produces(MediaType.APPLICATION_JSON)
+	public ResponseEntity<List<PerguntasMetodologias>> buscaListaPerguntasMetodologia() {
+		List<PerguntasMetodologias> perguntas = PerguntasMetodologias.getPerguntasMetodologia();
+		return new ResponseEntity<List<PerguntasMetodologias>>(perguntas, HttpStatus.OK);
+	}
+	
+	
+	@PostMapping("escolheMetodologia")
+	@CrossOrigin(origins = "*")
+	@ApiOperation(value = "Descisão sobre a metodologia a ser usada.")
+	@Produces(MediaType.APPLICATION_JSON)
+	public ResponseEntity<Projeto> escolheMetodologia(ProjetoVO vo) throws RegistroNaoEncontradoException{
+		Projeto p = service.escolheMetodologia(vo);
+		return null;
 	}
 
 }

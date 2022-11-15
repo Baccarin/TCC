@@ -1,5 +1,7 @@
 package br.com.ucpel.tcc.vo;
 
+import java.util.HashMap;
+
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -17,5 +19,7 @@ public class ProjetoVO extends BuscaGenericaVO{
 	private String etapa;
 	private String metodologia;
 	private boolean ativo;
+	
+	private HashMap<String, Integer> respostas;
 	
 }

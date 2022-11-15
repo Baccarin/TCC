@@ -111,6 +111,10 @@
                       <a *ngIf="projeto.etapa!='FIM'" class="avancaEtapa" title="AvancaEtapa" href="javascript:void(0)" (click)="avancaEtapa(projeto.id)"><i
                         class="bi bi-forward-fill"></i></a>
   
+                      <a  class="escolheMetodologia" title="EscolheMetodologia" href="javascript:void(0)" (click)="escolheMetodologia(projeto.id)">
+                        <i class="bi bi-gpu-card"></i></a>
+                        
+
                     </td>
                   </tr>
   
@@ -174,6 +178,73 @@
   
                 </div>
           
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                  <button type="submit" class="btn btn-primary">Atualizar</button>
+              </div>
+
+              </form>
+
+          </div>
+      </div>
+  </div>
+</div>
+
+
+
+<!-- Modal -->
+<div class="modal fade" id="modalEscolheMetodologia" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered modal-xl">
+      <div class="modal-content">
+          <div class="modal-header">
+              <h5 class="card-title">Escolha da metodologia ágil</h5>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+
+              <form (ngSubmit)="escolheMetodologia(data)">
+
+
+                    <label>SCRUM</label>
+                    <div *ngFor="let pergunta of perguntasScrum" style="background-color: rgb(134, 131, 131)">
+                      <label for="{{pergunta}}">{{ pergunta}}</label> <input class="form-check-input" type="checkbox" [value]="[pergunta]">
+                    </div>
+                    
+                    <br>
+
+                  <label>CRYSTAL</label>
+                  <div *ngFor="let pergunta of perguntasCrystal" style="background-color: rgb(253, 253, 253)">
+                    <label for="{{pergunta}}">{{ pergunta}}</label> <input class="form-check-input" type="checkbox" [value]="[pergunta]">
+                  </div>
+
+                  <br>
+
+                  <label>LEAN</label>
+                  <div *ngFor="let pergunta of perguntasLean" style="background-color: rgb(134, 131, 131)">
+                    <label for="{{pergunta}}">{{ pergunta}}</label> <input class="form-check-input" type="checkbox" [value]="[pergunta]">
+                  </div>
+
+                  <br>
+
+                  <label>KANBAN</label>
+                  <div *ngFor="let pergunta of perguntasKanban" style="background-color: rgb(253, 253, 253)">
+                    <label for="{{pergunta}}">{{ pergunta}}</label> <input class="form-check-input" type="checkbox" [value]="[pergunta]">
+                  </div>
+
+                  <br>
+
+                  <label>XP</label>
+                  <div *ngFor="let pergunta of perguntasXP" style="background-color:  rgb(134, 131, 131)">
+                    <label for="{{pergunta}}">{{ pergunta}}</label> <input class="form-check-input" type="checkbox" [value]="[pergunta]">
+                  </div>
+
+                  <br>
+
+                  <label>FDD</label>
+                  <div *ngFor="let pergunta of perguntasKanban" style="background-color: rgb(253, 253, 253)">
+                    <label for="{{pergunta}}">{{ pergunta}}</label> <input class="form-check-input" type="checkbox" [value]="[pergunta]">
+                  </div>
+
                 <div class="modal-footer">
                   <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
                   <button type="submit" class="btn btn-primary">Atualizar</button>

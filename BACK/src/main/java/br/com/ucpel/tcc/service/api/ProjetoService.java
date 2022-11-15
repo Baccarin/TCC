@@ -16,5 +16,5 @@ public interface ProjetoService {
 	
 	Projeto avancarEtapaProjeto(ProjetoVO vo) throws RegistroNaoEncontradoException, ProximaEtapaProjetoInvalidaException ;
 
-
+	Projeto escolheMetodologia(ProjetoVO vo)  throws RegistroNaoEncontradoException;
 }
